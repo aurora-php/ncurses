@@ -17,7 +17,7 @@ namespace org\octris\ncurses {
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class app extends \org\octris\ncurses\container
+    abstract class app extends \org\octris\ncurses\container
     /**/
     {
         /**
@@ -47,7 +47,7 @@ namespace org\octris\ncurses {
         /**/
         {
             if (is_null(self::$instance)) {
-                self::$instance = new app();
+                self::$instance = new static();
             }
 
             return self::$instance;
@@ -66,6 +66,40 @@ namespace org\octris\ncurses {
             $this->resource = STDSCR;
 
             parent::build();
+        }
+
+        /**
+         * Main application loop to be implemented by application.
+         *
+         * @octdoc  a:app/main
+         */
+        abstract protected function main();
+        /**/
+
+        /**
+         * Build and run application.
+         *
+         * @octdoc  m:app/run
+         */
+        public function run()
+        /**/
+        {
+            // initialize ncurses and register shutdown function
+            ncurses_init();
+
+            register_shutdown_function(function() {
+                ncurses_end();
+            });
+
+            // setup app UI
+            $this->setup();
+
+            // render app UI
+            $this->build();
+            $this->refresh();
+
+            // enter main loop
+            $this->main();
         }
 
         /**
@@ -94,11 +128,11 @@ namespace org\octris\ncurses {
             }
 
             // initialize initialization and ending
-            ncurses_init();
+            // ncurses_init();
 
-            register_shutdown_function(function() {
-                ncurses_end();
-            });
+            // register_shutdown_function(function() {
+            //     ncurses_end();
+            // });
 
             // additional keys initialization
             $keys = array(
