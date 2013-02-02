@@ -33,7 +33,7 @@ namespace org\octris\ncurses\container {
          * Constructor.
          *
          * @octdoc  m:menu/__construct
-         * @param   int             $width          Optional width of window.
+         * @param   int             $items          Items to display in menu.
          * @param   int             $height         Optional height of window.
          * @param   int             $x              Optional x position of window.
          * @param   int             $y              Optional y position of window.
@@ -53,7 +53,6 @@ namespace org\octris\ncurses\container {
          * A menu cannot have child components.
          *
          * @octdoc  m:container/addChild
-         * @param   object          $child          Child component to add.
          */
         public function addChild($child)
         /**/
