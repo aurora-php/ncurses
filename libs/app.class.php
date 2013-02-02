@@ -127,13 +127,6 @@ namespace org\octris\ncurses {
                 });
             }
 
-            // initialize initialization and ending
-            // ncurses_init();
-
-            // register_shutdown_function(function() {
-            //     ncurses_end();
-            // });
-
             // additional keys initialization
             $keys = array(
                 'NCURSES_KEY_LF'     => 10,
