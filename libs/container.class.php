@@ -39,10 +39,10 @@ namespace org\octris\ncurses {
         /**/
 
         /**
-         * Stores index of child that currently has the focus.
+         * Stores instance of child that currently has the focus.
          *
          * @octdoc  p:container/$focused
-         * @var     int|null
+         * @var     \org\octris\ncurses\component
          */
         protected $focused = null;
         /**/
@@ -211,7 +211,7 @@ namespace org\octris\ncurses {
         /**
          * Render component.
          *
-         * @octdoc  m:component/build
+         * @octdoc  m:container/build
          */
         public function build()
         /**/
