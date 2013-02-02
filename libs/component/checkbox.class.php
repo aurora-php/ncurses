@@ -99,6 +99,8 @@ namespace org\octris\ncurses\component {
                 ncurses_wattroff($res, NCURSES_A_REVERSE);
             }
 
+            $this->items[$no - 1]['label'][2] = ($selected ? 'X' : ' ');
+
             $this->parent->refresh();
         }
     }
