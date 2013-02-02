@@ -21,6 +21,15 @@ namespace org\octris\ncurses\component {
     /**/
     {
         /**
+         * Whether window has a border.
+         *
+         * @octdoc  p:window/$has_border
+         * @var     bool
+         */
+        protected $has_border = true;
+        /**/
+
+        /**
          * Width of window.
          * 
          * @octdoc  p:window/$width
@@ -83,7 +92,10 @@ namespace org\octris\ncurses\component {
         /**/
         {
             $this->resource = ncurses_newwin($this->height, $this->width, $this->y, $this->x);
-            ncurses_wborder($this->resource, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            if ($this->has_border) {
+                ncurses_wborder($this->resource, 0, 0, 0, 0, 0, 0, 0, 0);
+            }
             
             parent::build();
         }

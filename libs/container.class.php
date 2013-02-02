@@ -30,6 +30,15 @@ namespace org\octris\ncurses {
         /**/
 
         /**
+         * Whether container has a border.
+         *
+         * @octdoc  p:container/$has_border
+         * @var     bool
+         */
+        protected $has_border = false;
+        /**/
+
+        /**
          * Get size of container.
          *
          * @octdoc  m:container/getMaxXY
@@ -59,6 +68,18 @@ namespace org\octris\ncurses {
             $this->children[] = $child;
 
             return $child;
+        }
+
+        /**
+         * Whether the container has a border.
+         *
+         * @octdoc  m:container/hasBorder
+         * @return  bool                                                Returns true if container has a border.
+         */
+        public function hasBorder()
+        /**/
+        {
+            return $this->has_border;
         }
 
         /**
