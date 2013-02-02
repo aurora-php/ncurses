@@ -93,6 +93,43 @@ namespace org\octris\ncurses {
         }
 
         /**
+         * Get size of container.
+         *
+         * @octdoc  m:container/getSize
+         * @return  stdClass                                            Size ->width, ->height
+         */
+        public function getSize()
+        /**/
+        {
+            list($width, $height) = $this->getMaxXY();
+
+            return (object)array(
+                'width'  => $width, 
+                'height' => $height
+            );
+        }
+
+        /**
+         * Get inner size of container. The size returned by this method differs from the
+         * size returned by ~getSize~ if the container has a border.
+         *
+         * @octdoc  m:container/getInnerSize
+         * @return  stdClass                                            Size ->width, ->height
+         */
+        public function getInnerSize()
+        /**/
+        {
+            $size = $this->getSize();
+
+            if ($this->has_border) {
+                $size->width  -= 2;
+                $size->height -= 2;
+            }
+
+            return $size;
+        }
+
+        /**
          * Get resource of container.
          *
          * @octdoc  m:container/getResource
