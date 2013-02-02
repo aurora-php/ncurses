@@ -222,5 +222,41 @@ namespace org\octris\ncurses {
                 $child->build();
             }
         }
+
+        /**
+         * Main loop.
+         *
+         * @octdoc  m:container/run
+         */
+        protected function run()
+        /**/
+        {
+            do {
+                $pressed  = ncurses_getch($this->resource);
+
+                if ($pressed == NCURSES_KEY_TAB) {
+                    // move to next focusable component
+                    $next = is_null($this->focused);
+                    $idx  = 0;
+                    $cnt  = count($this->children);
+
+                    while (true) {
+                        $child = $this->children[($idx++ % $cnt)];
+
+                        if (!$child->isFocusable()) continue;
+
+                        if ($next) {
+                            $child->focus();
+                            break;
+                        } elseif ($idx > $cnt) {
+                            // nothing to focus
+                            break;
+                        } else {
+                            $next = ($child == $this->focused);
+                        }
+                    }
+                }
+            } while(true);
+        }
     }
 }
