@@ -126,18 +126,6 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Whether the container has a border.
-         *
-         * @octdoc  m:container/hasBorder
-         * @return  bool                                                Returns true if container has a border.
-         */
-        public function hasBorder()
-        /**/
-        {
-            return $this->has_border;
-        }
-
-        /**
          * Setup container UI.
          *
          * @octdoc  a:container/setup
