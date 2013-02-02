@@ -39,6 +39,15 @@ namespace org\octris\ncurses {
         /**/
 
         /**
+         * Whether component can take the focus.
+         *
+         * @octdoc  p:component/$focusable
+         * @var     bool
+         */
+        protected $focusable = true;
+        /**/
+
+        /**
          * Set parent container for component.
          *
          * @octdoc  m:component/setParent
@@ -59,6 +68,18 @@ namespace org\octris\ncurses {
         /**/
         {
             return $this->resource;
+        }
+
+        /**
+         * Return whether component can take the focus.
+         *
+         * @octdoc  m:component/isFocusable
+         * @return  bool                                Whether component can take the focus.
+         */
+        public function isFocusable()
+        /**/
+        {
+            return $this->focusable;
         }
 
         /**
