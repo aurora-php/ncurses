@@ -101,7 +101,7 @@ namespace org\octris\ncurses\component {
 
             if ($this->align != self::T_ALIGN_JUSTIFY) {
                 array_walk($rows, function(&$row) use ($width, $size) {
-                    $row = str_pad($row, $width, ' ', $this->align);
+                    $row = str_pad(trim($row), $width, ' ', $this->align);
                     $row = str_pad($row, $size->width, ' ', STR_PAD_BOTH);
                 });
 
