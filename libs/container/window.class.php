@@ -140,6 +140,8 @@ namespace org\octris\ncurses\container {
                 ncurses_wborder($this->resource, 0, 0, 0, 0, 0, 0, 0, 0);
             }
             
+            $this->setup();
+
             parent::build();
 
             $this->panel = new \org\octris\ncurses\panel($this);
