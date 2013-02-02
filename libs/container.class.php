@@ -216,6 +216,8 @@ namespace org\octris\ncurses {
         public function build()
         /**/
         {
+            $this->setup();
+
             foreach ($this->children as $child) {
                 $child->build();
             }

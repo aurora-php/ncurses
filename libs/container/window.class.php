@@ -185,8 +185,6 @@ namespace org\octris\ncurses\container {
                 $this->resource = $this->window_resource;
             }
             
-            $this->setup();
-
             parent::build();
 
             $this->panel = new \org\octris\ncurses\panel($this, $this->window_resource);
