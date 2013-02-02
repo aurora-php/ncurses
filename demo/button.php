@@ -7,19 +7,23 @@ require_once(__DIR__ . '/../libs/autoloader.class.php');
 
 use \org\octris\ncurses as ncurses;
 
-$app = ncurses\app::getInstance();
+class test extends ncurses\app {
+    protected $button;
 
-$button1 = $app->addChild(
-    new ncurses\component\button( 1, 1, 'Button #1')
-);
-$button2 = $app->addChild(
-    new ncurses\component\button(20, 1, 'Button #2')
-);
+    protected function setup() {
+        $this->button = $this->addChild(
+            new ncurses\component\button( 1, 1, 'Button #1')
+        );
+        $this->addChild(
+            new ncurses\component\button(20, 1, 'Button #2')
+        );
+    }
 
-$app->build();
-$app->refresh();
+    protected function main() {
+        $this->button->focus();
 
-$button1->focus();
+        sleep(2);
+    }
+}
 
-sleep(2);
-
+test::getInstance()->run();
