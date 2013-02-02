@@ -92,18 +92,6 @@ namespace org\octris\ncurses\component {
         }
 
         /**
-         * A menu cannot have child components.
-         *
-         * @octdoc  m:container/addChild
-         * @param   \org\octris\ncurses\component       $child          Child component to add.
-         */
-        public function addChild(\org\octris\ncurses\component $child)
-        /**/
-        {
-            throw new \Exception('A menu cannot have child components!');
-        }
-
-        /**
          * Get size of listbox.
          *
          * @octdoc  m:listbox/getSize
