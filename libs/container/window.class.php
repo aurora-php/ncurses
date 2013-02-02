@@ -241,15 +241,5 @@ namespace org\octris\ncurses\container {
         {
             $this->panel->hide();
         }
-
-        /**
-         * Main loop.
-         *
-         * @octdoc  m:window/run
-         */
-        protected function run()
-        /**/
-        {
-        }
     }
 }
