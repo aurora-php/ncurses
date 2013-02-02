@@ -68,6 +68,15 @@ namespace org\octris\ncurses\component {
         /**/
 
         /**
+         * Text component cannot take the focus.
+         *
+         * @octdoc  p:text/$focusable
+         * @var     bool
+         */
+        protected $focusable = false;
+        /**/
+
+        /**
          * Constructor.
          *
          * @octdoc  m:text/__construct
