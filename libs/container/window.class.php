@@ -21,6 +21,15 @@ namespace org\octris\ncurses\container {
     /**/
     {
         /**
+         * Window resource.
+         *
+         * @octdoc  p:window/$window_resource
+         * @var     resource
+         */
+        protected $window_resource;
+        /**/
+
+        /**
          * Panel instance the window is assigned to.
          *
          * @octdoc  p:window/$panel
@@ -112,6 +121,37 @@ namespace org\octris\ncurses\container {
             unset($this->panel);
 
             ncurses_delwin($this->resource);
+            ncurses_delwin($this->window_resource);
+        }
+
+        /**
+         * Get size of window.
+         *
+         * @octdoc  m:window/getSize
+         * @return  stdClass                                            Size ->width, ->height
+         */
+        public function getSize()
+        /**/
+        {
+            return (object)array(
+                'width'  => $this->width, 
+                'height' => $this->height
+            );
+        }
+
+        /**
+         * Get inner size of window.
+         *
+         * @octdoc  m:window/getInnerSize
+         * @return  stdClass                                            Size ->width, ->height
+         */
+        public function getInnerSize()
+        /**/
+        {
+            return (object)array(
+                'width'  => $this->width - 2 * (int)$this->has_border, 
+                'height' => $this->height - 2 * (int)$this->has_border
+            );
         }
 
         /**
@@ -134,19 +174,37 @@ namespace org\octris\ncurses\container {
         public function build()
         /**/
         {
-            $this->resource = ncurses_newwin($this->height, $this->width, $this->y, $this->x);
-
             if ($this->has_border) {
-                ncurses_wborder($this->resource, 0, 0, 0, 0, 0, 0, 0, 0);
+                // two windows to prevent overwriting of window border
+                $this->window_resource = ncurses_newwin($this->height, $this->width, $this->y, $this->x);
+                $this->resource = ncurses_newwin($this->height - 2, $this->width - 2, $this->y + 1, $this->x + 1);
+
+                ncurses_wborder($this->window_resource, 0, 0, 0, 0, 0, 0, 0, 0);
+            } else {
+                $this->window_resource = ncurses_newwin($this->height, $this->width, $this->y, $this->x);
+                $this->resource = $this->window_resource;
             }
             
             $this->setup();
 
             parent::build();
 
-            $this->panel = new \org\octris\ncurses\panel($this);
+            $this->panel = new \org\octris\ncurses\panel($this, $this->window_resource);
 
             $this->is_build = true;
+        }
+
+        /**
+         * Refresh window.
+         *
+         * @octdoc  m:window/refresh
+         */
+        public function refresh()
+        /**/
+        {
+            ncurses_wrefresh($this->window_resource);
+
+            parent::refresh();
         }
 
         /**
