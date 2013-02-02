@@ -67,35 +67,58 @@ namespace org\octris\ncurses {
 
             parent::build();
         }
-    }
-}
 
-/*
- * Ncurses application setup
- */
-namespace {
-    // optionally set error logging
-    if (defined('NCURSES_LOG')) {
-        touch(NCURSES_LOG);
+        /**
+         * Initialize application.
+         *
+         * @octdoc  m:app/init
+         */
+        public static function init()
+        /**/
+        {
+            static $initialized = false;
 
-        set_error_handler(function($no, $str, $file, $line, $context) {
-            file_put_contents(
-                NCURSES_LOG,
-                sprintf("%s:%d #%d -- %s\n\n", $file, $line, $no, $str),
-                FILE_APPEND
+            if ($initialized) return;
+
+            // optionally set error logging
+            if (defined('NCURSES_LOG')) {
+                touch(NCURSES_LOG);
+
+                set_error_handler(function($no, $str, $file, $line, $context) {
+                    file_put_contents(
+                        NCURSES_LOG,
+                        sprintf("%s:%d #%d -- %s\n\n", $file, $line, $no, $str),
+                        FILE_APPEND
+                    );
+                });
+            }
+
+            // initialize initialization and ending
+            ncurses_init();
+
+            register_shutdown_function(function() {
+                ncurses_end();
+            });
+
+            // additional keys initialization
+            $keys = array(
+                'NCURSES_KEY_LF'     => 10,
+                'NCURSES_KEY_CR'     => 13,
+                'NCURSES_KEY_ENTER'  => 13,
+                'NCURSES_KEY_ESCAPE' => 27,
+                'NCURSES_KEY_SPACE'  => 32
             );
-        });
+
+            array_walk($keys, function($code, $name) {
+                if (!defined($name)) {
+                    define($name, $code);
+                }
+            });
+
+            // ---
+            $initialized = true;
+        }
     }
 
-    // initialize initialization and ending
-    ncurses_init();
-
-    register_shutdown_function(function() {
-        ncurses_end();
-    });
-
-    // additional initialization
-    if (!defined('NCURSES_KEY_ESCAPE')) {
-        define('NCURSES_KEY_ESCAPE', 27);
-    }
+    app::init();
 }
