@@ -10,7 +10,11 @@ use \org\octris\ncurses as ncurses;
 class win extends ncurses\container\window {
 	protected function setup() {
 		$this->addChild(
-		    new ncurses\component\text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel lacus nunc. Aliquam quam erat, semper ac pellentesque quis, aliquam a est. Integer rutrum malesuada libero vel aliquam. Praesent pharetra vestibulum fringilla. Vestibulum vitae ligula erat. Nunc scelerisque sapien eget dolor facilisis vitae imperdiet nunc tristique. In risus elit, vulputate id pulvinar et, sagittis at dui. Quisque nec risus sapien, eget pellentesque orci. Mauris porttitor semper lacus, ac egestas magna semper sit amet.')
+		    new ncurses\component\text(
+		    	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel lacus nunc. Aliquam quam erat, semper ac pellentesque quis, aliquam a est. Integer rutrum malesuada libero vel aliquam. Praesent pharetra vestibulum fringilla. Vestibulum vitae ligula erat. Nunc scelerisque sapien eget dolor facilisis vitae imperdiet nunc tristique. In risus elit, vulputate id pulvinar et, sagittis at dui. Quisque nec risus sapien, eget pellentesque orci. Mauris porttitor semper lacus, ac egestas magna semper sit amet.',
+		    	ncurses\component\text::T_ALIGN_LEFT,
+		    	1, 2
+		    )
 		);
 	}
 
@@ -22,7 +26,7 @@ class test extends ncurses\app {
 	protected $win;
 
 	protected function setup() {
-		$this->win = $this->addChild(new win(40, 10, 5, 5));
+		$this->win = $this->addChild(new win(75, 20, 5, 5));
 	}
 
 	protected function main() {
