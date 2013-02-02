@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\container {
     /**
-     * Windows component.
+     * Windows container.
      *
-     * @octdoc      c:component/window
+     * @octdoc      c:container/window
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class window extends \org\octris\ncurses\container
+    abstract class window extends \org\octris\ncurses\container
     /**/
     {
         /**
@@ -148,6 +148,16 @@ namespace org\octris\ncurses\component {
         }
 
         /**
+         * Event get's called when window is displayed.
+         *
+         * @octdoc  m:window/onShow
+         */
+        public function onShow()
+        /**/
+        {
+        }
+
+        /**
          * Show window.
          *
          * @octdoc  m:window/show
@@ -158,6 +168,9 @@ namespace org\octris\ncurses\component {
             if (!$this->is_build) $this->build();
 
             $this->panel->show();
+
+            $this->onShow();
+            $this->run();
         }
 
         /**
@@ -169,6 +182,16 @@ namespace org\octris\ncurses\component {
         /**/
         {
             $this->panel->hide();
+        }
+
+        /**
+         * Main loop.
+         *
+         * @octdoc  m:window/run
+         */
+        protected function run()
+        /**/
+        {
         }
     }
 }

@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\container {
     /**
-     * Menu component.
+     * Menu container.
      *
-     * @octdoc      c:component/menu
+     * @octdoc      c:container/menu
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class menu extends \org\octris\ncurses\component\window
+    class menu extends \org\octris\ncurses\container\window
     /**/
     {
         /**
@@ -53,12 +53,33 @@ namespace org\octris\ncurses\component {
          * A menu cannot have child components.
          *
          * @octdoc  m:container/addChild
-         * @param   \org\octris\ncurses\component       $child          Child component to add.
+         * @param   object          $child          Child component to add.
          */
-        public function addChild(\org\octris\ncurses\component $child)
+        public function addChild($child)
         /**/
         {
             throw new \Exception('A menu cannot have child components!');
+        }
+
+        /**
+         * Nothing to setup.
+         *
+         * @octdoc  m:menu/setup
+         */
+        protected function setup()
+        /**/
+        {
+        }
+
+        /**
+         * Focus listbox when menu is showed.
+         *
+         * @octdoc  m:menu/onShow
+         */
+        public function onShow()
+        /**/
+        {
+            $this->listbox->focus();
         }
 
         /**
@@ -75,11 +96,11 @@ namespace org\octris\ncurses\component {
         }
 
         /**
-         * Execute menu.
+         * Run menu.
          *
          * @octdoc  m:menu/run
          */
-        public function run()
+        protected function run()
         /**/
         {
             $this->listbox->run();
