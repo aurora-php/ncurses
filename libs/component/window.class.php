@@ -21,12 +21,30 @@ namespace org\octris\ncurses\component {
     /**/
     {
         /**
+         * Panel instance the window is assigned to.
+         *
+         * @octdoc  p:window/$panel
+         * @var     \org\octris\ncurses\panel
+         */
+        private $panel;
+        /**/
+
+        /**
          * Whether window has a border.
          *
          * @octdoc  p:window/$has_border
          * @var     bool
          */
         protected $has_border = true;
+        /**/
+
+        /**
+         * Whether window has been build.
+         *
+         * @octdoc  p:window/$is_build
+         * @var     bool
+         */
+        protected $is_build = false;
         /**/
 
         /**
@@ -84,6 +102,31 @@ namespace org\octris\ncurses\component {
         }
         
         /**
+         * Destructor.
+         *
+         * @octdoc  m:window/__destruct
+         */
+        public function __destruct()
+        /**/
+        {
+            unset($this->panel);
+
+            ncurses_delwin($this->resource);
+        }
+
+        /**
+         * Return whether window is visible.
+         *
+         * @octdoc  m:window/isVisible
+         * @return  bool                                Returns whether window is visible.
+         */
+        public function isVisible()
+        /**/
+        {
+            return $this->panel->isVisible();
+        }
+
+        /**
          * Build window.
          *
          * @octdoc  m:window/build
@@ -98,6 +141,34 @@ namespace org\octris\ncurses\component {
             }
             
             parent::build();
+
+            $this->panel = new \org\octris\ncurses\panel($this);
+
+            $this->is_build = true;
+        }
+
+        /**
+         * Show window.
+         *
+         * @octdoc  m:window/show
+         */
+        public function show()
+        /**/
+        {
+            if (!$this->is_build) $this->build();
+
+            $this->panel->show();
+        }
+
+        /**
+         * Hide window.
+         *
+         * @octdoc  m:window/hide
+         */
+        public function hide()
+        /**/
+        {
+            $this->panel->hide();
         }
     }
 }
