@@ -133,6 +133,7 @@ namespace org\octris\ncurses {
 
             // additional keys initialization
             $keys = array(
+                'NCURSES_KEY_TAB'    =>  9,
                 'NCURSES_KEY_LF'     => 10,
                 'NCURSES_KEY_CR'     => 13,
                 'NCURSES_KEY_ENTER'  => 13,
