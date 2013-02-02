@@ -7,19 +7,35 @@ require_once('org.octris.core/app/autoloader.class.php');
 
 use \org\octris\ncurses as ncurses;
 
-$app = ncurses\app::getInstance();
-$win = $app->addChild(new ncurses\component\window(
-	14, 4, 5, 5
-));
+class win extends ncurses\container\window {
+	protected $checkbox;
 
-$menu = $win->addChild(
-    new ncurses\component\checkbox(array(
-        array('label' => 'Apple', 'selected' => true),
-        array('label' => 'Orange', 'selected' => false)
-    ))
-);
+	protected function setup() {
+		$this->checkbox = $this->addChild(
+		    new ncurses\component\checkbox(array(
+		        array('label' => 'Apple',  'selected' => true),
+		        array('label' => 'Orange', 'selected' => false),
+		        array('label' => 'Banana', 'selected' => false)
+		    ))
+		);
+	}
 
-$app->build();
-$app->refresh();
+    protected function run() {
+    	$this->checkbox->run();
+    }
+}
 
-$menu->run();
+class test extends ncurses\app {
+	protected $win;
+
+	protected function setup() {
+		$this->win = $this->addChild(new win(14, 5, 5, 5));
+
+	}
+
+	protected function main() {
+		$this->win->show();
+	}
+}
+
+test::getInstance()->run();

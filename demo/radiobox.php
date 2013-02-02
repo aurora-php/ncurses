@@ -7,20 +7,36 @@ require_once('org.octris.core/app/autoloader.class.php');
 
 use \org\octris\ncurses as ncurses;
 
-$app = ncurses\app::getInstance();
-$win = $app->addChild(new ncurses\component\window(
-	13, 5, 5, 5
-));
+class win extends ncurses\container\window {
+	protected $radiobox;
 
-$menu = $win->addChild(
-    new ncurses\component\radiobox(array(
-        array('label' => 'blue',  'selected' => true),
-        array('label' => 'green', 'selected' => false),
-        array('label' => 'black', 'selected' => true)
-    ))
-);
+	protected function setup() {
+		$this->radiobox = $this->addChild(
+		    new ncurses\component\radiobox(array(
+		        array('label' => 'blue',  'selected' => true),
+		        array('label' => 'green', 'selected' => false),
+		        array('label' => 'black', 'selected' => true)
+		    ))
+		);
+	}
 
-$app->build();
-$app->refresh();
+    protected function run() {
+    	$this->radiobox->run();
+    }
+}
 
-$menu->run();
+class test extends ncurses\app {
+	protected $win;
+
+	protected function setup() {
+		$this->win = $this->addChild(new win(13, 5, 5, 5));
+
+	}
+
+	protected function main() {
+		$this->win->show();
+	}
+}
+
+test::getInstance()->run();
+

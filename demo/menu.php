@@ -7,16 +7,19 @@ require_once('org.octris.core/app/autoloader.class.php');
 
 use \org\octris\ncurses as ncurses;
 
-$app = ncurses\app::getInstance();
+class test extends ncurses\app {
+	protected $menu;
 
-$menu = $app->addChild(
-    new ncurses\component\menu(array(
-        array('label' => 'Network'),
-        array('label' => 'Administration')
-    ))
-);
+	protected function setup() {
+		$this->menu = $this->addChild(new ncurses\container\menu(array(
+		    array('label' => 'Network'),
+		    array('label' => 'Administration')
+		)));
+	}
 
-$app->build();
-$app->refresh();
+	protected function main() {
+		$this->menu->show();
+	}
+}
 
-$menu->run();
+test::getInstance()->run();
