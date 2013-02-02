@@ -21,30 +21,12 @@ namespace org\octris\ncurses\component {
     /**/
     {
         /**
-         * Currently selected item.
+         * Instance of listbox used to display menu.
          *
-         * @octdoc  p:menu/$selected
-         * @var     int
+         * @octdoc  p:menu/$listbox
+         * @var     \org\octris\ncurses\component\listbox
          */
-        protected $selected = 1;
-        /**/
-
-        /**
-         * Menu items.
-         *
-         * @octdoc  p:menu/$items
-         * @var     array
-         */
-        protected $items = array();
-        /**/
-
-        /**
-         * Number of menu items.
-         *
-         * @octdoc  p:menu/$cnt
-         * @var     int
-         */
-        protected $cnt = 0;
+        protected $listbox;
         /**/
 
         /**
@@ -59,21 +41,12 @@ namespace org\octris\ncurses\component {
         public function __construct(array $items, $height = 0, $x = 0, $y = 0)
         /**/
         {
-            $height = ($height > 0 ? $height : count($items));
-            $width  = array_reduce($items, function(&$width, $item) {
-                $width = max($width, strlen($item['label']) + 2);
+            $this->listbox = new \org\octris\ncurses\component\listbox($items, $x + 1, $y + 1);
+            $this->listbox->setParent($this);
 
-                return $width;
-            }, 0);
+            $size = $this->listbox->getSize();
 
-            array_walk($items, function(&$item) use ($width) {
-                $item['label'] = str_pad(' ' . $item['label'], $width, ' ', STR_PAD_RIGHT);
-            });
-
-            $this->items = $items;
-            $this->cnt   = count($items);
-
-            parent::__construct($width + 2, $height + 2, $x, $y);
+            parent::__construct($size->width + 2, $size->height + 2, $x, $y);
         }
 
         /**
@@ -98,15 +71,7 @@ namespace org\octris\ncurses\component {
         {
             parent::build();
 
-            for ($i = 1; $i <= $this->cnt; ++$i) {
-                if ($i == $this->selected) {
-                    ncurses_wattron($this->resource, NCURSES_A_REVERSE);
-                    ncurses_mvwaddstr($this->resource, $i, 1, $this->items[$i - 1]['label']);
-                    ncurses_wattroff($this->resource, NCURSES_A_REVERSE);
-                } else {
-                    ncurses_mvwaddstr($this->resource, $i, 1, $this->items[$i - 1]['label']);
-                }
-            }
+            $this->listbox->build();
         }
 
         /**
@@ -117,32 +82,7 @@ namespace org\octris\ncurses\component {
         public function run()
         /**/
         {
-            do {
-                $pressed  = ncurses_getch($this->resource);
-                $selected = $this->selected;
-
-                if ($pressed == NCURSES_KEY_UP) {
-                    $this->selected = max(1, $this->selected - 1);
-                } elseif ($pressed == NCURSES_KEY_DOWN) {
-                    $this->selected = min($this->cnt, $this->selected + 1);
-                } elseif ($pressed == NCURSES_KEY_ENTER || $pressed == NCURSES_KEY_SPACE) {
-                    if (isset($this->items[$this->selected - 1]['action'])) {
-                        $this->items[$this->selected - 1]['action']();
-                    }                    
-                } elseif ($pressed == NCURSES_KEY_ESCAPE) {
-                    break;
-                }
-
-                if ($selected != $this->selected) {
-                    ncurses_wattron($this->resource, NCURSES_A_REVERSE);
-                    ncurses_mvwaddstr($this->resource, $this->selected, 1, $this->items[$this->selected - 1]['label']);
-                    ncurses_wattroff($this->resource, NCURSES_A_REVERSE);
-
-                    ncurses_mvwaddstr($this->resource, $selected, 1, $this->items[$selected - 1]['label']);
-
-                    $this->refresh();
-                }
-            } while(true);
+            $this->listbox->run();
         }
     }
 }
