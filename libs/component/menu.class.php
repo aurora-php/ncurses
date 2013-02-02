@@ -125,7 +125,7 @@ namespace org\octris\ncurses\component {
                     $this->selected = max(1, $this->selected - 1);
                 } elseif ($pressed == NCURSES_KEY_DOWN) {
                     $this->selected = min($this->cnt, $this->selected + 1);
-                } elseif (NCURSES_KEY_ESCAPE) {
+                } elseif ($pressed == NCURSES_KEY_ESCAPE) {
                     break;
                 }
 
