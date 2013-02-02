@@ -31,6 +31,7 @@ namespace org\octris\ncurses\component {
         public function __construct(array $items, $x = 0, $y = 0)
         /**/
         {
+            // determine width and height of list
             $this->height = count($items);
             $this->width  = array_reduce($items, function(&$width, $item) {
                 $width = max($width, strlen($item['label']) + 6);
@@ -38,6 +39,7 @@ namespace org\octris\ncurses\component {
                 return $width;
             }, 0);
 
+            // add check button to label and add action for toggling check button
             array_walk($items, function(&$item, $no) {
                 $item['label'] = str_pad(
                     ' [' . ($item['selected'] ? 'X' : ' ') . '] ' . $item['label'], 
@@ -46,21 +48,16 @@ namespace org\octris\ncurses\component {
                     STR_PAD_RIGHT
                 );
 
-                if (isset($item['action'])) {
-                    $action = $item['action'];
+                $item['action'] = function() use ($item, $no) {
+                    $this->toggle($no + 1);
 
-                    $item['action'] = function() use ($action, $no) {
-                        $this->toggle($no + 1);
-
-                        $action();
-                    };
-                } else {
-                    $item['action'] = function() use ($no) {
-                        $this->toggle($no + 1);
-                    };
-                }
+                    if (isset($item['action']) && is_callable($item['action'])) {
+                        $item['action']();
+                    }
+                };
             });
 
+            // misc
             $this->items = $items;
             $this->cnt   = count($items);
 
