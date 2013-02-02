@@ -80,24 +80,23 @@ namespace org\octris\ncurses\component {
             if ($no < 1 || $no > $this->cnt) return;
 
             $res      = $this->parent->getResource();
+            $border   = (int)$this->parent->hasBorder();
+
             $selected = ($this->items[$no - 1]['selected'] = !$this->items[$no - 1]['selected']);
 
             if ($no == $this->selected) {
                 ncurses_wattron($res, NCURSES_A_REVERSE);
-                ncurses_mvwaddstr(
-                    $res,
-                    $this->y + ($no - 1), 
-                    $this->x + 2, 
-                    ($selected ? 'X' : ' ')
-                );
+            }
+
+            ncurses_mvwaddstr(
+                $res,
+                $this->y + ($no - 1) + $border, 
+                $this->x + 2 + $border, 
+                ($selected ? 'X' : ' ')
+            );
+
+            if ($no == $this->selected) {            
                 ncurses_wattroff($res, NCURSES_A_REVERSE);
-            } else {
-                ncurses_mvwaddstr(
-                    $res,
-                    $this->y + ($no - 1), 
-                    $this->x + 2, 
-                    ($selected ? 'X' : ' ')
-                );
             }
 
             $this->parent->refresh();

@@ -71,9 +71,13 @@ namespace org\octris\ncurses\component {
         public function build()
         /**/
         {
+            $border = (int)$this->parent->hasBorder();
+
             ncurses_mvwaddstr(
                 $this->parent->getResource(), 
-                $this->y, $this->x, $this->text
+                $border + $this->y, 
+                $border + $this->x, 
+                $this->text
             );
         }
     }

@@ -135,25 +135,23 @@ namespace org\octris\ncurses\component {
         public function build()
         /**/
         {
-            $res = $this->parent->getResource();
+            $res    = $this->parent->getResource();
+            $border = (int)$this->parent->hasBorder();
 
             for ($i = 1; $i <= $this->cnt; ++$i) {
                 if ($i == $this->selected) {
                     ncurses_wattron($res, NCURSES_A_REVERSE);
-                    ncurses_mvwaddstr(
-                        $res, 
-                        $this->y + ($i - 1), 
-                        $this->x, 
-                        $this->items[$i - 1]['label']
-                    );
+                }
+
+                ncurses_mvwaddstr(
+                    $res, 
+                    $this->y + ($i - 1) + $border, 
+                    $this->x + $border, 
+                    $this->items[$i - 1]['label']
+                );
+
+                if ($i == $this->selected) {
                     ncurses_wattroff($res, NCURSES_A_REVERSE);
-                } else {
-                    ncurses_mvwaddstr(
-                        $res, 
-                        $this->y + ($i - 1), 
-                        $this->x, 
-                        $this->items[$i - 1]['label']
-                    );
                 }
             }
         }
@@ -166,7 +164,8 @@ namespace org\octris\ncurses\component {
         public function run()
         /**/
         {
-            $res = $this->parent->getResource();
+            $res    = $this->parent->getResource();
+            $border = (int)$this->parent->hasBorder();
 
             do {
                 $pressed  = ncurses_getch($res);
@@ -188,16 +187,16 @@ namespace org\octris\ncurses\component {
                     ncurses_wattron($res, NCURSES_A_REVERSE);
                     ncurses_mvwaddstr(
                         $res, 
-                        $this->y + ($this->selected - 1), 
-                        $this->x, 
+                        $this->y + ($this->selected - 1) + $border, 
+                        $this->x + $border, 
                         $this->items[$this->selected - 1]['label']
                     );
                     ncurses_wattroff($res, NCURSES_A_REVERSE);
 
                     ncurses_mvwaddstr(
                         $res, 
-                        $this->y + ($selected - 1), 
-                        $this->x, 
+                        $this->y + ($selected - 1) + $border, 
+                        $this->x + $border, 
                         $this->items[$selected - 1]['label']
                     );
 

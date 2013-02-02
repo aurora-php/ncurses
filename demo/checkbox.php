@@ -16,7 +16,7 @@ $menu = $win->addChild(
     new ncurses\component\checkbox(array(
         array('label' => 'Apple', 'selected' => true),
         array('label' => 'Orange', 'selected' => false)
-    ), 1, 1)
+    ))
 );
 
 $app->build();
