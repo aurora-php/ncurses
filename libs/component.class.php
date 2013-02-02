@@ -62,6 +62,37 @@ namespace org\octris\ncurses {
         }
 
         /**
+         * Event is triggered if component loses focus.
+         *
+         * @octdoc  m:component/onBlur
+         */
+        public function onBlur()
+        /**/
+        {
+        }
+
+        /**
+         * Event is triggered if component get's the focus.
+         *
+         * @octdoc  m:component/onFocus
+         */
+        public function onFocus()
+        /**/
+        {
+        }
+
+        /**
+         * Set focus for component.
+         *
+         * @octdoc  m:component/focus
+         */
+        public function focus()
+        /**/
+        {
+            $this->parent->focus($this);
+        }
+
+        /**
          * Render component.
          *
          * @octdoc  a:component/build
