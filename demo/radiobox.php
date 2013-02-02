@@ -3,7 +3,7 @@
 
 define('NCURSES_LOG', '/tmp/test.log');
 
-require_once('org.octris.core/app/autoloader.class.php');
+require_once(__DIR__ . '/../libs/autoloader.class.php');
 
 use \org\octris\ncurses as ncurses;
 
