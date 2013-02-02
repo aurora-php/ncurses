@@ -102,6 +102,10 @@ namespace org\octris\ncurses {
             $this->main();
         }
 
+        /*
+         *
+         */
+
         /**
          * Initialize application.
          *
