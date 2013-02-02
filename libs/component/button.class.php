@@ -105,7 +105,7 @@ namespace org\octris\ncurses\component {
                 $this->parent->getResource(), 
                 $border + $this->y, 
                 $border + $this->x, 
-                '[ ' . $this->text . ' ]'
+                '<' . $this->text . '>'
             );
         }
     }
