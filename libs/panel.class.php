@@ -69,15 +69,17 @@ namespace org\octris\ncurses {
          * Constructor, panel is a static class.
          *
          * @octdoc  m:panel/__construct
+         * @param   \org\octris\ncurses\container           $container          Container that is assigned to the panel.
+         * @param   resource                                $resource           Resource of the container.
          */
-        public function __construct(\org\octris\ncurses\container $container)
+        public function __construct(\org\octris\ncurses\container $container, $resource)
         /**/
         {
             $this->panel_id = self::$panel_cnt++;
 
             self::$panels[$this->panel_id] = $container;
 
-            $this->resource  = ncurses_new_panel($container->getResource());
+            $this->resource  = ncurses_new_panel($resource);
             
             $this->hide();  // all panels are hidden by default
         }
