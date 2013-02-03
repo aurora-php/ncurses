@@ -133,8 +133,6 @@ namespace org\octris\ncurses\container {
                 return $result + strlen($button) + 2;
             }, (count($buttons) - 1) * 2);
 
-            trigger_error($b_width);
-
             $x = floor(($size->width - $b_width) / 2);
 
             foreach ($buttons as $button) {
