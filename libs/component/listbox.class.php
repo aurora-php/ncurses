@@ -128,6 +128,48 @@ namespace org\octris\ncurses\component {
         }
 
         /**
+         * Trigger action if ENTER key is pressed.
+         *
+         * @octdoc  m:button/onKeypress
+         * @param   int                 $key            Code of the key that was pressed.
+         */
+        public function onKeypress($key_code)
+        /**/
+        {
+            $res      = $this->parent->getResource();
+            $selected = $this->selected;
+
+            if ($key_code == NCURSES_KEY_UP) {
+                $this->selected = max(1, $this->selected - 1);
+            } elseif ($key_code == NCURSES_KEY_DOWN) {
+                $this->selected = min($this->cnt, $this->selected + 1);
+            } elseif ($key_code == NCURSES_KEY_CR || $pressed == NCURSES_KEY_SPACE) {
+                if (isset($this->items[$this->selected - 1]['action'])) {
+                    $this->items[$this->selected - 1]['action']();
+                }                    
+            }
+
+            if ($selected != $this->selected) {
+                ncurses_wattron($res, NCURSES_A_REVERSE);
+                ncurses_mvwaddstr(
+                    $res, 
+                    $this->y + ($this->selected - 1), 
+                    $this->x, 
+                    $this->items[$this->selected - 1]['label']
+                );
+                ncurses_wattroff($res, NCURSES_A_REVERSE);
+
+                ncurses_mvwaddstr(
+                    $res, 
+                    $this->y + ($selected - 1), 
+                    $this->x, 
+                    $this->items[$selected - 1]['label']
+                );
+
+                $this->parent->refresh();
+            }
+        
+        /**
          * Build menu.
          *
          * @octdoc  m:listbox/build
@@ -153,54 +195,6 @@ namespace org\octris\ncurses\component {
                     ncurses_wattroff($res, NCURSES_A_REVERSE);
                 }
             }
-        }
-
-        /**
-         * Execute menu.
-         *
-         * @octdoc  m:listbox/run
-         */
-        public function run()
-        /**/
-        {
-            $res = $this->parent->getResource();
-
-            do {
-                $pressed  = ncurses_getch($res);
-                $selected = $this->selected;
-
-                if ($pressed == NCURSES_KEY_UP) {
-                    $this->selected = max(1, $this->selected - 1);
-                } elseif ($pressed == NCURSES_KEY_DOWN) {
-                    $this->selected = min($this->cnt, $this->selected + 1);
-                } elseif ($pressed == NCURSES_KEY_ENTER || $pressed == NCURSES_KEY_SPACE) {
-                    if (isset($this->items[$this->selected - 1]['action'])) {
-                        $this->items[$this->selected - 1]['action']();
-                    }                    
-                } elseif ($pressed == NCURSES_KEY_ESCAPE) {
-                    break;
-                }
-
-                if ($selected != $this->selected) {
-                    ncurses_wattron($res, NCURSES_A_REVERSE);
-                    ncurses_mvwaddstr(
-                        $res, 
-                        $this->y + ($this->selected - 1), 
-                        $this->x, 
-                        $this->items[$this->selected - 1]['label']
-                    );
-                    ncurses_wattroff($res, NCURSES_A_REVERSE);
-
-                    ncurses_mvwaddstr(
-                        $res, 
-                        $this->y + ($selected - 1), 
-                        $this->x, 
-                        $this->items[$selected - 1]['label']
-                    );
-
-                    $this->parent->refresh();
-                }
-            } while(true);
         }
     }
 }
