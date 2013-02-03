@@ -128,6 +128,45 @@ namespace org\octris\ncurses\component {
         }
 
         /**
+         * Get Focus.
+         *
+         * @octdoc  m:button/onFocus
+         */
+        public function onFocus()
+        /**/
+        {
+            // $res = $this->parent->getResource();
+
+            // ncurses_wattron($res, NCURSES_A_REVERSE);
+
+            // $this->build();
+            
+            // ncurses_wattroff($res, NCURSES_A_REVERSE);
+        }
+
+        /**
+         * Lose focus.
+         *
+         * @octdoc  m:button/onBlur
+         */
+        public function onBlur()
+        /**/
+        {
+            // $this->build();
+        }
+
+        /**
+         * Get's called when ENTER key is pressed on a button.
+         *
+         * @octdoc  m:button/onAction
+         */
+        public function onAction()
+        /**/
+        {
+            $this->propagateEvent('action');
+        }
+
+        /**
          * Trigger action if ENTER key is pressed.
          *
          * @octdoc  m:button/onKeypress
