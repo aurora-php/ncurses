@@ -93,16 +93,5 @@ namespace org\octris\ncurses\container {
 
             $this->listbox->build();
         }
-
-        /**
-         * Run menu.
-         *
-         * @octdoc  m:menu/run
-         */
-        protected function run()
-        /**/
-        {
-            $this->listbox->run();
-        }
     }
 }
