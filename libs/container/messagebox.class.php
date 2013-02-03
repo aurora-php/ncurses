@@ -140,7 +140,9 @@ namespace org\octris\ncurses\container {
                     new \org\octris\ncurses\component\button(
                         $x, $y, $button
                     )
-                );
+                )->addEvent('action', function() use ($button) {
+                    trigger_error($button);
+                });
 
                 $x += strlen($button) + 4;
             }
