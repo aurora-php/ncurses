@@ -92,6 +92,31 @@ namespace org\octris\ncurses\component {
         }
 
         /**
+         * Get's called when ENTER key is pressed on a button.
+         *
+         * @octdoc  m:button/onAction
+         */
+        public function onAction()
+        /**/
+        {
+            $this->propagateEvent('action');
+        }
+
+        /**
+         * Trigger action if ENTER key is pressed.
+         *
+         * @octdoc  m:button/onKeypress
+         * @param   int                 $key            Code of the key that was pressed.
+         */
+        public function onKeypress($key_code)
+        /**/
+        {
+            if ($key_code == NCURSES_KEY_CR) {
+                $this->onAction();
+            }
+        }
+
+        /**
          * Render button.
          *
          * @octdoc  m:button/render
