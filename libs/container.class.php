@@ -255,6 +255,9 @@ namespace org\octris\ncurses {
                             $next = ($child == $this->focused);
                         }
                     }
+                } elseif (!is_null($this->focused)) {
+                    // delegate to focused component
+                    $this->focused->onKeypress($pressed);
                 }
             } while(true);
         }
