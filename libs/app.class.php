@@ -84,19 +84,25 @@ namespace org\octris\ncurses {
             if (defined('NCURSES_LOG')) {
                 touch(NCURSES_LOG);
 
-                set_error_handler(function($no, $str, $file, $line, $context) {
+                $log_error = function($no, $str, $file, $line, $context = null) {
                     file_put_contents(
                         NCURSES_LOG,
                         sprintf("%s:%d #%d -- %s\n\n", $file, $line, $no, $str),
                         FILE_APPEND
                     );
-                });
+                };
+
+                set_error_handler($log_error);
             }
 
             // initialize initialization and ending
             ncurses_init();
 
             register_shutdown_function(function() {
+                if (defined('NCURSES_LOG') && !is_null($error = error_get_last())) {
+                    $log_error($error['type'], $error['message'], $error['file'], $error['line']);
+                }
+
                 ncurses_end();
             });
 
