@@ -192,7 +192,7 @@ namespace org\octris\ncurses\component {
                 $this->selected = max(1, $this->selected - 1);
             } elseif ($key_code == NCURSES_KEY_DOWN) {
                 $this->selected = min($this->cnt, $this->selected + 1);
-            } elseif ($key_code == NCURSES_KEY_CR || $pressed == NCURSES_KEY_SPACE) {
+            } elseif ($key_code == NCURSES_KEY_CR || $key_code == NCURSES_KEY_SPACE) {
                 if (isset($this->items[$this->selected - 1]['action'])) {
                     $this->items[$this->selected - 1]['action']();
                 }                    
