@@ -217,6 +217,7 @@ namespace org\octris\ncurses\component {
 
                 $this->parent->refresh();
             }
+        }
         
         /**
          * Build menu.
