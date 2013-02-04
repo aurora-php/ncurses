@@ -48,6 +48,15 @@ namespace org\octris\ncurses\component {
         /**/
 
         /**
+         * Label component cannot take the focus.
+         *
+         * @octdoc  p:label/$focusable
+         * @var     bool
+         */
+        protected $focusable = false;
+        /**/
+
+        /**
          * Constructor.
          *
          * @octdoc  m:label/__construct
@@ -73,7 +82,9 @@ namespace org\octris\ncurses\component {
         {
             ncurses_mvwaddstr(
                 $this->parent->getResource(), 
-                $this->y, $this->x, $this->text
+                $this->y, 
+                $this->x, 
+                $this->text
             );
         }
     }

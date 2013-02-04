@@ -17,7 +17,7 @@ namespace org\octris\ncurses {
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class app extends \org\octris\ncurses\container
+    abstract class app extends \org\octris\ncurses\container
     /**/
     {
         /**
@@ -47,7 +47,7 @@ namespace org\octris\ncurses {
         /**/
         {
             if (is_null(self::$instance)) {
-                self::$instance = new app();
+                self::$instance = new static();
             }
 
             return self::$instance;
@@ -67,6 +67,44 @@ namespace org\octris\ncurses {
 
             parent::build();
         }
+
+        /**
+         * Main application loop to be implemented by application.
+         *
+         * @octdoc  a:app/main
+         */
+        abstract protected function main();
+        /**/
+
+        /**
+         * Build and run application.
+         *
+         * @octdoc  m:app/run
+         */
+        public function run()
+        /**/
+        {
+            // initialize ncurses and register shutdown function
+            ncurses_init();
+
+            register_shutdown_function(function() {
+                ncurses_end();
+            });
+
+            // setup app UI
+            $this->setup();
+
+            // render app UI
+            $this->build();
+            $this->refresh();
+
+            // enter main loop
+            $this->main();
+        }
+
+        /*
+         *
+         */
 
         /**
          * Initialize application.
@@ -95,19 +133,9 @@ namespace org\octris\ncurses {
                 set_error_handler($log_error);
             }
 
-            // initialize initialization and ending
-            ncurses_init();
-
-            register_shutdown_function(function() {
-                if (defined('NCURSES_LOG') && !is_null($error = error_get_last())) {
-                    $log_error($error['type'], $error['message'], $error['file'], $error['line']);
-                }
-
-                ncurses_end();
-            });
-
             // additional keys initialization
             $keys = array(
+                'NCURSES_KEY_TAB'    =>  9,
                 'NCURSES_KEY_LF'     => 10,
                 'NCURSES_KEY_CR'     => 13,
                 'NCURSES_KEY_ENTER'  => 13,
