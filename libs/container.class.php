@@ -66,6 +66,16 @@ namespace org\octris\ncurses {
         /**/
 
         /**
+         * Whether to exit main loop. This property is modified using the ~doExit~ method and
+         * will be queried by the main loop to exit the container.
+         *
+         * @octdoc  p:container/$do_exit
+         * @var     array|bool
+         */
+        protected $do_exit = false;
+        /**/
+
+        /**
          * Set parent container for component.
          *
          * @octdoc  m:container/setParent
@@ -138,6 +148,18 @@ namespace org\octris\ncurses {
         /**/
         {
             return $this->resource;
+        }
+
+        /**
+         * Set status for leaving container.
+         *
+         * @octdoc  m:container/doExit
+         * @param   mixed                                                           $r_value            Value to return.
+         */
+        public function doExit($r_value)
+        /**/
+        {
+            $this->do_exit = array('r_value' => $r_value);
         }
 
         /**
@@ -259,7 +281,12 @@ namespace org\octris\ncurses {
                     // delegate to focused component
                     $this->focused->onKeypress($pressed);
                 }
-            } while(true);
+            } while($this->do_exit === false);
+
+            $return = $this->do_exit['r_value'];
+            $this->do_exit = false;
+
+            return $return;
         }
     }
 }
