@@ -19,10 +19,6 @@ class win extends ncurses\container\window {
 		    ))
 		);
 	}
-
-    protected function run() {
-    	$this->radiobox->run();
-    }
 }
 
 class test extends ncurses\app {

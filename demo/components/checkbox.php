@@ -19,7 +19,6 @@ class win extends ncurses\container\window {
 		    ))
 		);
 	}
-
 }
 
 class test extends ncurses\app {
