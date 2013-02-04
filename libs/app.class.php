@@ -113,6 +113,28 @@ namespace org\octris\ncurses {
          */
 
         /**
+         * Error logger.
+         *
+         * @octdoc  m:app/logError
+         * @param   int                     $no                     Number/type of error.
+         * @param   string                  $message                Error message.
+         * @param   string                  $file                   File the error occured in.
+         * @param   int                     $line                   Number of line the error occured in.
+         * @param   mixed                   $context                Optional context the error occured in.
+         */
+        public static function logError($no, $message, $file, $line, $context = null)
+        /**/
+        {
+            if (!defined('NCURSES_LOG')) return;
+
+            file_put_contents(
+                NCURSES_LOG,
+                sprintf("type: %d\nfile: %s\nline: %d\nmsg : %s\n\n", $no, $file, $line, $message),
+                FILE_APPEND
+            );
+        }
+
+        /**
          * Initialize application.
          *
          * @octdoc  m:app/init
@@ -124,20 +146,8 @@ namespace org\octris\ncurses {
 
             if ($initialized) return;
 
-            // optionally set error logging
-            if (defined('NCURSES_LOG')) {
-                touch(NCURSES_LOG);
-
-                $log_error = function($no, $str, $file, $line, $context = null) {
-                    file_put_contents(
-                        NCURSES_LOG,
-                        sprintf("%s:%d #%d -- %s\n\n", $file, $line, $no, $str),
-                        FILE_APPEND
-                    );
-                };
-
-                set_error_handler($log_error);
-            }
+            // set error logging
+            set_error_handler(array('\org\octris\ncurses\app', 'logError'));
 
             // additional keys initialization
             $keys = array(
