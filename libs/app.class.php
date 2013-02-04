@@ -88,6 +88,12 @@ namespace org\octris\ncurses {
             ncurses_init();
 
             register_shutdown_function(function() {
+                $error = error_get_last();
+
+                if (!is_null($error)) {
+                    \org\octris\ncurses\app::logError($error['type'], $error['message'], $error['file'], $error['line']);
+                }
+
                 ncurses_end();
             });
 
