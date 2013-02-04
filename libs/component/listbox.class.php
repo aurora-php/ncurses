@@ -179,7 +179,7 @@ namespace org\octris\ncurses\component {
         /**
          * Trigger action if ENTER key is pressed.
          *
-         * @octdoc  m:button/onKeypress
+         * @octdoc  m:listbox/onKeypress
          * @param   int                 $key            Code of the key that was pressed.
          */
         public function onKeypress($key_code)
@@ -220,7 +220,7 @@ namespace org\octris\ncurses\component {
         }
         
         /**
-         * Build menu.
+         * Build listbox.
          *
          * @octdoc  m:listbox/build
          */
