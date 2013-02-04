@@ -141,7 +141,7 @@ namespace org\octris\ncurses\container {
                         $x, $y, $button
                     )
                 )->addEvent('action', function() use ($button) {
-                    trigger_error($button);
+                    $this->doExit($button);
                 });
 
                 $x += strlen($button) + 4;
