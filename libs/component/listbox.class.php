@@ -130,35 +130,45 @@ namespace org\octris\ncurses\component {
         /**
          * Get Focus.
          *
-         * @octdoc  m:button/onFocus
+         * @octdoc  m:listbox/onFocus
          */
         public function onFocus()
         /**/
         {
-            // $res = $this->parent->getResource();
+            $res = $this->parent->getResource();
 
-            // ncurses_wattron($res, NCURSES_A_REVERSE);
-
-            // $this->build();
-            
-            // ncurses_wattroff($res, NCURSES_A_REVERSE);
+            ncurses_wattron($res, NCURSES_A_REVERSE);
+            ncurses_mvwaddstr(
+                $res, 
+                $this->y + ($this->selected - 1), 
+                $this->x, 
+                $this->items[$this->selected - 1]['label']
+            );
+            ncurses_wattroff($res, NCURSES_A_REVERSE);
         }
 
         /**
          * Lose focus.
          *
-         * @octdoc  m:button/onBlur
+         * @octdoc  m:listbox/onBlur
          */
         public function onBlur()
         /**/
         {
-            // $this->build();
+            $res = $this->parent->getResource();
+
+            ncurses_mvwaddstr(
+                $res, 
+                $this->y + ($this->selected - 1), 
+                $this->x, 
+                $this->items[$this->selected - 1]['label']
+            );
         }
 
         /**
          * Get's called when ENTER key is pressed on a button.
          *
-         * @octdoc  m:button/onAction
+         * @octdoc  m:listbox/onAction
          */
         public function onAction()
         /**/
@@ -219,20 +229,12 @@ namespace org\octris\ncurses\component {
             $res = $this->parent->getResource();
 
             for ($i = 1; $i <= $this->cnt; ++$i) {
-                if ($i == $this->selected) {
-                    ncurses_wattron($res, NCURSES_A_REVERSE);
-                }
-
                 ncurses_mvwaddstr(
                     $res, 
                     $this->y + ($i - 1), 
                     $this->x, 
                     $this->items[$i - 1]['label']
                 );
-
-                if ($i == $this->selected) {
-                    ncurses_wattroff($res, NCURSES_A_REVERSE);
-                }
             }
         }
     }
