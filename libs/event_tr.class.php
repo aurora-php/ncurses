@@ -47,7 +47,7 @@ namespace org\octris\ncurses {
          * @param   bool                        $propagate          Whether to propagate event to other handlders.
          * @return  string                                          ID the event handler is registered as.
          */
-        public function addKeyEvent($test, callable $cb, $propagate = true)
+        public function addKeyEvent($test, callable $cb, $propagate = false)
         /**/
         {
             if (is_string($test)) {
