@@ -84,6 +84,25 @@ namespace org\octris\ncurses\component {
         }
 
         /**
+         * Set value for textline.
+         *
+         * @octdoc  m:listbox/setValue
+         * @param   mixed           $value          Value to set.
+         */
+        public function setValue($value)
+        /**/
+        {
+            $this->value = substr($value . str_repeat(' ', $this->size), 0, $this->size);
+
+            ncurses_mvwaddstr(
+                $this->parent->getResource(),
+                $this->y, $this->x, $this->value
+            );
+
+            $this->parent->refresh();
+        }
+
+        /**
          * Get Focus.
          *
          * @octdoc  m:textline/onFocus
@@ -120,67 +139,6 @@ namespace org\octris\ncurses\component {
         }
 
         /**
-         * Textline editor.
-         *
-         * @octdoc  m:textline/onKeypress
-         * @param   int                 $key            Code of the key that was pressed.
-         */
-        public function onKeypress($key_code)
-        /**/
-        {
-            $res = $this->parent->getResource();
-
-            $cursor_x = $this->cursor_x;
-            $size     = min(strlen(rtrim($this->value)) + 1, $this->size);
-
-            if ($key_code == NCURSES_KEY_CR) {
-                $this->onAction();
-            } elseif ($key_code == NCURSES_KEY_LEFT) {
-                if ($cursor_x > 0) --$cursor_x;
-            } elseif ($key_code == NCURSES_KEY_RIGHT) {
-                if ($cursor_x < $size - 1) ++$cursor_x;
-            } elseif ($key_code == NCURSES_KEY_BACK) {
-                if ($cursor_x > 0) {
-                    --$cursor_x;
-
-                    $this->value = substr(
-                        substr_replace(
-                            $this->value, 
-                            '', 
-                            $cursor_x, 
-                            1
-                        ) . str_repeat(' ', $this->size), 
-                        0, 
-                        $this->size
-                    );
-
-                    ncurses_mvwaddstr($res, $this->y, $this->x, $this->value);
-                }
-            } elseif (ctype_print($key_code)) {
-                $this->value = substr(
-                    substr_replace(
-                        $this->value, 
-                        chr($key_code), 
-                        $cursor_x, 
-                        0
-                    ), 
-                    0, 
-                    $this->size
-                ); 
-
-                ncurses_mvwaddstr($res, $this->y, $this->x, $this->value);
-
-                if ($cursor_x < $this->size - 1) ++$cursor_x;
-            }
-
-            ncurses_wmove($res, $this->y, $this->x + $cursor_x);
-
-            $this->cursor_x = $cursor_x;
-
-            $this->parent->refresh();
-        }
-        
-        /**
          * Build textline.
          *
          * @octdoc  m:textline/build
@@ -192,6 +150,58 @@ namespace org\octris\ncurses\component {
                 $this->parent->getResource(),
                 $this->y, $this->x, $this->value
             );
+
+            // attach keyboard events
+            $this->addKeyEvent(NCURSES_KEY_LEFT, function() {
+                $size = min(strlen(rtrim($this->value)) + 1, $this->size);
+
+                if ($this->cursor_x > 0) {
+                    ncurses_wmove($this->parent->getResource(), $this->y, $this->x + --$this->cursor_x);
+                    $this->parent->refresh();
+                }
+            });
+            $this->addKeyEvent(NCURSES_KEY_RIGHT, function() {
+                $size = min(strlen(rtrim($this->value)) + 1, $this->size);
+                
+                if ($this->cursor_x < $size - 1) {
+                    ncurses_wmove($this->parent->getResource(), $this->y, $this->x + ++$this->cursor_x);
+                    $this->parent->refresh();
+                }
+            });
+            $this->addKeyEvent(NCURSES_KEY_BACK, function() {
+                if ($this->cursor_x > 0) {
+                    --$this->cursor_x;
+
+                    $value = substr(substr_replace(
+                        $this->value, 
+                        '', 
+                        $this->cursor_x, 
+                        1
+                    ) . str_repeat(' ', $this->size), 0, $this->size);
+
+                    $this->setValue($value);
+
+                    ncurses_wmove($this->parent->getResource(), $this->y, $this->x + $this->cursor_x);
+
+                    $this->parent->refresh();
+                }
+            });
+            $this->addKeyEvent(function($kc) { return ctype_print($kc); }, function($key_code) {
+                $value = substr(substr_replace(
+                    $this->value, 
+                    chr($key_code), 
+                    $this->cursor_x, 
+                    0
+                ), 0, $this->size);
+
+                $this->setValue($value);
+
+                if ($this->cursor_x < $this->size - 1) ++$this->cursor_x;
+
+                ncurses_wmove($this->parent->getResource(), $this->y, $this->x + $this->cursor_x);
+
+                $this->parent->refresh();
+            });
         }
     }
 }
