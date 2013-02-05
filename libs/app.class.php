@@ -156,7 +156,8 @@ namespace org\octris\ncurses {
                 'NCURSES_KEY_CR'     => 13,
                 'NCURSES_KEY_ENTER'  => 13,
                 'NCURSES_KEY_ESCAPE' => 27,
-                'NCURSES_KEY_SPACE'  => 32
+                'NCURSES_KEY_SPACE'  => 32,
+                'NCURSES_KEY_BACK'   => 127
             );
 
             array_walk($keys, function($code, $name) {
