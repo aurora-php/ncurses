@@ -57,6 +57,15 @@ namespace org\octris\ncurses\container {
         /**/
 
         /**
+         * Window title. Note that the title will only be rendered, if the window has a border.
+         * 
+         * @octdoc  p:window/$title
+         * @var     string
+         */
+        protected $title = '';
+        /**/
+
+        /**
          * Width of window.
          * 
          * @octdoc  p:window/$width
@@ -188,6 +197,24 @@ namespace org\octris\ncurses\container {
                 $this->resource = ncurses_newwin($this->height - 2, $this->width - 2, $this->y + 1, $this->x + 1);
 
                 ncurses_wborder($this->window_resource, 0, 0, 0, 0, 0, 0, 0, 0);
+
+                // draw window title
+                $t_len = strlen($this->title);
+
+                $title = ($t_len + 4 <= $this->width
+                            ? $this->title
+                            : ($t_len + 8 <= $this->width
+                                ? substr($this->title, 0, $this->width - 8) . ' ...'
+                                : ''));
+
+                if ($title != '') {                   
+                    ncurses_mvwaddstr(
+                        $this->window_resource, 
+                        0, 
+                        floor(($this->width - strlen($title) - 2) / 2),
+                        ' ' . $title . ' '
+                    );
+                }
             } else {
                 $this->window_resource = ncurses_newwin($this->height, $this->width, $this->y, $this->x);
                 $this->resource = $this->window_resource;
