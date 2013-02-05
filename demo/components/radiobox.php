@@ -12,7 +12,7 @@ class win extends ncurses\container\window {
 
 	protected function setup() {
 		$this->radiobox = $this->addChild(
-		    new ncurses\component\radiobox(array(
+		    new ncurses\component\radiobox(0, 0, array(
 		        array('label' => 'blue',  'selected' => true),
 		        array('label' => 'green', 'selected' => false),
 		        array('label' => 'black', 'selected' => true)

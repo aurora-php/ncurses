@@ -24,11 +24,11 @@ namespace org\octris\ncurses\component {
          * Constructor.
          *
          * @octdoc  m:checkbox/__construct
+         * @param   int             $x              X position of checkbox.
+         * @param   int             $y              Y position of checkbox.
          * @param   int             $items          Items of checkbox.
-         * @param   int             $x              Optional x position of checkbox.
-         * @param   int             $y              Optional y position of checkbox.
          */
-        public function __construct(array $items, $x = 0, $y = 0)
+        public function __construct($x, $y, array $items)
         /**/
         {
             // determine width and height of list

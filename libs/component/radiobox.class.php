@@ -27,11 +27,11 @@ namespace org\octris\ncurses\component {
          * Constructor.
          *
          * @octdoc  m:radiobox/__construct
+         * @param   int             $x              X position of radiobox.
+         * @param   int             $y              Y position of radiobox.
          * @param   int             $items          Items of radiobox.
-         * @param   int             $x              Optional x position of radiobox.
-         * @param   int             $y              Optional y position of radiobox.
          */
-        public function __construct(array $items, $x = 0, $y = 0)
+        public function __construct($x, $y, array $items)
         /**/
         {
             // determine width and height of list

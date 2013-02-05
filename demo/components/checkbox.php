@@ -12,7 +12,7 @@ class win extends ncurses\container\window {
 
 	protected function setup() {
 		$this->checkbox = $this->addChild(
-		    new ncurses\component\checkbox(array(
+		    new ncurses\component\checkbox(0, 0, array(
 		        array('label' => 'Apple',  'selected' => true),
 		        array('label' => 'Orange', 'selected' => false),
 		        array('label' => 'Banana', 'selected' => false)

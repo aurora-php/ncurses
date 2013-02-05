@@ -87,11 +87,11 @@ namespace org\octris\ncurses\component {
          * Constructor.
          *
          * @octdoc  m:listbox/__construct
+         * @param   int             $x              X position of listbox.
+         * @param   int             $y              Y position of listbox.
          * @param   int             $items          Items of listbox.
-         * @param   int             $x              Optional x position of listbox.
-         * @param   int             $y              Optional y position of listbox.
          */
-        public function __construct(array $items, $x = 0, $y = 0)
+        public function __construct($x, $y, array $items)
         /**/
         {
             $this->height = count($items);
