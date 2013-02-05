@@ -103,20 +103,6 @@ namespace org\octris\ncurses\component {
         }
 
         /**
-         * Trigger action if ENTER key is pressed.
-         *
-         * @octdoc  m:button/onKeypress
-         * @param   int                 $key            Code of the key that was pressed.
-         */
-        public function onKeypress($key_code)
-        /**/
-        {
-            if ($key_code == NCURSES_KEY_CR) {
-                $this->onAction();
-            }
-        }
-
-        /**
          * Render button.
          *
          * @octdoc  m:button/render
@@ -130,6 +116,11 @@ namespace org\octris\ncurses\component {
                 $this->x, 
                 '<' . $this->text . '>'
             );
+
+            // attach keyboard events
+            $this->addKeyEvent(NCURSES_KEY_CR, function() {
+                $this->onAction();
+            });
         }
     }
 }
