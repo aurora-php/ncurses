@@ -109,7 +109,7 @@ namespace org\octris\ncurses\component {
         }
 
         /**
-         * Get's called when ENTER key is pressed on a button.
+         * Get's called when ENTER key is pressed in textline.
          *
          * @octdoc  m:textline/onAction
          */
@@ -120,7 +120,7 @@ namespace org\octris\ncurses\component {
         }
 
         /**
-         * Trigger action if ENTER key is pressed.
+         * Textline editor.
          *
          * @octdoc  m:textline/onKeypress
          * @param   int                 $key            Code of the key that was pressed.
@@ -133,7 +133,9 @@ namespace org\octris\ncurses\component {
             $cursor_x = $this->cursor_x;
             $size     = min(strlen(rtrim($this->value)) + 1, $this->size);
 
-            if ($key_code == NCURSES_KEY_LEFT) {
+            if ($key_code == NCURSES_KEY_CR) {
+                $this->onAction();
+            } elseif ($key_code == NCURSES_KEY_LEFT) {
                 if ($cursor_x > 0) --$cursor_x;
             } elseif ($key_code == NCURSES_KEY_RIGHT) {
                 if ($cursor_x < $size - 1) ++$cursor_x;
