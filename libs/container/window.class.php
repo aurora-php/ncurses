@@ -93,21 +93,29 @@ namespace org\octris\ncurses\container {
         /**/
 
         /**
-         * Constructor.
+         * Constructor. If the X and/or Y position of the window is not set, the window will get rendered
+         * centered vertically and/or horizontally on the screen.
          *
          * @octdoc  m:window/__construct
-         * @param   int             $width          Optional width of window (default: 0).
-         * @param   int             $height         Optional height of window (default: 0).
-         * @param   int             $x              Optional x position of window (default: 0).
-         * @param   int             $y              Optional y position of window (default: 0).
+         * @param   int             $width          Width of window.
+         * @param   int             $height         Height of window.
+         * @param   int             $x              Optional x position of window.
+         * @param   int             $y              Optional y position of window.
          */
-        public function __construct($width = 0, $height = 0, $x = 0, $y = 0)
+        public function __construct($width, $height, $x = null, $y = null)
         /**/
         {
-            $this->width  = $width;
-            $this->height = $height;
-            $this->x      = $x;
-            $this->y      = $y;
+            ncurses_getmaxyx(STDSCR, $max_y, $max_x);
+
+            $this->width  = min($width, $max_x);
+            $this->height = min($height, $max_y);
+
+            $this->x = (is_null($x)
+                        ? floor(($max_x - $this->width) / 2)
+                        : $x);
+            $this->y = (is_null($y)
+                        ? floor(($max_y - $this->height) / 2)
+                        : $y);
         }
         
         /**
