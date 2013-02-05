@@ -113,7 +113,7 @@ namespace org\octris\ncurses {
 
             foreach ($this->key_events as $handler) {
                 if ($handler['test']($char)) {
-                    $handler['callback']();
+                    $handler['callback']($char);
 
                     if (!($propagate = $handler['propagate'])) break;
                 }
