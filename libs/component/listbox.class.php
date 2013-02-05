@@ -128,6 +128,40 @@ namespace org\octris\ncurses\component {
         }
 
         /**
+         * Select specified list item.
+         *
+         * @octdoc  m:listbox/setValue
+         * @param   int                     $item                       Number of item to set.
+         */
+        public function setValue($item)
+        /**/
+        {
+            if ($item != $this->selected) {
+                $res = $this->parent->getResource();
+
+                ncurses_wattron($res, NCURSES_A_REVERSE);
+                ncurses_mvwaddstr(
+                    $res, 
+                    $this->y + ($item - 1), 
+                    $this->x, 
+                    $this->items[$item - 1]['label']
+                );
+                ncurses_wattroff($res, NCURSES_A_REVERSE);
+
+                ncurses_mvwaddstr(
+                    $res, 
+                    $this->y + ($this->selected - 1), 
+                    $this->x, 
+                    $this->items[$this->selected - 1]['label']
+                );
+
+                $this->parent->refresh();
+
+                $this->selected = $item;
+            }
+        }
+
+        /**
          * Get Focus.
          *
          * @octdoc  m:listbox/onFocus
@@ -177,49 +211,6 @@ namespace org\octris\ncurses\component {
         }
 
         /**
-         * Trigger action if ENTER key is pressed.
-         *
-         * @octdoc  m:listbox/onKeypress
-         * @param   int                 $key            Code of the key that was pressed.
-         */
-        public function onKeypress($key_code)
-        /**/
-        {
-            $res      = $this->parent->getResource();
-            $selected = $this->selected;
-
-            if ($key_code == NCURSES_KEY_UP) {
-                $this->selected = max(1, $this->selected - 1);
-            } elseif ($key_code == NCURSES_KEY_DOWN) {
-                $this->selected = min($this->cnt, $this->selected + 1);
-            } elseif ($key_code == NCURSES_KEY_CR || $key_code == NCURSES_KEY_SPACE) {
-                if (isset($this->items[$this->selected - 1]['action'])) {
-                    $this->items[$this->selected - 1]['action']();
-                }                    
-            }
-
-            if ($selected != $this->selected) {
-                ncurses_wattron($res, NCURSES_A_REVERSE);
-                ncurses_mvwaddstr(
-                    $res, 
-                    $this->y + ($this->selected - 1), 
-                    $this->x, 
-                    $this->items[$this->selected - 1]['label']
-                );
-                ncurses_wattroff($res, NCURSES_A_REVERSE);
-
-                ncurses_mvwaddstr(
-                    $res, 
-                    $this->y + ($selected - 1), 
-                    $this->x, 
-                    $this->items[$selected - 1]['label']
-                );
-
-                $this->parent->refresh();
-            }
-        }
-        
-        /**
          * Build listbox.
          *
          * @octdoc  m:listbox/build
@@ -240,7 +231,20 @@ namespace org\octris\ncurses\component {
 
             // attach keyboard events
             $this->addKeyEvent(NCURSES_KEY_UP, function() {
-
+                $this->setValue(max(1, $this->selected - 1));
+            });
+            $this->addKeyEvent(NCURSES_KEY_DOWN, function() {
+                $this->setValue(min($this->cnt, $this->selected + 1));
+            });
+            $this->addKeyEvent(NCURSES_KEY_CR, function() {
+                if (isset($this->items[$this->selected - 1]['action'])) {
+                    $this->items[$this->selected - 1]['action']();
+                }                    
+            }, true);
+            $this->addKeyEvent(NCURSES_KEY_SPACE, function() {
+                if (isset($this->items[$this->selected - 1]['action'])) {
+                    $this->items[$this->selected - 1]['action']();
+                }                    
             });
         }
     }
