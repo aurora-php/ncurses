@@ -20,6 +20,8 @@ namespace org\octris\ncurses {
     abstract class container
     /**/
     {
+        use \org\octris\ncurses\event_tr;
+
         /**
          * Resource of container.
          *
@@ -231,6 +233,35 @@ namespace org\octris\ncurses {
         }
 
         /**
+         * Move focus to next focusable component.
+         *
+         * @octdoc  m:container/moveFocus
+         */
+        public function moveFocus()
+        /**/
+        {
+            $next = is_null($this->focused);
+            $idx  = 0;
+            $cnt  = count($this->children);
+
+            while (true) {
+                $child = $this->children[($idx++ % $cnt)];
+
+                if (!$child->isFocusable()) continue;
+
+                if ($next) {
+                    $child->focus();
+                    break;
+                } elseif ($idx > $cnt) {
+                    // nothing to focus
+                    break;
+                } else {
+                    $next = ($child == $this->focused);
+                }
+            }
+        }
+
+        /**
          * Render component.
          *
          * @octdoc  m:container/build
@@ -238,6 +269,9 @@ namespace org\octris\ncurses {
         public function build()
         /**/
         {
+            $this->addKeyEvent(NCURSES_KEY_TAB, function() { $this->moveFocus(); });
+            $this->addKeyEvent(NCURSES_KEY_CR,  function() { $this->moveFocus(); });
+
             $this->setup();
 
             foreach ($this->children as $child) {
@@ -254,32 +288,16 @@ namespace org\octris\ncurses {
         /**/
         {
             do {
-                $pressed  = ncurses_getch($this->resource);
+                $key_code = ncurses_getch($this->resource);
 
-                if ($pressed == NCURSES_KEY_TAB) {
-                    // move to next focusable component
-                    $next = is_null($this->focused);
-                    $idx  = 0;
-                    $cnt  = count($this->children);
+                if (!($propagate = is_null($this->focused))) {
+                    $propagate = ($this->focused->propagateKeyEvent($key_code) && $this->do_exit === false);
 
-                    while (true) {
-                        $child = $this->children[($idx++ % $cnt)];
+                    $this->focused->onKeypress(null);
+                }
 
-                        if (!$child->isFocusable()) continue;
-
-                        if ($next) {
-                            $child->focus();
-                            break;
-                        } elseif ($idx > $cnt) {
-                            // nothing to focus
-                            break;
-                        } else {
-                            $next = ($child == $this->focused);
-                        }
-                    }
-                } elseif (!is_null($this->focused)) {
-                    // delegate to focused component
-                    $this->focused->onKeypress($pressed);
+                if ($propagate) {
+                    $this->propagateKeyEvent($key_code);
                 }
             } while($this->do_exit === false);
 

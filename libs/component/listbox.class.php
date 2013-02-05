@@ -237,6 +237,11 @@ namespace org\octris\ncurses\component {
                     $this->items[$i - 1]['label']
                 );
             }
+
+            // attach keyboard events
+            $this->addKeyEvent(NCURSES_KEY_UP, function() {
+
+            });
         }
     }
 }

@@ -20,6 +20,8 @@ namespace org\octris\ncurses {
     abstract class component
     /**/
     {
+        use \org\octris\ncurses\event_tr;
+
         /**
          * Resource of component.
          *
