@@ -235,19 +235,20 @@ namespace org\octris\ncurses\component {
                     return ($key_code <= 255 && ctype_print($key_code)); 
                 }, 
                 function($key_code) use ($show_value) {
-                $this->value = substr(
-                    substr_replace($this->value, chr($key_code), $this->value_offset + $this->cursor_x, 0),
-                    0, $this->max_length
-                );
+                    $this->value = substr(
+                        substr_replace($this->value, chr($key_code), $this->value_offset + $this->cursor_x, 0),
+                        0, $this->max_length
+                    );
 
-                if ($this->cursor_x < $this->size - 1) {
-                    ++$this->cursor_x;
-                } elseif ($this->value_offset + $this->cursor_x < $this->max_length) {
-                    ++$this->value_offset;
+                    if ($this->cursor_x < $this->size - 1) {
+                        ++$this->cursor_x;
+                    } elseif ($this->value_offset + $this->cursor_x < $this->max_length) {
+                        ++$this->value_offset;
+                    }
+
+                    $show_value();
                 }
-
-                $show_value();
-            });
+            );
         }
     }
 }
