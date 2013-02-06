@@ -227,9 +227,14 @@ namespace org\octris\ncurses {
         /**
          * Render component.
          *
-         * @octdoc  a:component/build
+         * @octdoc  m:component/build
          */
-        abstract public function build();
+        public function build()
         /**/
+        {
+            $this->addKeyEvent(NCURSES_KEY_CR,  function() { 
+                $this->parent->moveFocus(); 
+            }, true);
+        }
     }
 }
