@@ -218,6 +218,8 @@ namespace org\octris\ncurses\component {
         public function build()
         /**/
         {
+            parent::build();
+
             $res = $this->parent->getResource();
 
             for ($i = 1; $i <= $this->cnt; ++$i) {

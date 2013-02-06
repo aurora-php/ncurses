@@ -110,6 +110,8 @@ namespace org\octris\ncurses\component {
         public function build()
         /**/
         {
+            parent::build();
+
             ncurses_mvwaddstr(
                 $this->parent->getResource(), 
                 $this->y, 
