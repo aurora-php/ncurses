@@ -270,7 +270,6 @@ namespace org\octris\ncurses {
         /**/
         {
             $this->addKeyEvent(NCURSES_KEY_TAB, function() { $this->moveFocus(); });
-            $this->addKeyEvent(NCURSES_KEY_CR,  function() { $this->moveFocus(); });
 
             $this->setup();
 
