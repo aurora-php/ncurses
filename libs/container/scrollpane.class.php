@@ -167,7 +167,6 @@ namespace org\octris\ncurses\container {
 
             // add scrolling
             ncurses_scrollok($this->resource, true);
-            // ncurses_wsetscrreg($this->scrollpane, )
 
             ncurses_wattron($this->scrollpane_resource, NCURSES_A_REVERSE);
 
