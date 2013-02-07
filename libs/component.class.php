@@ -80,6 +80,18 @@ namespace org\octris\ncurses {
         }
 
         /**
+         * Get parent container of component.
+         *
+         * @octdoc  m:component/getParent
+         * @return  \org\octris\ncurses\container                       Parent container.
+         */
+        public function getParent()
+        /**/
+        {
+            return $this->parent;
+        }
+
+        /**
          * Get resource of component.
          *
          * @octdoc  m:component/getResource
