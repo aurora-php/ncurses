@@ -136,6 +136,7 @@ namespace org\octris\ncurses\component {
             $res = $this->parent->getResource();
 
             ncurses_wmove($res, $this->y, $this->x + $this->cursor_x);
+            ncurses_curs_set(1);
 
             $this->parent->refresh();            
         }
@@ -148,6 +149,7 @@ namespace org\octris\ncurses\component {
         public function onBlur()
         /**/
         {
+            ncurses_curs_set(0);
         }
 
         /**
