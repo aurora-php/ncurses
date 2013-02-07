@@ -71,7 +71,7 @@ namespace org\octris\ncurses {
          * Set parent container for component.
          *
          * @octdoc  m:component/setParent
-         * @param   \org\octris\core\ncurses\container      $parent         Parent container.
+         * @param   \org\octris\ncurses\container       $parent         Parent container.
          */
         final public function setParent(\org\octris\ncurses\container $parent)
         /**/
