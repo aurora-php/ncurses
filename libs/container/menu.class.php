@@ -38,7 +38,7 @@ namespace org\octris\ncurses\container {
          * @param   int             $x              Optional x position of window.
          * @param   int             $y              Optional y position of window.
          */
-        public function __construct(array $items, $height = 0, $x = 0, $y = 0)
+        public function __construct(array $items, $height = 0, $x = null, $y = null)
         /**/
         {
             $this->listbox = new \org\octris\ncurses\component\listbox(0, 0, $items);
