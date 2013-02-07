@@ -208,12 +208,12 @@ namespace org\octris\ncurses\container {
                                 : ''));
 
                 if ($title != '') {                   
-                    ncurses_mvwaddstr(
-                        $this->window_resource, 
-                        0, 
-                        floor(($this->width - strlen($title) - 2) / 2),
-                        ' ' . $title . ' '
-                    );
+                    $title_x = floor(($this->width - strlen($title) - 2) / 2);
+
+                    ncurses_wmove($this->window_resource, 0, $title_x);
+                    ncurses_whline($this->window_resource, NCURSES_ACS_RTEE, 1);
+                    ncurses_mvwaddstr($this->window_resource, 0, $title_x + 1, $title);
+                    ncurses_whline($this->window_resource, NCURSES_ACS_LTEE, 1);
                 }
             } else {
                 $this->window_resource = ncurses_newwin($this->height, $this->width, $this->y, $this->x);
