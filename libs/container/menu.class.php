@@ -41,7 +41,7 @@ namespace org\octris\ncurses\container {
         public function __construct(array $items, $height = 0, $x = 0, $y = 0)
         /**/
         {
-            $this->listbox = new \org\octris\ncurses\component\listbox($x, $y, $items);
+            $this->listbox = new \org\octris\ncurses\component\listbox(0, 0, $items);
             $this->listbox->setParent($this);
 
             $size = $this->listbox->getSize();
