@@ -156,9 +156,9 @@ namespace org\octris\ncurses {
          * Set status for leaving container.
          *
          * @octdoc  m:container/doExit
-         * @param   mixed                                                           $r_value            Value to return.
+         * @param   mixed                                                           $r_value            Optional value to return.
          */
-        public function doExit($r_value)
+        public function doExit($r_value = null)
         /**/
         {
             $this->do_exit = array('r_value' => $r_value);
