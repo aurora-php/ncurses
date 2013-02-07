@@ -52,7 +52,7 @@ namespace org\octris\ncurses\container {
         /**
          * A menu cannot have child components.
          *
-         * @octdoc  m:container/addChild
+         * @octdoc  m:menu/addChild
          */
         public function addChild($child)
         /**/
