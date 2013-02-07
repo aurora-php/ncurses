@@ -21,6 +21,15 @@ namespace org\octris\ncurses {
     /**/
     {
         /**
+         * Enable logging to file.
+         *
+         * @octdoc  p:app/$logging
+         * @var     string|bool
+         */
+        protected static $logging = false;
+        /**/
+
+        /**
          * Application instance.
          *
          * @octdoc  p:app/$instance
@@ -93,7 +102,7 @@ namespace org\octris\ncurses {
                 $error = error_get_last();
 
                 if (!is_null($error)) {
-                    \org\octris\ncurses\app::logError($error['type'], $error['message'], $error['file'], $error['line']);
+                    static::logError($error['type'], $error['message'], $error['file'], $error['line']);
                 }
 
                 ncurses_end();
@@ -127,10 +136,10 @@ namespace org\octris\ncurses {
         public static function logError($no, $message, $file, $line, $context = null)
         /**/
         {
-            if (!defined('NCURSES_LOG')) return;
+            if (!static::$logging || !is_writable(static::$logging)) return;
 
             file_put_contents(
-                NCURSES_LOG,
+                static::$logging,
                 sprintf("type: %d\nfile: %s\nline: %d\nmsg : %s\n\n", $no, $file, $line, $message),
                 FILE_APPEND
             );
@@ -149,7 +158,7 @@ namespace org\octris\ncurses {
             if ($initialized) return;
 
             // set error logging
-            set_error_handler(array('\org\octris\ncurses\app', 'logError'));
+            set_error_handler(array('static', 'logError'));
 
             // additional keys initialization
             $keys = array(
