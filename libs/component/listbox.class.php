@@ -240,12 +240,12 @@ namespace org\octris\ncurses\component {
             });
             $this->addKeyEvent(NCURSES_KEY_CR, function() {
                 if (isset($this->items[$this->selected - 1]['action'])) {
-                    $this->items[$this->selected - 1]['action']();
+                    $this->items[$this->selected - 1]['action']($this);
                 }                    
             }, true);
             $this->addKeyEvent(NCURSES_KEY_SPACE, function() {
                 if (isset($this->items[$this->selected - 1]['action'])) {
-                    $this->items[$this->selected - 1]['action']();
+                    $this->items[$this->selected - 1]['action']($this);
                 }                    
             });
         }
