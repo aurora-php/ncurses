@@ -98,7 +98,7 @@ namespace org\octris\ncurses {
         public function getMaxXY()
         /**/
         {
-            $this->refresh();
+            ncurses_wrefresh($this->resource);
             ncurses_getmaxyx($this->resource, $y, $x);
             
             return array($x, $y);
