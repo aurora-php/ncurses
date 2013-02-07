@@ -38,6 +38,15 @@ namespace org\octris\ncurses {
         /**/
 
         /**
+         * Application title.
+         *
+         * @octdoc  p:app/$title = '';
+         * @var     string
+         */
+        protected $title = '';
+        /**/
+
+        /**
          * Constructor, create root window.
          *
          * @octdoc  m:app/__construct
@@ -73,6 +82,13 @@ namespace org\octris\ncurses {
             ncurses_newwin(0, 0, 0, 0);
 
             $this->resource = STDSCR;
+
+            if ($this->title != '') {
+                list($width, ) = $this->getMaxXY();
+
+                ncurses_mvaddstr(0, 0, $this->title);
+                ncurses_mvhline(1, 0, NCURSES_ACS_HLINE, $width);
+            }
 
             parent::build();
         }
