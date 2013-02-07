@@ -244,7 +244,7 @@ namespace org\octris\ncurses {
             $idx  = 0;
             $cnt  = count($this->children);
 
-            while (true) {
+            while (true && $cnt > 0) {
                 $child = $this->children[($idx++ % $cnt)];
 
                 if (!$child->isFocusable()) continue;
