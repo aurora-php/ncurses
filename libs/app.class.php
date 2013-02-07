@@ -86,6 +86,8 @@ namespace org\octris\ncurses {
         {
             // initialize ncurses and register shutdown function
             ncurses_init();
+            ncurses_curs_set(0);
+            ncurses_noecho();
 
             register_shutdown_function(function() {
                 $error = error_get_last();
