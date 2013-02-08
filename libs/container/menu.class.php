@@ -41,8 +41,7 @@ namespace org\octris\ncurses\container {
         public function __construct(array $items, $height = 0, $x = null, $y = null)
         /**/
         {
-            $this->listbox = new \org\octris\ncurses\component\listbox(0, 0, $items);
-            $this->listbox->setParent($this);
+            $this->listbox = parent::addChild(new \org\octris\ncurses\component\listbox(0, 0, $items));
 
             $size = $this->listbox->getSize();
 
@@ -90,8 +89,6 @@ namespace org\octris\ncurses\container {
         /**/
         {
             parent::build();
-
-            $this->listbox->build();
         }
     }
 }
