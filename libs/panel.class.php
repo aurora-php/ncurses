@@ -62,7 +62,7 @@ namespace org\octris\ncurses {
          * @octdoc  p:panel/$panel_cnt
          * @var     int
          */
-        protected static $panel_cnt;
+        protected static $panel_cnt = 0;
         /**/
 
         /**
