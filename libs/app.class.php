@@ -47,6 +47,15 @@ namespace org\octris\ncurses {
         /**/
 
         /**
+         * Set-up proxies.
+         *
+         * @octdoc  p:app/$proxies
+         * @var     array
+         */
+        protected $proxies = array();
+        /**/
+
+        /**
          * Constructor, create root window.
          *
          * @octdoc  m:app/__construct
@@ -91,6 +100,24 @@ namespace org\octris\ncurses {
             }
 
             parent::build();
+        }
+
+        /**
+         * Proxy method.
+         *
+         * @octdoc  m:app/proxy
+         * @return  mixed                                   Return value of callback function.
+         */
+        public function proxy(callable $cb)
+        /**/
+        {
+            $hash = spl_object_hash($cb);
+
+            if (!isset($this->proxies[$hash])) {
+                $this->proxies[$hash] = $cb();
+            }
+
+            return $this->proxies[$hash];
         }
 
         /**
