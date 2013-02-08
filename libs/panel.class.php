@@ -21,21 +21,12 @@ namespace org\octris\ncurses {
     /**/
     {
         /**
-         * Resource of panel.
+         * Resources to handle.
          *
-         * @octdoc  p:panel/$resource
-         * @var     resource
+         * @octdoc  p:panel/$resources
+         * @var     array
          */
-        protected $resource;
-        /**/
-
-        /**
-         * Id of panel.
-         *
-         * @octdoc  p:panel/$panel_id
-         * @var     int
-         */
-        protected $panel_id;
+        protected $resources;
         /**/
 
         /**
@@ -48,38 +39,17 @@ namespace org\octris\ncurses {
         /**/
 
         /**
-         * Panel instances.
-         *
-         * @octdoc  p:panel/$panels
-         * @var     array
-         */
-        protected static $panels = array();
-        /**/
-
-        /**
-         * Panel counter will increase for every new created panel.
-         *
-         * @octdoc  p:panel/$panel_cnt
-         * @var     int
-         */
-        protected static $panel_cnt = 0;
-        /**/
-
-        /**
          * Constructor, panel is a static class.
          *
          * @octdoc  m:panel/__construct
-         * @param   \org\octris\ncurses\container           $container          Container that is assigned to the panel.
-         * @param   resource                                $resource           Resource of the container.
+         * @param   array                       $resources              One or multiple resources to handle.
          */
-        public function __construct(\org\octris\ncurses\container $container, $resource)
+        public function __construct(array $resources)
         /**/
         {
-            $this->panel_id = self::$panel_cnt++;
-
-            self::$panels[$this->panel_id] = $container;
-
-            $this->resource  = ncurses_new_panel($resource);
+            foreach ($resources as $resource) {
+                $this->resources[] = ncurses_new_panel($resource);
+            }
             
             $this->hide();  // all panels are hidden by default
         }
@@ -92,8 +62,9 @@ namespace org\octris\ncurses {
         public function __destruct()
         /**/
         {
-            ncurses_del_panel($this->resource);
-            unset(self::$panels[$this->panel_id]);
+            foreach ($this->resources as $resource) {
+                ncurses_del_panel($resource);
+            }
         }
 
         /**
@@ -117,10 +88,12 @@ namespace org\octris\ncurses {
         /**/
         {
             if (!$this->is_visible) {
-                ncurses_show_panel($this->resource);
-                ncurses_update_panels();
+                foreach ($this->resources as $resource) {
+                    ncurses_show_panel($resource);
+                    ncurses_update_panels();
+                }
+
                 ncurses_doupdate();
-    
                 $this->is_visible = true;
             } else {
                 $this->focus();
@@ -137,8 +110,11 @@ namespace org\octris\ncurses {
         {
             if (!$this->is_visible) return;
 
-            ncurses_hide_panel($this->resource);
-            ncurses_update_panels();
+            foreach ($this->resources as $resource) {
+                ncurses_hide_panel($resource);
+                ncurses_update_panels();
+            }
+
             ncurses_doupdate();
 
             $this->is_visible = false;
