@@ -124,9 +124,6 @@ namespace org\octris\ncurses {
                 ncurses_end();
             });
 
-            // setup app UI
-            $this->setup();
-
             // render app UI
             $this->build();
             $this->refresh();
