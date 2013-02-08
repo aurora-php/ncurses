@@ -222,7 +222,7 @@ namespace org\octris\ncurses\container {
             
             parent::build();
 
-            $this->panel = new \org\octris\ncurses\panel($this, $this->window_resource);
+            $this->panel = new \org\octris\ncurses\panel(array($this->window_resource, $this->resource));
 
             $this->is_build = true;
         }
