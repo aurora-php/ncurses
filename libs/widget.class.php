@@ -11,21 +11,21 @@
 
 namespace org\octris\ncurses {
     /**
-     * Ncurses component class.
+     * Ncurses widget class.
      *
-     * @octdoc      c:ncurses/component
+     * @octdoc      c:ncurses/widget
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    abstract class component
+    abstract class widget
     /**/
     {
         use \org\octris\ncurses\event_tr;
 
         /**
-         * Resource of component.
+         * Resource of widget.
          *
-         * @octdoc  p:component/$resource
+         * @octdoc  p:widget/$resource
          * @var     resource|null
          */
         protected $resource = null;
@@ -34,16 +34,16 @@ namespace org\octris\ncurses {
         /**
          * Parent container.
          *
-         * @octdoc  p:component/$parent
+         * @octdoc  p:widget/$parent
          * @var     \org\octris\core\ncurses\container|null
          */
         protected $parent = null;
         /**/
 
         /**
-         * Whether component can take the focus.
+         * Whether widget can take the focus.
          *
-         * @octdoc  p:component/$focusable
+         * @octdoc  p:widget/$focusable
          * @var     bool
          */
         protected $focusable = true;
@@ -52,7 +52,7 @@ namespace org\octris\ncurses {
         /**
          * Stores registered event handlers.
          *
-         * @octdoc  p:component/$events
+         * @octdoc  p:widget/$events
          * @var     array
          */
         protected $events = array();
@@ -61,16 +61,16 @@ namespace org\octris\ncurses {
         /**
          * Stores event handler IDs.
          *
-         * @octdoc  p:component/$events_cnt
+         * @octdoc  p:widget/$events_cnt
          * @var     array
          */
         protected $events_cnt = array();
         /**/
 
         /**
-         * Set parent container for component.
+         * Set parent container for widget.
          *
-         * @octdoc  m:component/setParent
+         * @octdoc  m:widget/setParent
          * @param   \org\octris\ncurses\container       $parent         Parent container.
          */
         final public function setParent(\org\octris\ncurses\container $parent)
@@ -80,9 +80,9 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Get parent container of component.
+         * Get parent container of widget.
          *
-         * @octdoc  m:component/getParent
+         * @octdoc  m:widget/getParent
          * @return  \org\octris\ncurses\container                       Parent container.
          */
         public function getParent()
@@ -92,9 +92,9 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Get resource of component.
+         * Get resource of widget.
          *
-         * @octdoc  m:component/getResource
+         * @octdoc  m:widget/getResource
          */
         public function getResource()
         /**/
@@ -105,7 +105,7 @@ namespace org\octris\ncurses {
         /**
          * Add event handler.
          *
-         * @octdoc  m:component/addEvent
+         * @octdoc  m:widget/addEvent
          * @param   string          $name               Name of event to add handler for.
          * @param   callable        $cb                 Callback to trigger for event.
          * @param   bool            $propagate          Whether to propagate event to other handlers.
@@ -140,7 +140,7 @@ namespace org\octris\ncurses {
         /**
          * Remove event handler.
          *
-         * @octdoc  m:component/removeEvent
+         * @octdoc  m:widget/removeEvent
          * @param   string              $id                 ID of event handler to remove.
          */
         public function removeEvent($id)
@@ -162,7 +162,7 @@ namespace org\octris\ncurses {
         /**
          * Propagate event.
          *
-         * @octdoc  m:component/propagateEvent
+         * @octdoc  m:widget/propagateEvent
          * @param   string              $name               Name of event to propagate.
          * @param   array               $args               Optional arguments for event handler.
          */
@@ -181,10 +181,10 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Return whether component can take the focus.
+         * Return whether widget can take the focus.
          *
-         * @octdoc  m:component/isFocusable
-         * @return  bool                                Whether component can take the focus.
+         * @octdoc  m:widget/isFocusable
+         * @return  bool                                Whether widget can take the focus.
          */
         public function isFocusable()
         /**/
@@ -193,9 +193,9 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Event is triggered if component loses focus.
+         * Event is triggered if widget loses focus.
          *
-         * @octdoc  m:component/onBlur
+         * @octdoc  m:widget/onBlur
          */
         public function onBlur()
         /**/
@@ -203,9 +203,9 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Event is triggered if component get's the focus.
+         * Event is triggered if widget get's the focus.
          *
-         * @octdoc  m:component/onFocus
+         * @octdoc  m:widget/onFocus
          */
         public function onFocus()
         /**/
@@ -213,10 +213,10 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Event is triggered if component is focused and a key is pressed.
+         * Event is triggered if widget is focused and a key is pressed.
          * Note however, that TAB keys will be handled by the container class.
          *
-         * @octdoc  m:component/onKeypress
+         * @octdoc  m:widget/onKeypress
          * @param   int                 $key            Code of the key that was pressed.
          */
         public function onKeypress($key_code)
@@ -226,9 +226,9 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Move focus to the component.
+         * Move focus to the widget.
          *
-         * @octdoc  m:component/focus
+         * @octdoc  m:widget/focus
          */
         public function focus()
         /**/
@@ -237,9 +237,9 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Render component.
+         * Render widget.
          *
-         * @octdoc  m:component/build
+         * @octdoc  m:widget/build
          */
         public function build()
         /**/

@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\widget {
     /**
-     * Textline component.
+     * Textline widget.
      *
-     * @octdoc      c:component/textline
+     * @octdoc      c:widget/textline
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class textline extends \org\octris\ncurses\component
+    class textline extends \org\octris\ncurses\widget
     /**/
     {
         /**

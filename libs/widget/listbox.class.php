@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\widget {
     /**
-     * Listbox component.
+     * Listbox widget.
      *
-     * @octdoc      c:component/listbox
+     * @octdoc      c:widget/listbox
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class listbox extends \org\octris\ncurses\component
+    class listbox extends \org\octris\ncurses\widget
     /**/
     {
         /**

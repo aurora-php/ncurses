@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\widget {
     /**
-     * checkbox component.
+     * checkbox widget.
      *
-     * @octdoc      c:component/checkbox
+     * @octdoc      c:widget/checkbox
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class checkbox extends \org\octris\ncurses\component\listbox
+    class checkbox extends \org\octris\ncurses\widget\listbox
     /**/
     {
         /**

@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\widget {
     /**
-     * Button component.
+     * Button widget.
      *
-     * @octdoc      c:component/button
+     * @octdoc      c:widget/button
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class button extends \org\octris\ncurses\component
+    class button extends \org\octris\ncurses\widget
     /**/
     {
         /**

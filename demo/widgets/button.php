@@ -8,16 +8,20 @@ use \org\octris\ncurses as ncurses;
 class test extends ncurses\app {
     protected static $logging = '/tmp/test.log';
 
+    protected $button;
+
     protected function setup() {
-        $this->addChild(
-            new ncurses\component\label(1, 1, 'Label #1')
+        $this->button = $this->addChild(
+            new ncurses\widget\button( 1, 1, 'Button #1')
         );
         $this->addChild(
-            new ncurses\component\label(1, 2, 'Label #2')
+            new ncurses\widget\button(20, 1, 'Button #2')
         );
     }
 
     protected function main() {
+        $this->button->focus();
+
         sleep(2);
     }
 }

@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\widget {
     /**
      * Floating text widget.
      *
-     * @octdoc      c:component/text
+     * @octdoc      c:widget/text
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class text extends \org\octris\ncurses\component
+    class text extends \org\octris\ncurses\widget
     /**/
     {
         /**
@@ -68,7 +68,7 @@ namespace org\octris\ncurses\component {
         /**/
 
         /**
-         * Text component cannot take the focus.
+         * Text widget cannot take the focus.
          *
          * @octdoc  p:text/$focusable
          * @var     bool

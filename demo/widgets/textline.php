@@ -6,16 +6,10 @@ require_once(__DIR__ . '/../../libs/autoloader.class.php');
 use \org\octris\ncurses as ncurses;
 
 class win extends ncurses\container\window {
-	protected $checkbox;
-
 	protected function setup() {
-		$this->checkbox = $this->addChild(
-		    new ncurses\component\checkbox(0, 0, array(
-		        array('label' => 'Apple',  'selected' => true),
-		        array('label' => 'Orange', 'selected' => false),
-		        array('label' => 'Banana', 'selected' => false)
-		    ))
-		);
+		$this->addChild(new ncurses\widget\textline(
+			0, 0, 16, 'test'
+		));
 	}
 }
 
@@ -25,7 +19,7 @@ class test extends ncurses\app {
 	protected $win;
 
 	protected function setup() {
-		$this->win = $this->addChild(new win(14, 5, 5, 5));
+		$this->win = $this->addChild(new win(18, 3, 5, 5));
 
 	}
 

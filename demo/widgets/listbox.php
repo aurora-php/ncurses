@@ -7,7 +7,7 @@ use \org\octris\ncurses as ncurses;
 
 class win extends ncurses\container\window {
 	protected function setup() {
-		 $this->addChild(new ncurses\component\listbox(0, 0, array(
+		 $this->addChild(new ncurses\widget\listbox(0, 0, array(
 		    array('label' => 'Network'),
 		    array('label' => 'Administration')
 		)));

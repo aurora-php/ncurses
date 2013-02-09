@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\widget {
     /**
-     * Radiobox component.
+     * Radiobox widget.
      *
-     * @octdoc      c:component/radiobox
+     * @octdoc      c:widget/radiobox
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class radiobox extends \org\octris\ncurses\component\listbox
+    class radiobox extends \org\octris\ncurses\widget\listbox
     /**/
     {
         /**

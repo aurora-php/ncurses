@@ -32,7 +32,7 @@ namespace org\octris\ncurses {
         /**/
 
         /**
-         * Child components.
+         * Child widgets.
          *
          * @octdoc  p:container/$children
          * @var     array
@@ -44,7 +44,7 @@ namespace org\octris\ncurses {
          * Stores instance of child that currently has the focus.
          *
          * @octdoc  p:container/$focused
-         * @var     \org\octris\ncurses\component
+         * @var     \org\octris\ncurses\widget
          */
         protected $focused = null;
         /**/
@@ -78,7 +78,7 @@ namespace org\octris\ncurses {
         /**/
 
         /**
-         * Set parent container for component.
+         * Set parent container for widget.
          *
          * @octdoc  m:container/setParent
          * @param   \org\octris\core\ncurses\container      $parent         Parent container.
@@ -165,18 +165,18 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Add child component.
+         * Add child widget.
          *
          * @octdoc  m:container/addChild
-         * @param   \org\octris\ncurses\component|\org\octris\ncurses\container       $child          Child component to add.
-         * @return  \org\octris\ncurses\component|\org\octris\ncurses\container                       The instance of the child component.
+         * @param   \org\octris\ncurses\widget|\org\octris\ncurses\container       $child          Child widget to add.
+         * @return  \org\octris\ncurses\widget|\org\octris\ncurses\container                       The instance of the child widget.
          */
         public function addChild($child)
         /**/
         {
             if (!($child instanceof \org\octris\ncurses\container ||
-                  $child instanceof \org\octris\ncurses\component)) {
-                throw new \Exception('"\org\octris\ncurses\container" or "\org\octris\ncurses\component" expected');
+                  $child instanceof \org\octris\ncurses\widget)) {
+                throw new \Exception('"\org\octris\ncurses\container" or "\org\octris\ncurses\widget" expected');
             }
 
             $child->setParent($this);
@@ -212,28 +212,28 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Set focus for a component in container.
+         * Set focus for a widget in container.
          *
          * @octdoc  m:container/focus
-         * @param   \org\octris\ncurses\component       $component          The component to focus.
+         * @param   \org\octris\ncurses\widget       $widget          The widget to focus.
          */
-        public function focus(\org\octris\ncurses\component $component)
+        public function focus(\org\octris\ncurses\widget $widget)
         /**/
         {
-            // remove focus from component
+            // remove focus from widget
             if (!is_null($this->focused)) {
                 $this->focused->onBlur();
             }
 
             // set new focus
-            $this->focused = $component;
+            $this->focused = $widget;
             $this->focused->onFocus();
 
             $this->refresh();
         }
 
         /**
-         * Move focus to next focusable component.
+         * Move focus to next focusable widget.
          *
          * @octdoc  m:container/moveFocus
          */
@@ -262,7 +262,7 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Render component.
+         * Render widget.
          *
          * @octdoc  m:container/build
          */
