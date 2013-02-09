@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\container {
+namespace org\octris\ncurses\component {
     /**
-     * Messagebox container.
+     * Messagebox component.
      *
      * @octdoc      c:container/messagebox
      * @copyright   copyright (c) 2013 by Harald Lapp
@@ -112,9 +112,9 @@ namespace org\octris\ncurses\container {
         /**/
         {
             parent::addChild(
-                new \org\octris\ncurses\component\text(
+                new \org\octris\ncurses\widget\text(
                     $this->text, 
-                    \org\octris\ncurses\component\text::T_ALIGN_CENTER,
+                    \org\octris\ncurses\widget\text::T_ALIGN_CENTER,
                     1
                 )
             );
@@ -137,7 +137,7 @@ namespace org\octris\ncurses\container {
 
             foreach ($buttons as $button) {
                 parent::addChild(
-                    new \org\octris\ncurses\component\button(
+                    new \org\octris\ncurses\widget\button(
                         $x, $y, $button
                     )
                 )->addEvent('action', function() use ($button) {

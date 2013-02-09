@@ -11,8 +11,8 @@ class test extends ncurses\app {
 	protected $msg;
 
 	protected function setup() {
-		$this->msg = $this->addChild(new ncurses\container\messagebox(
-			ncurses\container\messagebox::T_YESNO,
+		$this->msg = $this->addChild(new ncurses\component\messagebox(
+			ncurses\component\messagebox::T_YESNO,
 			'Do you really want to continue?',
 			40, 7, 5, 5
 		));
