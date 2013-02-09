@@ -32,7 +32,8 @@ while (true) {
 
         $row = 2;
         array_walk($info, function(&$v, $k) use (&$row) {
-            ncurses_mvaddstr($row++, 0, sprintf("%-20s = %s%10s", $k, $v, ''));            
+            ncurses_mvaddstr($row++, 0, sprintf("%-20s = %s", $k, $v));
+            ncurses_clrtoeol();
         });
 
         ncurses_refresh();
