@@ -17,6 +17,8 @@ function rl_callback($ret) {
 
 readline_callback_handler_install('', 'rl_callback');
 
+ncurses_mvaddstr(0, 0, "press CTRL+C to exit");
+
 while (true) {
     $w = NULL;
     $e = NULL;
@@ -28,7 +30,11 @@ while (true) {
 
         $info = readline_info();
 
-        ncurses_mvaddstr(0, 0, $info['line_buffer']);
+        $row = 2;
+        array_walk($info, function(&$v, $k) use (&$row) {
+            ncurses_mvaddstr($row++, 0, sprintf("%-20s = %s%10s", $k, $v, ''));            
+        });
+
         ncurses_refresh();
     }
 }
