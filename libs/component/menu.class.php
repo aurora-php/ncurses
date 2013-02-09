@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\container {
+namespace org\octris\ncurses\component {
     /**
      * Menu container.
      *
-     * @octdoc      c:container/menu
+     * @octdoc      c:component/menu
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
@@ -41,7 +41,7 @@ namespace org\octris\ncurses\container {
         public function __construct(array $items, $height = 0, $x = null, $y = null)
         /**/
         {
-            $this->listbox = parent::addChild(new \org\octris\ncurses\component\listbox(0, 0, $items));
+            $this->listbox = parent::addChild(new \org\octris\ncurses\widget\listbox(0, 0, $items));
 
             $size = $this->listbox->getSize();
 

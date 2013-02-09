@@ -11,7 +11,7 @@ class test extends ncurses\app {
 	protected $menu;
 
 	protected function setup() {
-		$this->menu = $this->addChild(new ncurses\container\menu(array(
+		$this->menu = $this->addChild(new ncurses\component\menu(array(
 		    array('label' => 'Network'),
 		    array('label' => 'Administration')
 		)));
