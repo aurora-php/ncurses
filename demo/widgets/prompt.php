@@ -7,7 +7,7 @@ use \org\octris\ncurses as ncurses;
 
 class win extends ncurses\container\window {
 	protected function setup() {
-		 $this->addChild(new ncurses\component\shell(0, -1, '$ '));
+		 $this->addChild(new ncurses\widget\prompt('$ '));
 	}
 }
 

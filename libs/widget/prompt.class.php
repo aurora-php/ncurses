@@ -9,76 +9,55 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace org\octris\ncurses\widget {
     /**
-     * Shell component.
+     * prompt component.
      *
-     * @octdoc      c:component/shell
+     * @octdoc      c:component/prompt
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class shell extends \org\octris\ncurses\container\scrollpane
+    class prompt extends \org\octris\ncurses\widget
     /**/
     {
         /**
-         * X position to start input at.
-         *
-         * @octdoc  p:shell/$x
-         * @var     int
-         */
-        protected $x;
-        /**/
-
-        /**
          * Y position to start input at.
          *
-         * @octdoc  p:shell/$y
+         * @octdoc  p:prompt/$y
          * @var     int
          */
-        protected $y;
+        protected $y = 0;
         /**/
 
         /**
-         * Prompt.
+         * X position to start input at.
+         *
+         * @octdoc  p:prompt/$x
+         * @var     int
+         */
+        protected $x = 0;
+        /**/
+
+        /**
+         * Prompt text to show.
          * 
-         * @octdoc  p:shell/$prompt
+         * @octdoc  p:prompt/$prompt
          * @var     string
          */
         protected $prompt;
         /**/
 
         /**
-         * Cursor Y position.
-         *
-         * @octdoc  p:promt/$cursor_y;
-         * @var     int
-         */
-        protected $cursor_y;
-        /**/
-
-        /**
-         * Cursor X position.
-         *
-         * @octdoc  p:promt/$cursor_x;
-         * @var     int
-         */
-        protected $cursor_x;
-        /**/
-
-        /**
          * Constructor.
          *
-         * @octdoc  m:shell/__construct
-         * @param   int                             $x              X position to start input at.
-         * @param   int                             $y              Y position to start input at.
-         * @param   string                          $prompt         Optional prompt to display.
+         * @octdoc  m:prompt/__construct
+         * @param   string                          $prompt         Optional prompt text to display.
          */
-        public function __construct($x, $y, $prompt = '')
+        public function __construct($prompt = '')
         /**/
         {
-            $this->x      = $x;
-            $this->y      = $y;
             $this->prompt = $prompt;
+            $this->x      = strlen($prompt);
         }
 
         /**
@@ -91,8 +70,9 @@ namespace org\octris\ncurses\component {
         {
             $res = $this->parent->getResource();
 
-            // ncurses_wmove($res, $this->y, $this->x + $this->cursor_x);
+            ncurses_wmove($res, $this->y, $this->x);
             ncurses_curs_set(1);
+            ncurses_scrollok($res, true);
 
             $this->parent->refresh();            
 
@@ -113,41 +93,46 @@ namespace org\octris\ncurses\component {
         /**
          * Render prompt.
          *
-         * @octdoc  m:shell/render
+         * @octdoc  m:prompt/render
          */
         public function build()
         /**/
         {
-            $res  = $this->parent->getResource();
-            $size = $this->parent->getInnerSize();
+            parent::build();
 
-            $this->y = ($this->y < 0 ? $size->height - 1 : $this->y);
+            $res = $this->parent->getResource();
 
-            ncurses_mvwaddstr($res, $y, 0, $this->prompt);
-
-            $this->cursor_y = $y;
-            $this->cursor_x = strlen($this->prompt);
-
-            ncurses_scrollok($res, true);
+            ncurses_mvwaddstr($res, $this->y, 0, $this->prompt);
         }
 
         /**
          * Newline.
          *
-         * @octdoc  m:shell/
+         * @octdoc  m:prompt/
 
         /**
          * Main loop.
          *
-         * @octdoc  m:shell/run
+         * @octdoc  m:prompt/run
          */
         protected function run()
         /**/
         {
-            $res = $this->parent->getResource();
+            $res  = $this->parent->getResource();
+            $size = $this->parent->getInnerSize();
 
-            readline_callback_handler_install('', function($v) {
-                ++$this->cursor_y;
+            readline_callback_handler_install('', function($v) use ($res, $size) {
+                // new input line
+                $inc = ceil(($this->x + strlen($v)) / $size->width);
+
+                $this->y += $inc;
+                $this->x  = strlen($this->prompt);
+
+                if ($this->y + $inc > $size->height) {
+                    ncurses_wscrl($res, $inc);
+                }
+
+                ncurses_mvwaddstr($res, $this->y, 0, $this->prompt);
             });
 
             readline_completion_function(function() {
@@ -167,11 +152,11 @@ namespace org\octris\ncurses\component {
 
                     ncurses_mvwaddstr(
                         $res,
-                        $this->cursor_y, $this->cursor_x,
+                        $this->y, $this->x,
                         $info['line_buffer']
                     );
                     // ncurses_clrtoeol();
-                    ncurses_wmove($res, $this->cursor_y, $this->cursor_x + $info['point']);
+                    ncurses_wmove($res, $this->y, $this->x + $info['point']);
                     ncurses_wrefresh($res);
                 }
             } while(true);
