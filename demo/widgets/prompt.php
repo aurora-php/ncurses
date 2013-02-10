@@ -12,13 +12,10 @@ class win extends ncurses\container\window {
 }
 
 class test extends ncurses\app {
-    protected static $logging = '/tmp/test.log';
-
 	protected $win;
 
 	protected function setup() {
-		$this->win = $this->addChild(new win(40, 15));
-
+		$this->win = $this->addChild(new win(10, 5));
 	}
 
 	protected function main() {
@@ -26,4 +23,5 @@ class test extends ncurses\app {
 	}
 }
 
+test::enableLog('/tmp/test.log');
 test::getInstance()->run();

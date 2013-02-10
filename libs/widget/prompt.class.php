@@ -21,21 +21,48 @@ namespace org\octris\ncurses\widget {
     /**/
     {
         /**
-         * Y position to start input at.
+         * Y position to start line at.
          *
-         * @octdoc  p:prompt/$y
+         * @octdoc  p:prompt/$line_y
          * @var     int
          */
-        protected $y = 0;
+        protected $line_y = 0;
         /**/
 
         /**
-         * X position to start input at.
+         * Y position of cursor.
          *
-         * @octdoc  p:prompt/$x
+         * @octdoc  p:prompt/$cursor_y
          * @var     int
          */
-        protected $x = 0;
+        protected $cursor_y = 0;
+        /**/
+
+        /**
+         * X position of cursor.
+         *
+         * @octdoc  p:prompt/$cursor_x
+         * @var     int
+         */
+        protected $cursor_x = 0;
+        /**/
+
+        /**
+         * Y position of cursor on screen.
+         *
+         + @octdoc  p:prompt/$cursor_sy
+         * @var     int
+         */
+        protected $cursor_sy = 0;
+        /**/
+
+        /**
+         * Relative Y position of cursor.
+         *
+         * @octdoc  p:prompt/$cursor_ry
+         * @var     int
+         */
+        protected $cursor_ry = 0;
         /**/
 
         /**
@@ -48,6 +75,42 @@ namespace org\octris\ncurses\widget {
         /**/
 
         /**
+         * Length of prompt.
+         *
+         * @octdoc  p:prompt/$prompt_len
+         * @var     int
+         */
+        protected $prompt_len;
+        /**/
+
+        /**
+         * Width of container.
+         *
+         * @octdoc  p:prompt/$width
+         * @var     int
+         */
+        protected $width;
+        /**/
+
+        /**
+         * Height of container.
+         *
+         * @octdoc  p:prompt/$height
+         * @var     int
+         */
+        protected $height;
+        /**/
+
+        /**
+         * Maximum length a line can be displayed.
+         *
+         * @octdoc  p:prompt/$max_len
+         * @var     int
+         */
+        protected $max_len;
+        /**/
+
+        /**
          * Constructor.
          *
          * @octdoc  m:prompt/__construct
@@ -56,8 +119,8 @@ namespace org\octris\ncurses\widget {
         public function __construct($prompt = '')
         /**/
         {
-            $this->prompt = $prompt;
-            $this->x      = strlen($prompt);
+            $this->prompt     = $prompt;
+            $this->prompt_len = $this->cursor_x = strlen($prompt);
         }
 
         /**
@@ -70,9 +133,8 @@ namespace org\octris\ncurses\widget {
         {
             $res = $this->parent->getResource();
 
-            ncurses_wmove($res, $this->y, $this->x);
+            ncurses_wmove($res, $this->cursor_y, $this->cursor_x);
             ncurses_curs_set(1);
-            ncurses_scrollok($res, true);
 
             $this->parent->refresh();            
 
@@ -102,13 +164,42 @@ namespace org\octris\ncurses\widget {
 
             $res = $this->parent->getResource();
 
-            ncurses_mvwaddstr($res, $this->y, 0, $this->prompt);
+            ncurses_mvwaddstr($res, 0, 0, $this->prompt);
+            ncurses_scrollok($res, true);
+
+            $size = $this->parent->getInnerSize();
+            $this->width  = $size->width;
+            $this->height = $size->height;
+
+            $this->max_len = $this->width * $this->height;
         }
 
         /**
-         * Newline.
+         * Calculate cursor position.
          *
-         * @octdoc  m:prompt/
+         * @octdoc  m:prompt/getCursorXY
+         * @param   array                   $info                       Readline info.
+         * @return  array                                               X, Y position.
+         */
+        protected function getCursorXY($info)
+        /**/
+        {
+            static $x, $y = 0;
+
+            $y = floor(($this->prompt_len + $info['point']) / $this->width);
+            $x = ($this->prompt_len + $info['point']) % $this->width;
+
+            $dy = $this->cursor_sy + ($y - $this->cursor_y);
+            $sy = max(0, min($this->height - 1, $dy));
+
+            $this->cursor_x  = $x;
+            $this->cursor_y  = $y;
+            $this->cursor_sy = $sy;
+
+            trigger_error(sprintf("x,y: %d,%d | sy: %d | dy: %d", $x, $y, $sy, $dy));
+
+            return array($x, $y, $sy);
+        }
 
         /**
          * Main loop.
@@ -119,20 +210,18 @@ namespace org\octris\ncurses\widget {
         /**/
         {
             $res  = $this->parent->getResource();
-            $size = $this->parent->getInnerSize();
 
-            readline_callback_handler_install('', function($v) use ($res, $size) {
+            readline_callback_handler_install('', function($v) use ($res) {
+                readline_add_history($v);
+
                 // new input line
-                $inc = ceil(($this->x + strlen($v)) / $size->width);
+                $inc = ceil(($this->x + strlen($v)) / $this->width);
 
-                $this->y += $inc;
-                $this->x  = strlen($this->prompt);
+                $this->cursor_y = $this->line_y = min($this->height - 1, $this->y + $inc);
+                $this->cursor_x = strlen($this->prompt);
 
-                if ($this->y + $inc > $size->height) {
-                    ncurses_wscrl($res, $inc);
-                }
-
-                ncurses_mvwaddstr($res, $this->y, 0, $this->prompt);
+                ncurses_mvwaddstr($res, $this->line_y, 0, $this->prompt);
+                ncurses_wrefresh($res);
             });
 
             readline_completion_function(function() {
@@ -149,14 +238,31 @@ namespace org\octris\ncurses\widget {
                     readline_callback_read_char();
 
                     $info = readline_info();
+                    $line = $this->prompt . $info['line_buffer'];
+                    $len  = strlen($line);
 
+                    list($cx, $cy, $sy) = $this->getCursorXY($info);
+
+                    // show line buffer contents and clear rest of line
+                    // $this->y = max(floor(($len - 1) / $this->width));
+
+                    ncurses_scrollok($res, false);
                     ncurses_mvwaddstr(
-                        $res,
-                        $this->y, $this->x,
-                        $info['line_buffer']
+                        $res, 
+                        $this->line_y, 
+                        0, 
+                        $line
+                        // substr($line, ($cy - $sy) * $this->width, $this->max_len)
                     );
-                    // ncurses_clrtoeol();
-                    ncurses_wmove($res, $this->y, $this->x + $info['point']);
+                    ncurses_wclrtoeol($res);
+
+                    trigger_error(substr($line, ($cy - $sy) * $this->width, $this->max_len));
+
+                    // calculate and place cursor
+                    ncurses_wmove($res, $sy, $cx);
+                    ncurses_scrollok($res, true);
+
+                    // refresh window
                     ncurses_wrefresh($res);
                 }
             } while(true);
