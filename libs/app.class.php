@@ -66,6 +66,18 @@ namespace org\octris\ncurses {
         }
 
         /**
+         * Enable logging.
+         *
+         * @octdoc  m:app/enableLog
+         * @para    string          $log_file               File to log to.
+         */
+        public static function enableLog($log_file)
+        /**/
+        {
+            self::$logging = $log_file;
+        }
+
+        /**
          * Create an instance of the application.
          *
          * @octdoc  m:app/getInstance
@@ -198,7 +210,9 @@ namespace org\octris\ncurses {
             if ($initialized) return;
 
             // set error logging
-            set_error_handler(array('static', 'logError'));
+            set_error_handler(function($no, $message, $file, $line, $context = null) {
+                static::logError($no, $message, $file, $line, $context);
+            });
 
             // additional keys initialization
             $keys = array(
