@@ -184,8 +184,6 @@ namespace org\octris\ncurses\widget {
         protected function getCursorXY($info)
         /**/
         {
-            static $x, $y = 0;
-
             $y = floor(($this->prompt_len + $info['point']) / $this->width);
             $x = ($this->prompt_len + $info['point']) % $this->width;
 
@@ -217,11 +215,6 @@ namespace org\octris\ncurses\widget {
                 // new input line
                 $inc = ceil(($this->x + strlen($v)) / $this->width);
 
-                $this->cursor_y = $this->line_y = min($this->height - 1, $this->y + $inc);
-                $this->cursor_x = strlen($this->prompt);
-
-                ncurses_mvwaddstr($res, $this->line_y, 0, $this->prompt);
-                ncurses_wrefresh($res);
             });
 
             readline_completion_function(function() {
