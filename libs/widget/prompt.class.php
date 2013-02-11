@@ -213,8 +213,10 @@ namespace org\octris\ncurses\widget {
                 readline_add_history($v);
 
                 // new input line
-                $inc = ceil(($this->x + strlen($v)) / $this->width);
+                $line_y       = $this->line_y + ceil(($this->prompt_len + strlen($v)) / $this->width);
+                $this->line_y = min($line_y, $this->height);
 
+                trigger_error(sprintf("line_y: %d", $this->line_y));
             });
 
             readline_completion_function(function() {
@@ -250,7 +252,7 @@ namespace org\octris\ncurses\widget {
                     trigger_error(substr($line, ($cy - $sy) * $this->width, $this->max_len));
 
                     // calculate and place cursor
-                    ncurses_wmove($res, $sy, $cx);
+                    ncurses_wmove($res, $this->line_y + $sy, $cx);
 
                     // refresh window
                     ncurses_wrefresh($res);
