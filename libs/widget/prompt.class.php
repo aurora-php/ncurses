@@ -238,29 +238,26 @@ namespace org\octris\ncurses\widget {
                     readline_callback_read_char();
 
                     $info = readline_info();
-                    $line = $this->prompt . $info['line_buffer'];
-                    $len  = strlen($line);
+                    $line = $this->prompt . $info['line_buffer'] . str_repeat(' ', $this->width);
 
                     list($cx, $cy, $sy) = $this->getCursorXY($info);
 
                     // show line buffer contents and clear rest of line
-                    // $this->y = max(floor(($len - 1) / $this->width));
-
                     ncurses_scrollok($res, false);
                     ncurses_mvwaddstr(
                         $res, 
                         $this->line_y, 
                         0, 
-                        $line
-                        // substr($line, ($cy - $sy) * $this->width, $this->max_len)
+                        // $line
+                        substr($line, ($cy - $sy) * $this->width, $this->max_len)
                     );
                     ncurses_wclrtoeol($res);
+                    ncurses_scrollok($res, true);
 
                     trigger_error(substr($line, ($cy - $sy) * $this->width, $this->max_len));
 
                     // calculate and place cursor
                     ncurses_wmove($res, $sy, $cx);
-                    ncurses_scrollok($res, true);
 
                     // refresh window
                     ncurses_wrefresh($res);
