@@ -188,8 +188,6 @@ namespace org\octris\ncurses\widget {
                 ncurses_wscrl($this->parent->getResource(), 1);
             }
 
-            trigger_error(sprintf("x,y: %d,%d | sy: %d | dy: %d | this->ly: %d | this->height: %d", $x, $y, $sy, $dy, $this->line_y, $this->height));
-
             $this->cursor_x  = $x;
             $this->cursor_y  = $y;
             $this->cursor_sy = $sy;
@@ -243,7 +241,6 @@ namespace org\octris\ncurses\widget {
             readline_callback_handler_install('', function($input) use ( &$point) {
                 readline_add_history($input);
 
-                    trigger_error(sprintf("scroll: %d", $scroll));
                 $this->doNewLine($input, $point);
 
             });
@@ -277,8 +274,6 @@ namespace org\octris\ncurses\widget {
                     );
                     ncurses_wclrtobot($res);
                     ncurses_scrollok($res, true);
-
-                    trigger_error(substr($line, ($cy - $sy) * $this->width, $this->getMaxLen()));
 
                     // calculate and place cursor
                     ncurses_wmove($res, $this->line_y + $sy, $cx);
