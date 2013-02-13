@@ -198,6 +198,38 @@ namespace org\octris\ncurses\widget {
         }
 
         /**
+         * Perform a newline.
+         *
+         * @octdoc  m:prompt/doNewLine
+         * @param   string                  $v                      String
+         */
+        public function doNewLine($v, $point = 0)
+        /**/
+        {
+            $res = $this->parent->getResource();
+
+            // new input line
+            $total  = ceil(($this->prompt_len + strlen($v)) / $this->width);
+            $line_y = $this->line_y + $total;
+
+            if ($line_y >= $this->height) {
+                $scroll = max(1, $total - ((ceil(($this->prompt_len + $point) / $this->width) + $this->height - ($this->cursor_sy + 1)) - 1));
+                ncurses_wscrl($res, $scroll);
+                $line_y = $this->height - 1;
+
+                $v = str_pad($this->prompt . $v, $total * $this->width);
+
+                ncurses_mvwaddstr(
+                    $res, 
+                    max(0, $line_y - $total), 0, 
+                    substr($v, -($total * $this->width))
+                );
+            }
+
+            $this->line_y = $line_y;
+        }
+
+        /**
          * Main loop.
          *
          * @octdoc  m:prompt/run
@@ -208,30 +240,12 @@ namespace org\octris\ncurses\widget {
             $res   = $this->parent->getResource();
             $point = 0;
 
-            readline_callback_handler_install('', function($v) use ($res, &$point) {
-                readline_add_history($v);
-
-                // new input line
-                $total  = ceil(($this->prompt_len + strlen($v)) / $this->width);
-                $line_y = $this->line_y + $total;
-
-                if ($line_y >= $this->height) {
-                    $scroll = max(1, $total - ((ceil(($this->prompt_len + $point) / $this->width) + $this->height - ($this->cursor_sy + 1)) - 1));
-                    ncurses_wscrl($res, $scroll);
-                    $line_y = $this->height - 1;
+            readline_callback_handler_install('', function($input) use ( &$point) {
+                readline_add_history($input);
 
                     trigger_error(sprintf("scroll: %d", $scroll));
+                $this->doNewLine($input, $point);
 
-                    $v = str_pad($this->prompt . $v, $total * $this->width);
-
-                    ncurses_mvwaddstr(
-                        $res, 
-                        max(0, $line_y - $total), 0, 
-                        substr($v, -($total * 8))
-                    );
-                }
-
-                $this->line_y = $line_y;
             });
 
             readline_completion_function(function() {
