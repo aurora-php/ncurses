@@ -93,6 +93,16 @@ namespace org\octris\ncurses\widget {
         /**/
 
         /**
+         * Whether to exit main loop. This property is modified using the ~doExit~ method and
+         * will be queried by the main loop to exit the prompt widget.
+         *
+         * @octdoc  p:prompt/$do_exit
+         * @var     array|bool
+         */
+        protected $do_exit = false;
+        /**/
+
+        /**
          * Constructor.
          *
          * @octdoc  m:prompt/__construct
@@ -223,6 +233,18 @@ namespace org\octris\ncurses\widget {
         }
 
         /**
+         * Set status for leaving prompt.
+         *
+         * @octdoc  m:prompt/doExit
+         * @param   mixed                                                           $r_value            Optional value to return.
+         */
+        public function doExit($r_value = null)
+        /**/
+        {
+            $this->do_exit = array('r_value' => $r_value);
+        }
+
+        /**
          * Perform a newline.
          *
          * @octdoc  m:prompt/doNewLine
@@ -313,7 +335,12 @@ namespace org\octris\ncurses\widget {
                     // refresh window
                     ncurses_wrefresh($res);
                 }
-            } while(true);
+            } while($this->do_exit === false);
+
+            $return = $this->do_exit['r_value'];
+            $this->do_exit = false;
+
+            return $return;
         }
     }
 }
