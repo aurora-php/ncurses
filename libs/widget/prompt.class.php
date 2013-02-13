@@ -135,6 +135,33 @@ namespace org\octris\ncurses\widget {
         }
 
         /**
+         * This event handler get's called when 'ENTER' key is pressed.
+         * The Method get's the input string as parameter.
+         *
+         * @octdoc  m:textline/onAction
+         * @param   string              $input          Input string.
+         * @return  string                              Output to render.
+         */
+        public function onAction($input)
+        /**/
+        {
+            $this->propagateEvent('action', array($input));
+        }
+
+        /**
+         * This event handler get's called when 'TAB' key is pressed.
+         *
+         * @octdoc  m:textline/onClompletion
+         * @param   string              $input          Input string.
+         * @return  array                               Valid strings that can expand the completion.
+         */
+        public function onCompletion($input)
+        /**/
+        {
+            $this->propagateEvent('completion', array($input));
+        }
+
+        /**
          * Render prompt.
          *
          * @octdoc  m:prompt/render
@@ -243,9 +270,14 @@ namespace org\octris\ncurses\widget {
 
                 $this->doNewLine($input, $point);
 
+                $this->onAction($input);
             });
+            
+            readline_completion_function(function($input, $index) {
+                $info  = readline_info();
+                $input = substr($info['line_buffer'], 0, $info['end']);
 
-            readline_completion_function(function() {
+                $this->onCompletion($input);
             });
 
             do {
