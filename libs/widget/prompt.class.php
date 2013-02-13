@@ -337,6 +337,8 @@ namespace org\octris\ncurses\widget {
                 }
             } while($this->do_exit === false);
 
+            ncurses_curs_set(0);
+
             $return = $this->do_exit['r_value'];
             $this->do_exit = false;
 
