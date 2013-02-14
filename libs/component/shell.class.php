@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\widget {
+namespace org\octris\ncurses\component {
     /**
-     * prompt component.
+     * Shell component.
      *
-     * @octdoc      c:component/prompt
+     * @octdoc      c:component/shell
      * @copyright   copyright (c) 2013 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class prompt extends \org\octris\ncurses\widget
+    class shell extends \org\octris\ncurses\container\window
     /**/
     {
         /**
          * Y position to start line at.
          *
-         * @octdoc  p:prompt/$line_y
+         * @octdoc  p:shell/$line_y
          * @var     int
          */
         protected $line_y = 0;
@@ -32,7 +32,7 @@ namespace org\octris\ncurses\widget {
         /**
          * Y position of cursor.
          *
-         * @octdoc  p:prompt/$cursor_y
+         * @octdoc  p:shell/$cursor_y
          * @var     int
          */
         protected $cursor_y = 0;
@@ -41,7 +41,7 @@ namespace org\octris\ncurses\widget {
         /**
          * X position of cursor.
          *
-         * @octdoc  p:prompt/$cursor_x
+         * @octdoc  p:shell/$cursor_x
          * @var     int
          */
         protected $cursor_x = 0;
@@ -50,7 +50,7 @@ namespace org\octris\ncurses\widget {
         /**
          * Y position of cursor on screen.
          *
-         + @octdoc  p:prompt/$cursor_sy
+         + @octdoc  p:shell/$cursor_sy
          * @var     int
          */
         protected $cursor_sy = 0;
@@ -59,7 +59,7 @@ namespace org\octris\ncurses\widget {
         /**
          * Prompt text to show.
          * 
-         * @octdoc  p:prompt/$prompt
+         * @octdoc  p:shell/$prompt
          * @var     string
          */
         protected $prompt;
@@ -68,7 +68,7 @@ namespace org\octris\ncurses\widget {
         /**
          * Length of prompt.
          *
-         * @octdoc  p:prompt/$prompt_len
+         * @octdoc  p:shell/$prompt_len
          * @var     int
          */
         protected $prompt_len;
@@ -77,7 +77,7 @@ namespace org\octris\ncurses\widget {
         /**
          * Width of container.
          *
-         * @octdoc  p:prompt/$width
+         * @octdoc  p:shell/$width
          * @var     int
          */
         protected $width;
@@ -86,7 +86,7 @@ namespace org\octris\ncurses\widget {
         /**
          * Height of container.
          *
-         * @octdoc  p:prompt/$height
+         * @octdoc  p:shell/$height
          * @var     int
          */
         protected $height;
@@ -96,7 +96,7 @@ namespace org\octris\ncurses\widget {
          * Whether to exit main loop. This property is modified using the ~doExit~ method and
          * will be queried by the main loop to exit the prompt widget.
          *
-         * @octdoc  p:prompt/$do_exit
+         * @octdoc  p:shell/$do_exit
          * @var     array|bool
          */
         protected $do_exit = false;
@@ -105,88 +105,48 @@ namespace org\octris\ncurses\widget {
         /**
          * Constructor.
          *
-         * @octdoc  m:prompt/__construct
+         * @octdoc  m:shell/__construct
+         * @param   int             $width          Width of window.
+         * @param   int             $height         Height of window.
          * @param   string                          $prompt         Optional prompt text to display.
+         * @param   int             $x              Optional x position of window.
+         * @param   int             $y              Optional y position of window.
          */
-        public function __construct($prompt = '')
+        public function __construct($width, $height, $prompt = '', $x = null, $y = null)
         /**/
         {
             $this->prompt     = $prompt;
             $this->prompt_len = $this->cursor_x = strlen($prompt);
+
+            parent::__construct($width, $height, $x, $y);
         }
 
         /**
-         * Get Focus.
+         * Setup shell.
          *
-         * @octdoc  m:textline/onFocus
+         * @octdoc  m:shell/setup
          */
-        public function onFocus()
+        protected function setup()
         /**/
         {
-            $res = $this->parent->getResource();
-
-            ncurses_wmove($res, $this->cursor_y, $this->cursor_x);
-            ncurses_curs_set(1);
-
-            $this->parent->refresh();            
-
-            $this->run();
-        }
-
-        /**
-         * Lose focus.
-         *
-         * @octdoc  m:textline/onBlur
-         */
-        public function onBlur()
-        /**/
-        {
-            ncurses_curs_set(0);
-        }
-
-        /**
-         * This event handler get's called when 'ENTER' key is pressed.
-         * The Method get's the input string as parameter.
-         *
-         * @octdoc  m:textline/onAction
-         * @param   string              $input          Input string.
-         * @return  string                              Output to render.
-         */
-        public function onAction($input)
-        /**/
-        {
-            $this->propagateEvent('action', array($input));
-        }
-
-        /**
-         * This event handler get's called when 'TAB' key is pressed.
-         *
-         * @octdoc  m:textline/onClompletion
-         * @param   string              $input          Input string.
-         * @return  array                               Valid strings that can expand the completion.
-         */
-        public function onCompletion($input)
-        /**/
-        {
-            $this->propagateEvent('completion', array($input));
         }
 
         /**
          * Render prompt.
          *
-         * @octdoc  m:prompt/render
+         * @octdoc  m:shell/render
          */
         public function build()
         /**/
         {
             parent::build();
 
-            $res = $this->parent->getResource();
+            $res = $this->getResource();
 
             ncurses_mvwaddstr($res, 0, 0, $this->prompt);
             ncurses_scrollok($res, true);
 
-            $size = $this->parent->getInnerSize();
+            $size = $this->getInnerSize();
             $this->width  = $size->width;
             $this->height = $size->height;
         }
@@ -194,7 +154,7 @@ namespace org\octris\ncurses\widget {
         /**
          * Calculate and return max length the line to display can have.
          *
-         * @octdoc  m:prompt/getMaxLen
+         * @octdoc  m:shell/getMaxLen
          * @return  int                                                 Maximum length.
          */
         protected function getMaxLen()
@@ -206,7 +166,7 @@ namespace org\octris\ncurses\widget {
         /**
          * Calculate cursor position.
          *
-         * @octdoc  m:prompt/getCursorXY
+         * @octdoc  m:shell/getCursorXY
          * @param   array                   $info                       Readline info.
          * @return  array                                               X, Y position.
          */
@@ -222,7 +182,7 @@ namespace org\octris\ncurses\widget {
             if ($y > $this->cursor_y && $this->line_y > 0 && $this->line_y + $sy > ($this->height - 1)) {
                 $this->line_y--;
 
-                ncurses_wscrl($this->parent->getResource(), 1);
+                ncurses_wscrl($this->getResource(), 1);
             }
 
             $this->cursor_x  = $x;
@@ -233,27 +193,37 @@ namespace org\octris\ncurses\widget {
         }
 
         /**
-         * Set status for leaving prompt.
+         * Get's called with after ENTER key is pressed.
          *
-         * @octdoc  m:prompt/doExit
-         * @param   mixed                                                           $r_value            Optional value to return.
+         * @octdoc  p:shell/onSubmit
+         * @param   string                  $input                  Last input row.
          */
-        public function doExit($r_value = null)
+        protected function onSubmit($input)
         /**/
         {
-            $this->do_exit = array('r_value' => $r_value);
+        }
+
+        /**
+         * Get's called for TAB completion.
+         *
+         * @octdoc  p:shell/onCompletion
+         * @param   string                  $input                  Current input row.
+         */
+        protected function onCompletion($input)
+        /**/
+        {
         }
 
         /**
          * Perform a newline.
          *
-         * @octdoc  m:prompt/doNewLine
+         * @octdoc  m:shell/doNewLine
          * @param   string                  $v                      String
          */
         public function doNewLine($v, $point = 0)
         /**/
         {
-            $res = $this->parent->getResource();
+            $res = $this->getResource();
 
             // new input line
             $total  = ceil(($this->prompt_len + strlen($v)) / $this->width);
@@ -279,20 +249,26 @@ namespace org\octris\ncurses\widget {
         /**
          * Main loop.
          *
-         * @octdoc  m:prompt/run
+         * @octdoc  m:shell/run
          */
         protected function run()
         /**/
         {
-            $res   = $this->parent->getResource();
+            $res   = $this->getResource();
             $point = 0;
 
-            readline_callback_handler_install('', function($input) use ( &$point) {
+            readline_callback_handler_install('', function($input) use (&$point) {
                 readline_add_history($input);
 
                 $this->doNewLine($input, $point);
 
-                $this->onAction($input);
+                $input = trim($input);
+
+                if ($input == 'quit' || $input == 'exit') {
+                    $this->doExit();
+                } else {
+                    $this->onSubmit($input);
+                }
             });
             
             readline_completion_function(function($input, $index) {
@@ -301,6 +277,9 @@ namespace org\octris\ncurses\widget {
 
                 $this->onCompletion($input);
             });
+
+            ncurses_wmove($res, $this->cursor_y, $this->cursor_x);
+            ncurses_curs_set(1);
 
             do {
                 $read   = array(STDIN);
