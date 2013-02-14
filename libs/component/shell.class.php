@@ -152,6 +152,48 @@ namespace org\octris\ncurses\component {
         }
 
         /**
+         * Write a string in the shell window.
+         *
+         * @octdoc  p:shell/write
+         * @param   string                  $str                    String to write.
+         */
+        public function write($str)
+        /**/
+        {
+            // move cursor to next line if input row is not empty
+            $info  = readline_info();
+
+            if ($info['line_buffer'] != '') {
+                $this->doNewLine($info['line_buffer'], $info['point']);
+            }
+
+            // write string
+            $trimOne = function($str) {
+                return (substr($str, -1) == "\n" 
+                        ? substr($str, 0, -1)
+                        : $str);
+            };
+
+            $res = $this->getResource();
+
+            $rows1 = explode("\n", $trimOne($str));
+
+            foreach ($rows1 as $row1) {
+                $rows2 = explode("\n", $trimOne(chunk_split($row1, $this->width, "\n")));
+
+                foreach ($rows2 as $row2) {
+                    ncurses_mvwaddstr($res, $this->line_y, 0, $row2);
+
+                    $this->doNewLine($row2);
+                }
+            }
+
+            ncurses_mvwaddstr($res, $this->line_y, 0, $this->prompt);
+
+            ncurses_wrefresh($res);
+        }
+
+        /**
          * Calculate and return max length the line to display can have.
          *
          * @octdoc  m:shell/getMaxLen
