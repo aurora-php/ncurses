@@ -103,6 +103,15 @@ namespace org\octris\ncurses\component {
         /**/
 
         /**
+         * Is set to true if last key-press resulted in a newline.
+         *
+         * @octdoc  p:shell/$is_newline
+         * @var     bool
+         */
+        protected $is_newline = false;
+        /**/
+
+        /**
          * Constructor.
          *
          * @octdoc  m:shell/__construct
@@ -161,10 +170,12 @@ namespace org\octris\ncurses\component {
         /**/
         {
             // move cursor to next line if input row is not empty
-            $info  = readline_info();
+            if (!$this->is_newline) {
+                $info  = readline_info();
 
-            if ($info['line_buffer'] != '') {
-                $this->doNewLine($info['line_buffer'], $info['point']);
+                if ($info['line_buffer'] != '') {
+                    $this->doNewLine($info['line_buffer'], $info['point']);
+                }
             }
 
             // write string
@@ -304,6 +315,8 @@ namespace org\octris\ncurses\component {
 
                 $this->doNewLine($input, $point);
 
+                $this->is_newline = true;
+
                 $input = trim($input);
 
                 if ($input == 'quit' || $input == 'exit') {
@@ -314,6 +327,8 @@ namespace org\octris\ncurses\component {
             });
             
             readline_completion_function(function($input, $index) {
+                $this->is_newline = false;
+
                 $info  = readline_info();
                 $input = substr($info['line_buffer'], 0, $info['end']);
 
@@ -332,6 +347,8 @@ namespace org\octris\ncurses\component {
 
                 if ($n && in_array(STDIN, $read)) {
                     readline_callback_read_char();
+
+                    $this->is_newline = false;
 
                     $info  = readline_info();
                     $line  = $this->prompt . $info['line_buffer'] . str_repeat(' ', $this->width);
