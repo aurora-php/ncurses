@@ -15,3 +15,4 @@ Documentation
 -------------
 
 * Source documentation (nightly update): http://doc.octris.org/org.octris.ncurses/
+* Useful resources: https://github.com/octris/org.octris.ncurses/wiki
