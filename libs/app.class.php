@@ -243,7 +243,7 @@ namespace org\octris\ncurses {
 
             file_put_contents(
                 static::$logging,
-                sprintf("type: %d\nfile: %s\nline: %d\nmsg : %s\n\n", $no, $file, $line, $message),
+                sprintf("date: %s\ntype: %d\nfile: %s\nline: %d\nmsg : %s\n\n", strftime('%Y-%m-%d %H:%M:%S'), $no, $file, $line, $message),
                 FILE_APPEND
             );
         }
