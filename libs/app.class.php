@@ -82,6 +82,11 @@ namespace org\octris\ncurses {
 
                 ncurses_end();
             });
+
+            // set error logging
+            set_error_handler(function($no, $message, $file, $line, $context = null) {
+                static::logError($no, $message, $file, $line, $context);
+            });
         }
 
         /**
@@ -254,11 +259,6 @@ namespace org\octris\ncurses {
             static $initialized = false;
 
             if ($initialized) return;
-
-            // set error logging
-            set_error_handler(function($no, $message, $file, $line, $context = null) {
-                static::logError($no, $message, $file, $line, $context);
-            });
 
             // additional keys initialization
             $keys = array(
