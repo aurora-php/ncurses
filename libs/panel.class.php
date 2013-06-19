@@ -96,7 +96,7 @@ namespace org\octris\ncurses {
                 ncurses_doupdate();
                 $this->is_visible = true;
             } else {
-                $this->focus();
+                // $this->focus();
             }
         }
 
