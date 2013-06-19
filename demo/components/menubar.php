@@ -13,8 +13,8 @@ class test extends ncurses\app {
 	protected function setup() {
 		$this->menubar = $this->addChild(new ncurses\component\menubar());
 
-		$this->menubar->addMenu('File'); //, new ncurses\component\submenu());
-		$this->menubar->addMenu('Help'); //, new ncurses\component\submenu());
+		$this->menubar->addMenu('File', new ncurses\component\menu(array(array('label' => 'Open'), array('label' => 'Save'))));
+		$this->menubar->addMenu('Help', new ncurses\component\menu(array(array('label' => 'About'))));
 	}
 }
 
