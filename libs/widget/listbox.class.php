@@ -200,7 +200,7 @@ namespace org\octris\ncurses\widget {
         }
 
         /**
-         * Get's called when ENTER key is pressed on a button.
+         * Get's called when ENTER key is pressed on a listbox item.
          *
          * @octdoc  m:listbox/onAction
          */
