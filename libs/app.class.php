@@ -63,6 +63,16 @@ namespace org\octris\ncurses {
         protected function __construct()
         /**/
         {
+            // register shutdown function for catching E_FATAL errors.
+            register_shutdown_function(function() {
+                $error = error_get_last();
+
+                if (!is_null($error)) {
+                    static::logError($error['type'], $error['message'], $error['file'], $error['line']);
+                }
+
+                ncurses_end();
+            });
         }
 
         /**
@@ -152,16 +162,6 @@ namespace org\octris\ncurses {
             ncurses_init();
             ncurses_curs_set(0);
             ncurses_noecho();
-
-            register_shutdown_function(function() {
-                $error = error_get_last();
-
-                if (!is_null($error)) {
-                    static::logError($error['type'], $error['message'], $error['file'], $error['line']);
-                }
-
-                ncurses_end();
-            });
 
             // render app UI
             $this->build();
