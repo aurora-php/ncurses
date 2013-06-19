@@ -70,6 +70,47 @@ namespace org\octris\ncurses\component {
         }
 
         /**
+         * Add key event.
+         *
+         * @octdoc  m:menu/addKeyEvent
+         * @param   string|int|callable         $test               Either a character, a ASCII code of a character or a callback for validating character to set event handler for.
+         * @param   callable                    $cb                 Callback to trigger for event.
+         * @param   bool                        $propagate          Whether to propagate event to other handlders.
+         * @return  string                                          ID the event handler is registered as.
+         */
+        public function addKeyEvent($test, callable $cb, $propagate = false)
+        /**/
+        {
+            return $this->listbox->addKeyEvent($test, $cb, $propagate);
+        }
+
+        /**
+         * Remove key event handler.
+         *
+         * @octdoc  m:menu/removeKeyEvent
+         * @param   string              $id                 ID of event handler to remove.
+         */
+        public function removeKeyEvent($id)
+        /**/
+        {
+            $this->listbox->remoteKeyEvent($id);
+        }
+
+        /**
+         * Propagate event. The method returns true, if propagation was not stopped by an event handler called using
+         * this method.
+         *
+         * @octdoc  m:menu/propagateKeyEvent
+         * @param   string|int          $char               Either a character or a ASCII code of an event to propagate.
+         * @return  bool                                    Propagation status.
+         */
+        public function propagateKeyEvent($char)
+        /**/
+        {
+            return $this->listbox->propagateKeyEvent($char);
+        }
+
+        /**
          * Focus listbox when menu is showed.
          *
          * @octdoc  m:menu/onShow
