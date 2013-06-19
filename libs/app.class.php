@@ -188,7 +188,7 @@ namespace org\octris\ncurses {
         public static function logError($no, $message, $file, $line, $context = null)
         /**/
         {
-            if (!static::$logging || !is_writable(static::$logging)) return;
+            if (!static::$logging || (!is_writable(static::$logging) && !is_writable(dirname(static::$logging)))) return;
 
             file_put_contents(
                 static::$logging,
