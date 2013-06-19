@@ -56,6 +56,15 @@ namespace org\octris\ncurses {
         /**/
 
         /**
+         * Whether method 'leave' has been called.
+         *
+         * @octdoc  p:app/$left
+         * @var     bool
+         */
+        protected $left = false;
+        /**/
+
+        /**
          * Constructor, create root window.
          *
          * @octdoc  m:app/__construct
@@ -149,6 +158,40 @@ namespace org\octris\ncurses {
          */
         abstract protected function main();
         /**/
+
+        /**
+         * Temporarly leave ncurses.
+         *
+         * @octdoc  m:app/leave
+         * @return  bool                                    Returns true if application was able to leave ncurses.
+         */
+        public function leave()
+        /**/
+        {
+            if (!$this->left && ($this->left = !ncurses_def_prog_mode())) {
+                // ncurses_def_prog_mode returns false on success(!)
+                ncurses_end();
+            }
+
+            return $this->left;
+        }
+
+        /**
+         * Restore to ncurses.
+         *
+         * @octdoc  m:app/restore
+         */
+        public function restore()
+        /**/
+        {
+            if ($this->left) {
+                ncurses_reset_prog_mode();
+
+                $this->refresh();
+
+                $this->left = false;
+            }
+        }
 
         /**
          * Build and run application.
