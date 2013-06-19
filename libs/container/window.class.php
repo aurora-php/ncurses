@@ -26,7 +26,7 @@ namespace org\octris\ncurses\container {
          * @octdoc  p:window/$window_resource
          * @var     resource
          */
-        protected $window_resource;
+        protected $window_resource = null;
         /**/
 
         /**
@@ -35,7 +35,7 @@ namespace org\octris\ncurses\container {
          * @octdoc  p:window/$panel
          * @var     \org\octris\ncurses\panel
          */
-        private $panel;
+        private $panel = null;
         /**/
 
         /**
@@ -169,6 +169,26 @@ namespace org\octris\ncurses\container {
                 'width'  => $this->width - 2 * (int)$this->has_border, 
                 'height' => $this->height - 2 * (int)$this->has_border
             );
+        }
+
+        /**
+         * Move window on screen.
+         *
+         * @octdoc  m:window/moveTo
+         * @param   int                 $x                              New x-position to move to.
+         * @param   int                 $y                              New y-position to move to.
+         */
+        public function moveTo($x, $y)
+        /**/
+        {
+            if (!is_null($this->panel)) {
+                ncurses_move_panel($this->panel, $y, $x);
+
+                $this->refresh();
+            }
+
+            $this->x = $x;
+            $this->y = $y;
         }
 
         /**
