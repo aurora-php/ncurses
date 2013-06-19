@@ -42,24 +42,28 @@ namespace org\octris\ncurses\component {
          * Selected menubar item.
          *
          * @octdoc  m:menubar/$selected
-         * @var     int
+         * @var     int|null
          */
-        protected $selected = 0;
+        protected $selected = null;
         /**/
 
         /**
          * Add a menu item to the menubar.
          *
          * @octdoc  m:menubar/addMenu
-         * @param   string                  $label                      Label of menu to add.
+         * @param   string                                  $label                      Label of menu to show in menubar.
+         * @param   \org\octris\ncurses\component\menu      $menu                       Menu object.
          */
-        public function addMenu($label)
+        public function addMenu($label, \org\octris\ncurses\component\menu $menu)
         /**/
         {
             $this->items[] = array(
                 'label' => $label,
+                'menu'  => $menu,
                 'x'     => 0
             );
+
+            ++$this->cnt;
         }
 
         /**
@@ -82,7 +86,7 @@ namespace org\octris\ncurses\component {
         {
             $res = $this->parent->getResource();
 
-            ncurses_mvwaddstr($res, 0, $this->items[$this->selected]['x'], $this->items[$this->selected]['label']);
+            $this->openMenu($this->selected);
         }
 
         /**
@@ -95,9 +99,26 @@ namespace org\octris\ncurses\component {
         {
             $res = $this->parent->getResource();
 
-            ncurses_wattron($res, NCURSES_A_REVERSE);
-            ncurses_mvwaddstr($res, 0, $this->items[$this->selected]['x'], $this->items[$this->selected]['label']);
-            ncurses_wattroff($res, NCURSES_A_REVERSE);
+            $this->closeMenu();
+        }
+
+        /**
+         * Close current open menu.
+         *
+         * @octdoc  m:listbox/closeMenu
+         */
+        protected function closeMenu()
+        /**/
+        {
+            if (!is_null($this->selected)) {
+                $res = $this->parent->getResource();
+
+                ncurses_wattron($res, NCURSES_A_REVERSE);
+                ncurses_mvwaddstr($res, 0, $this->items[$this->selected]['x'], $this->items[$this->selected]['label']);
+                ncurses_wattroff($res, NCURSES_A_REVERSE);
+        
+                $this->items[$this->selected]['menu']->hide();
+            }
         }
 
         /**
@@ -109,18 +130,20 @@ namespace org\octris\ncurses\component {
         public function openMenu($item)
         /**/
         {
-            if ($item != $this->selected) {
+            if (is_null($item)) $item = 0;
+
+            if ($item !== $this->selected) {
                 $res = $this->parent->getResource();
 
-                ncurses_wattron($res, NCURSES_A_REVERSE);
-                ncurses_mvwaddstr($res, 0, $this->items[$this->selected]['x'], $this->items[$this->selected]['label']);
-                ncurses_wattroff($res, NCURSES_A_REVERSE);
+                $this->closeMenu();
 
                 ncurses_mvwaddstr($res, 0, $this->items[$item]['x'], $this->items[$item]['label']);
 
                 $this->parent->refresh();
 
                 $this->selected = $item;
+
+                $this->items[$item]['menu']->show();
             }
         }
 
@@ -145,21 +168,26 @@ namespace org\octris\ncurses\component {
                 $item['label'] = ' ' . trim($item['label']) . ' ';
                 $item['x']     = $x;
 
+                $item['menu']->moveTo($x, 1);
+                $item['menu']->addKeyEvent(NCURSES_KEY_LEFT, function() {
+                    $this->openMenu(($this->selected + 1) % $this->cnt); 
+                });
+                $item['menu']->addKeyEvent(NCURSES_KEY_RIGHT, function() {
+                    $this->openMenu(($this->cnt + ($this->selected - 1)) % $this->cnt);
+                });
+                $item['menu']->addKeyEvent(NCURSES_KEY_CR, function() {
+                    $this->closeMenu();
+                }, true);
+                $item['menu']->addKeyEvent(NCURSES_KEY_SPACE, function() {
+                    $this->closeMenu();
+                }, true);
+
                 ncurses_wattron($res, NCURSES_A_REVERSE);
                 ncurses_mvwaddstr($res, 0, $x, $item['label']);
                 ncurses_wattroff($res, NCURSES_A_REVERSE);
 
                 $x += strlen($item['label']);
-                ++$this->cnt;
             }
-
-            // attach keyboard events
-            $this->addKeyEvent(NCURSES_KEY_LEFT, function() {
-                $this->openMenu(($this->selected + 1) % $this->cnt); 
-            });
-            $this->addKeyEvent(NCURSES_KEY_RIGHT, function() {
-                $this->openMenu(($this->cnt + ($this->selected - 1)) % $this->cnt);
-            });
         }
     }
 }
