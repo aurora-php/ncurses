@@ -156,8 +156,11 @@ namespace org\octris\ncurses {
          *
          * @octdoc  a:app/main
          */
-        abstract protected function main();
+        protected function main()
         /**/
+        {
+            parent::run();
+        }
 
         /**
          * Temporarly leave ncurses.
