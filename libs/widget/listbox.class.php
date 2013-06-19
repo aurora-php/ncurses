@@ -247,7 +247,7 @@ namespace org\octris\ncurses\widget {
                 if (isset($this->items[$this->selected - 1]['action'])) {
                     $this->items[$this->selected - 1]['action']($this);
                 }                    
-            });
+            }, true);
         }
     }
 }
