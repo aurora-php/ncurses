@@ -102,6 +102,15 @@ namespace org\octris\ncurses\container {
         /**/
 
         /**
+         * Whether the window is visible.
+         *
+         * @octdoc  p:window/$is_visible
+         * @var     bool
+         */
+        protected $is_visible = false;
+        /**/
+
+        /**
          * Constructor. If the X and/or Y position of the window is not set, the window will get rendered
          * centered vertically and/or horizontally on the screen.
          *
@@ -278,12 +287,15 @@ namespace org\octris\ncurses\container {
         public function show()
         /**/
         {
-            if (!$this->is_build) $this->build();
+            if (!$this->is_visible) {
+                if (!$this->is_build) $this->build();
 
-            $this->panel->show();
+                $this->panel->show();
 
-            $this->onShow();
-            $this->run();
+                $this->is_visible = true;
+
+                $this->onShow();
+            }
         }
 
         /**
@@ -294,7 +306,11 @@ namespace org\octris\ncurses\container {
         public function hide()
         /**/
         {
-            $this->panel->hide();
+            if ($this->is_visible) {
+                $this->panel->hide();
+
+                $this->is_visible = false;
+            }
         }
     }
 }
