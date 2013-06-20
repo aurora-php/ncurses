@@ -279,31 +279,28 @@ namespace org\octris\ncurses {
         }
 
         /**
-         * Main loop.
+         * Delegate an event.
          *
-         * @octdoc  m:container/run
+         * @octdoc  m:container/delegate
+         * @param   int                 $key_code               Key code of event.
+         * @return  bool                                        Whether to propagate the event.
          */
-        protected function run()
+        protected function delegate($key_code)
         /**/
         {
-            do {
-                $key_code = ncurses_getch($this->resource);
+            $key_code = ncurses_getch($this->resource);
 
-                if (!($propagate = is_null($this->focused))) {
-                    $propagate = ($this->focused->propagateKeyEvent($key_code) && $this->do_exit === false);
+            if (!($propagate = is_null($this->focused))) {
+                $propagate = $this->focused->propagateKeyEvent($key_code);
 
-                    $this->focused->onKeypress(null);
-                }
+                $this->focused->onKeypress(null);
+            }
 
-                if ($propagate) {
-                    $this->propagateKeyEvent($key_code);
-                }
-            } while($this->do_exit === false);
+            if ($propagate) {
+                $propagate = $this->propagateKeyEvent($key_code);
+            }
 
-            $return = $this->do_exit['r_value'];
-            $this->do_exit = false;
-
-            return $return;
+            return $propagate;
         }
     }
 }

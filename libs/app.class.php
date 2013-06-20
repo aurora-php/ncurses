@@ -164,7 +164,26 @@ namespace org\octris\ncurses {
         protected function main()
         /**/
         {
-            parent::run();
+            trigger_error(var_export($this->children, true));
+
+            // do {
+            //     $key_code = ncurses_getch($this->resource);
+
+            //     if (!($propagate = is_null($this->focused))) {
+            //         $propagate = ($this->focused->propagateKeyEvent($key_code) && $this->do_exit === false);
+
+            //         $this->focused->onKeypress(null);
+            //     }
+
+            //     if ($propagate) {
+            //         $this->propagateKeyEvent($key_code);
+            //     }
+            // } while($this->do_exit === false);
+
+            // $return = $this->do_exit['r_value'];
+            // $this->do_exit = false;
+
+            // return $return;
         }
 
         /**
@@ -240,6 +259,12 @@ namespace org\octris\ncurses {
         /**/
         {
             if (!static::$logging || (!is_writable(static::$logging) && !is_writable(dirname(static::$logging)))) return;
+
+            $message = preg_replace_callback('/^/m', function() {
+                static $row = 0;
+                
+                return ($row++ > 0 ? '      ' : '');
+            }, $message);
 
             file_put_contents(
                 static::$logging,

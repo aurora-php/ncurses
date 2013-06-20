@@ -312,5 +312,22 @@ namespace org\octris\ncurses\container {
                 $this->is_visible = false;
             }
         }
+
+        /**
+         * Delegate an event.
+         *
+         * @octdoc  m:container/delegate
+         * @param   int                 $key_code               Key code of event.
+         * @return  bool                                        Whether to propagate the event.
+         */
+        protected function delegate($key_code)
+        /**/
+        {
+            if (!($propagate = !$this->is_visible)) {
+                $propagate = parent::delegate($key_code);
+            }
+
+            return $propagate;
+        }
     }
 }
