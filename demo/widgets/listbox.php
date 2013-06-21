@@ -21,11 +21,12 @@ class test extends ncurses\app {
 
 	protected function setup() {
 		$this->win = $this->addChild(new win(18, 4, 5, 5));
-
 	}
 
 	protected function main() {
 		$this->win->show();
+
+		parent::main();
 	}
 }
 

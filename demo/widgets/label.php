@@ -16,10 +16,6 @@ class test extends ncurses\app {
             new ncurses\widget\label(1, 2, 'Label #2')
         );
     }
-
-    protected function main() {
-        sleep(2);
-    }
 }
 
 test::getInstance()->run();

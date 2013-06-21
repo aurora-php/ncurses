@@ -19,6 +19,8 @@ class test extends ncurses\app {
 
 	protected function main() {
 		$this->menu->show();
+
+		parent::main();
 	}
 }
 

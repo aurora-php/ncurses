@@ -28,10 +28,6 @@ class test extends ncurses\app {
 	protected function setup() {
 		$this->win = $this->addChild(new win(75, 20, 5, 5));
 	}
-
-	protected function main() {
-		sleep(2);
-	}
 }
 
 test::getInstance()->run();

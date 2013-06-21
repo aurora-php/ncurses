@@ -20,7 +20,7 @@ class test extends ncurses\app {
 			sleep(1);
 		}
 
-		sleep(2);
+		parent::main();
 	}
 }
 

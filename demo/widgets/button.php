@@ -22,7 +22,7 @@ class test extends ncurses\app {
     protected function main() {
         $this->button->focus();
 
-        sleep(2);
+        parent::main();
     }
 }
 

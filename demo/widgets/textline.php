@@ -25,6 +25,8 @@ class test extends ncurses\app {
 
 	protected function main() {
 		$this->win->show();
+
+		parent::main();
 	}
 }
 
