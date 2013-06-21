@@ -164,26 +164,17 @@ namespace org\octris\ncurses {
         protected function main()
         /**/
         {
-            trigger_error(var_export($this->children, true));
+            do {
+                $key_code = ncurses_getch($this->resource);
 
-            // do {
-            //     $key_code = ncurses_getch($this->resource);
-
-            //     if (!($propagate = is_null($this->focused))) {
-            //         $propagate = ($this->focused->propagateKeyEvent($key_code) && $this->do_exit === false);
-
-            //         $this->focused->onKeypress(null);
-            //     }
-
-            //     if ($propagate) {
-            //         $this->propagateKeyEvent($key_code);
-            //     }
-            // } while($this->do_exit === false);
-
-            // $return = $this->do_exit['r_value'];
-            // $this->do_exit = false;
-
-            // return $return;
+                foreach ($this->children as $child) {
+                    if ($child instanceof \org\octris\ncurses\container) {
+                        if (!$child->delegate($key_code)) {
+                            break;
+                        }
+                    }
+                }
+            } while(true);
         }
 
         /**
