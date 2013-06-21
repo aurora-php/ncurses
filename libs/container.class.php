@@ -288,8 +288,6 @@ namespace org\octris\ncurses {
         protected function delegate($key_code)
         /**/
         {
-            $key_code = ncurses_getch($this->resource);
-
             if (!($propagate = is_null($this->focused))) {
                 $propagate = $this->focused->propagateKeyEvent($key_code);
 
