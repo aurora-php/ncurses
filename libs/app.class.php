@@ -241,6 +241,12 @@ namespace org\octris\ncurses {
         {
             if (!static::$logging || (!is_writable(static::$logging) && !is_writable(dirname(static::$logging)))) return;
 
+            $message = preg_replace_callback('/^/m', function() {
+                static $row = 0;
+                
+                return ($row++ > 0 ? '      ' : '');
+            }, $message);
+
             file_put_contents(
                 static::$logging,
                 sprintf("date: %s\ntype: %d\nfile: %s\nline: %d\nmsg : %s\n\n", strftime('%Y-%m-%d %H:%M:%S'), $no, $file, $line, $message),
