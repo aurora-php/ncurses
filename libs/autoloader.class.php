@@ -29,11 +29,13 @@ namespace org\octris\ncurses {
         public static function autoload($classpath)
         /**/
         {
-            $pkg = preg_replace('|\\\\|', '/', preg_replace('|\\\\|', '.', ltrim($classpath, '\\\\'), 2)) . '.class.php';
-
-            try {
-                include_once($pkg);
-            } catch(\Exception $e) {
+            if (preg_match('/^\\\\?org\\\\octris\\\\ncurses\\\\/', $classpath, $match)) {
+                $pkg = preg_replace('|\\\\|', '/', substr($classpath, strlen($match[0]))) . '.class.php';
+                
+                try {
+                    include_once(__DIR__ . '/' . $pkg);
+                } catch(\Exception $e) {
+                }
             }
         }
     }
