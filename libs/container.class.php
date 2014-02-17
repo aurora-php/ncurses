@@ -26,7 +26,7 @@ namespace org\octris\ncurses {
          * Resource of container.
          *
          * @octdoc  p:container/$resource
-         * @var     resource|null
+         * @type    resource|null
          */
         protected $resource = null;
         /**/
@@ -35,7 +35,7 @@ namespace org\octris\ncurses {
          * Child widgets.
          *
          * @octdoc  p:container/$children
-         * @var     array
+         * @type    array
          */
         protected $children = array();
         /**/
@@ -44,7 +44,7 @@ namespace org\octris\ncurses {
          * Stores instance of child that currently has the focus.
          *
          * @octdoc  p:container/$focused
-         * @var     \org\octris\ncurses\widget
+         * @type    \org\octris\ncurses\widget
          */
         protected $focused = null;
         /**/
@@ -53,7 +53,7 @@ namespace org\octris\ncurses {
          * Whether container has a border.
          *
          * @octdoc  p:container/$has_border
-         * @var     bool
+         * @type    bool
          */
         protected $has_border = false;
         /**/
@@ -62,7 +62,7 @@ namespace org\octris\ncurses {
          * Parent container.
          *
          * @octdoc  p:container/$parent
-         * @var     \org\octris\core\ncurses\container|null
+         * @type    \org\octris\core\ncurses\container|null
          */
         protected $parent = null;
         /**/
@@ -72,7 +72,7 @@ namespace org\octris\ncurses {
          * will be queried by the main loop to exit the container.
          *
          * @octdoc  p:container/$do_exit
-         * @var     array|bool
+         * @type    array|bool
          */
         protected $do_exit = false;
         /**/

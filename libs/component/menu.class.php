@@ -24,7 +24,7 @@ namespace org\octris\ncurses\component {
          * Instance of listbox used to display menu.
          *
          * @octdoc  p:menu/$listbox
-         * @var     \org\octris\ncurses\component\listbox
+         * @type    \org\octris\ncurses\component\listbox
          */
         protected $listbox;
         /**/

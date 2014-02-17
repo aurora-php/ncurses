@@ -24,7 +24,7 @@ namespace org\octris\ncurses\component {
          * Menu items.
          *
          * @octdoc  m:menubar/$items
-         * @var     array
+         * @type    array
          */
         protected $items = array();
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\component {
          * Number of menu items.
          *
          * @octdoc  m:menubar/$cnt
-         * @var     int
+         * @type    int
          */
         protected $cnt = 0;
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\ncurses\component {
          * Selected menubar item.
          *
          * @octdoc  m:menubar/$selected
-         * @var     int|null
+         * @type    int|null
          */
         protected $selected = null;
         /**/

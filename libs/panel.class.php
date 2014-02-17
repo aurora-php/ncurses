@@ -24,7 +24,7 @@ namespace org\octris\ncurses {
          * Resources to handle.
          *
          * @octdoc  p:panel/$resources
-         * @var     array
+         * @type    array
          */
         protected $resources;
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses {
          * Whether panel is visible.
          *
          * @octdoc  p:panel/$is_visible
-         * @var     bool
+         * @type    bool
          */
         protected $is_visible = true;
         /**/

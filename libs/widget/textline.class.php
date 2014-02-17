@@ -24,7 +24,7 @@ namespace org\octris\ncurses\widget {
          * X position of textline.
          * 
          * @octdoc  p:textline/$x
-         * @var     int
+         * @type    int
          */
         protected $x;
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\widget {
          * Y position of textline.
          * 
          * @octdoc  p:textline/$y
-         * @var     int
+         * @type    int
          */
         protected $y;
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\ncurses\widget {
          * Size of textline.
          *
          * @octdoc  p:textline/$size
-         * @var     int
+         * @type    int
          */
         protected $size;
         /**/
@@ -51,7 +51,7 @@ namespace org\octris\ncurses\widget {
          * Value of textline.
          *
          * @octdoc  p:textline/$value
-         * @var     mixed
+         * @type    mixed
          */
         protected $value = '';
         /**/
@@ -60,7 +60,7 @@ namespace org\octris\ncurses\widget {
          * Curser position on screen.
          *
          * @octdoc  p:textline/$cursor_x
-         * @var     int
+         * @type    int
          */
         protected $cursor_x = 0;
         /**/
@@ -69,7 +69,7 @@ namespace org\octris\ncurses\widget {
          * Offset of value to start display at.
          *
          * @octdoc  p:textline/$value_offset
-         * @var     int
+         * @type    int
          */
         protected $value_offset = 0;
         /**/
@@ -78,7 +78,7 @@ namespace org\octris\ncurses\widget {
          * Maximum length of input.
          *
          * @octdoc  p:textline/$max_length
-         * @var     int|INF
+         * @type    int|INF
          */
         protected $max_length;
         /**/

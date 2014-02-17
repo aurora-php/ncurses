@@ -24,7 +24,7 @@ namespace org\octris\ncurses {
          * Enable logging to file.
          *
          * @octdoc  p:app/$logging
-         * @var     string|bool
+         * @type    string|bool
          */
         protected static $logging = false;
         /**/
@@ -41,7 +41,7 @@ namespace org\octris\ncurses {
          * Application title.
          *
          * @octdoc  p:app/$title = '';
-         * @var     string
+         * @type    string
          */
         protected $title = '';
         /**/
@@ -50,7 +50,7 @@ namespace org\octris\ncurses {
          * Set-up proxies.
          *
          * @octdoc  p:app/$proxies
-         * @var     array
+         * @type    array
          */
         protected $proxies = array();
         /**/
@@ -59,7 +59,7 @@ namespace org\octris\ncurses {
          * Whether method 'leave' has been called.
          *
          * @octdoc  p:app/$left
-         * @var     bool
+         * @type    bool
          */
         protected $left = false;
         /**/

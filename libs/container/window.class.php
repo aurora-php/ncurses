@@ -24,7 +24,7 @@ namespace org\octris\ncurses\container {
          * Window resource.
          *
          * @octdoc  p:window/$window_resource
-         * @var     resource
+         * @type    resource
          */
         protected $window_resource = null;
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\container {
          * Panel instance the window is assigned to.
          *
          * @octdoc  p:window/$panel
-         * @var     \org\octris\ncurses\panel
+         * @type    \org\octris\ncurses\panel
          */
         private $panel = null;
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\ncurses\container {
          * Whether window has a border.
          *
          * @octdoc  p:window/$has_border
-         * @var     bool
+         * @type    bool
          */
         protected $has_border = true;
         /**/
@@ -51,7 +51,7 @@ namespace org\octris\ncurses\container {
          * Whether window has been build.
          *
          * @octdoc  p:window/$is_build
-         * @var     bool
+         * @type    bool
          */
         protected $is_build = false;
         /**/
@@ -60,7 +60,7 @@ namespace org\octris\ncurses\container {
          * Window title. Note that the title will only be rendered, if the window has a border.
          * 
          * @octdoc  p:window/$title
-         * @var     string
+         * @type    string
          */
         protected $title = '';
         /**/
@@ -69,7 +69,7 @@ namespace org\octris\ncurses\container {
          * Width of window.
          * 
          * @octdoc  p:window/$width
-         * @var     int
+         * @type    int
          */
         protected $width;
         /**/
@@ -78,7 +78,7 @@ namespace org\octris\ncurses\container {
          * Height of window.
          * 
          * @octdoc  p:window/$height
-         * @var     int
+         * @type    int
          */
         protected $height;
         /**/
@@ -87,7 +87,7 @@ namespace org\octris\ncurses\container {
          * X position of window.
          * 
          * @octdoc  p:window/$x
-         * @var     int
+         * @type    int
          */
         protected $x;
         /**/
@@ -96,7 +96,7 @@ namespace org\octris\ncurses\container {
          * Y position of window.
          * 
          * @octdoc  p:window/$y
-         * @var     int
+         * @type    int
          */
         protected $y;
         /**/
@@ -105,7 +105,7 @@ namespace org\octris\ncurses\container {
          * Whether the window is visible.
          *
          * @octdoc  p:window/$is_visible
-         * @var     bool
+         * @type    bool
          */
         protected $is_visible = false;
         /**/

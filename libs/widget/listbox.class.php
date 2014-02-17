@@ -24,7 +24,7 @@ namespace org\octris\ncurses\widget {
          * Currently selected item.
          *
          * @octdoc  p:listbox/$selected
-         * @var     int
+         * @type    int
          */
         protected $selected = 1;
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\widget {
          * Menu items.
          *
          * @octdoc  p:listbox/$items
-         * @var     array
+         * @type    array
          */
         protected $items = array();
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\ncurses\widget {
          * Number of menu items.
          *
          * @octdoc  p:listbox/$cnt
-         * @var     int
+         * @type    int
          */
         protected $cnt = 0;
         /**/
@@ -51,7 +51,7 @@ namespace org\octris\ncurses\widget {
          * Width of listbox calculated from list items.
          *
          * @octdoc  p:listbox/$width
-         * @var     int
+         * @type    int
          */
         protected $width;
         /**/
@@ -60,7 +60,7 @@ namespace org\octris\ncurses\widget {
          * Height of listbox calculated from list items.
          *
          * @octdoc  p:listbox/$height
-         * @var     int
+         * @type    int
          */
         protected $height;
         /**/
@@ -69,7 +69,7 @@ namespace org\octris\ncurses\widget {
          * X position of listbox.
          * 
          * @octdoc  p:listbox/$x
-         * @var     int
+         * @type    int
          */
         protected $x;
         /**/
@@ -78,7 +78,7 @@ namespace org\octris\ncurses\widget {
          * Y position of listbox.
          * 
          * @octdoc  p:listbox/$y
-         * @var     int
+         * @type    int
          */
         protected $y;
         /**/

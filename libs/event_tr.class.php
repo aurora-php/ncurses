@@ -24,7 +24,7 @@ namespace org\octris\ncurses {
          * Stores registered key event handlers.
          *
          * @octdoc  p:event_tr/$key_events
-         * @var     array
+         * @type    array
          */
         protected $key_events = array();
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses {
          * Stores key event handler ID.
          *
          * @octdoc  p:event_tr/$key_events_cnt
-         * @var     int
+         * @type    int
          */
         protected $key_events_cnt = 1;
         /**/

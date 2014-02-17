@@ -24,7 +24,7 @@ namespace org\octris\ncurses\container {
          * Scrollpane resource.
          *
          * @octdoc  p:scrollpane/$window_resource
-         * @var     resource
+         * @type    resource
          */
         protected $scrollpane_resource;
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\container {
          * X position of scrollpane.
          *
          * @octdoc  p:scrollpane/$x
-         * @var     int
+         * @type    int
          */
         protected $x;
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\ncurses\container {
          * Y position of scrollpane.
          *
          * @octdoc  p:scrollpane/$y
-         * @var     int
+         * @type    int
          */
         protected $y;
         /**/
@@ -51,7 +51,7 @@ namespace org\octris\ncurses\container {
          * Visible height of scrollpane.
          *
          * @octdoc  p:scrollpane/$height
-         * @var     int
+         * @type    int
          */
         protected $height;
         /**/
@@ -60,7 +60,7 @@ namespace org\octris\ncurses\container {
          * Visible width of scrollpane.
          *
          * @octdoc  p:scrollpane/$width
-         * @var     int
+         * @type    int
          */
         protected $width;
         /**/
@@ -69,7 +69,7 @@ namespace org\octris\ncurses\container {
          * Buffer size in rows.
          *
          * @octdoc  p:scrollpane/$buffer_size
-         * @var     int
+         * @type    int
          */
         protected $buffer_size;
         /**/
@@ -78,7 +78,7 @@ namespace org\octris\ncurses\container {
          * Options.
          *
          * @octdoc  p:scrollpane/$options
-         * @var     int
+         * @type    int
          */
         protected $options;
         /**/

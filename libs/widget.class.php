@@ -26,7 +26,7 @@ namespace org\octris\ncurses {
          * Resource of widget.
          *
          * @octdoc  p:widget/$resource
-         * @var     resource|null
+         * @type    resource|null
          */
         protected $resource = null;
         /**/
@@ -35,7 +35,7 @@ namespace org\octris\ncurses {
          * Parent container.
          *
          * @octdoc  p:widget/$parent
-         * @var     \org\octris\core\ncurses\container|null
+         * @type    \org\octris\core\ncurses\container|null
          */
         protected $parent = null;
         /**/
@@ -44,7 +44,7 @@ namespace org\octris\ncurses {
          * Whether widget can take the focus.
          *
          * @octdoc  p:widget/$focusable
-         * @var     bool
+         * @type    bool
          */
         protected $focusable = true;
         /**/
@@ -53,7 +53,7 @@ namespace org\octris\ncurses {
          * Stores registered event handlers.
          *
          * @octdoc  p:widget/$events
-         * @var     array
+         * @type    array
          */
         protected $events = array();
         /**/
@@ -62,7 +62,7 @@ namespace org\octris\ncurses {
          * Stores event handler IDs.
          *
          * @octdoc  p:widget/$events_cnt
-         * @var     array
+         * @type    array
          */
         protected $events_cnt = array();
         /**/

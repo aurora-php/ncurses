@@ -24,7 +24,7 @@ namespace org\octris\ncurses\component {
          * Y position to start line at.
          *
          * @octdoc  p:shell/$line_y
-         * @var     int
+         * @type    int
          */
         protected $line_y = 0;
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\component {
          * Y position of cursor.
          *
          * @octdoc  p:shell/$cursor_y
-         * @var     int
+         * @type    int
          */
         protected $cursor_y = 0;
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\ncurses\component {
          * X position of cursor.
          *
          * @octdoc  p:shell/$cursor_x
-         * @var     int
+         * @type    int
          */
         protected $cursor_x = 0;
         /**/
@@ -51,7 +51,7 @@ namespace org\octris\ncurses\component {
          * Y position of cursor on screen.
          *
          + @octdoc  p:shell/$cursor_sy
-         * @var     int
+         * @type    int
          */
         protected $cursor_sy = 0;
         /**/
@@ -60,7 +60,7 @@ namespace org\octris\ncurses\component {
          * Prompt text to show.
          * 
          * @octdoc  p:shell/$prompt
-         * @var     string
+         * @type    string
          */
         protected $prompt;
         /**/
@@ -69,7 +69,7 @@ namespace org\octris\ncurses\component {
          * Length of prompt.
          *
          * @octdoc  p:shell/$prompt_len
-         * @var     int
+         * @type    int
          */
         protected $prompt_len;
         /**/
@@ -78,7 +78,7 @@ namespace org\octris\ncurses\component {
          * Width of container.
          *
          * @octdoc  p:shell/$width
-         * @var     int
+         * @type    int
          */
         protected $width;
         /**/
@@ -87,7 +87,7 @@ namespace org\octris\ncurses\component {
          * Height of container.
          *
          * @octdoc  p:shell/$height
-         * @var     int
+         * @type    int
          */
         protected $height;
         /**/
@@ -97,7 +97,7 @@ namespace org\octris\ncurses\component {
          * will be queried by the main loop to exit the prompt widget.
          *
          * @octdoc  p:shell/$do_exit
-         * @var     array|bool
+         * @type    array|bool
          */
         protected $do_exit = false;
         /**/
@@ -106,7 +106,7 @@ namespace org\octris\ncurses\component {
          * Is set to true if last key-press resulted in a newline.
          *
          * @octdoc  p:shell/$is_newline
-         * @var     bool
+         * @type    bool
          */
         protected $is_newline = false;
         /**/

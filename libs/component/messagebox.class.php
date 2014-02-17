@@ -53,7 +53,7 @@ namespace org\octris\ncurses\component {
          * Messagebox types.
          *
          * @octdoc  p:messagebox/$types
-         * @var     array
+         * @type    array
          */
         protected static $types = array(
             self::T_OK               => array(self::T_ACTION_OK),
@@ -69,7 +69,7 @@ namespace org\octris\ncurses\component {
          * Type of messagebox.
          *
          * @octdoc  p:messagebox/$type
-         * @var     int
+         * @type    int
          */
         protected $type;
         /**/
@@ -78,7 +78,7 @@ namespace org\octris\ncurses\component {
          * Text to display in messagebox.
          *
          * @octdoc  p:messagebox/$text
-         * @var     string
+         * @type    string
          */
         protected $text;
         /**/

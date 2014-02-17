@@ -35,7 +35,7 @@ namespace org\octris\ncurses\widget {
          * Text.
          * 
          * @octdoc  p:text/$text
-         * @var     string
+         * @type    string
          */
         protected $text;
         /**/
@@ -44,7 +44,7 @@ namespace org\octris\ncurses\widget {
          * Text alignment.
          *
          * @octdoc  p:text/$align
-         * @var     int
+         * @type    int
          */
         protected $align;
         /**/
@@ -53,7 +53,7 @@ namespace org\octris\ncurses\widget {
          * Vertical margin.
          *
          * @octdoc  p:text/$v_margin
-         * @var     int
+         * @type    int
          */
         protected $v_margin;
         /**/
@@ -62,7 +62,7 @@ namespace org\octris\ncurses\widget {
          * Horizontal margin.
          *
          * @octdoc  p:text/$h_margin
-         * @var     int
+         * @type    int
          */
         protected $h_margin;
         /**/
@@ -71,7 +71,7 @@ namespace org\octris\ncurses\widget {
          * Text widget cannot take the focus.
          *
          * @octdoc  p:text/$focusable
-         * @var     bool
+         * @type    bool
          */
         protected $focusable = false;
         /**/

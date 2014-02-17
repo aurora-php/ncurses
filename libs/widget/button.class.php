@@ -24,7 +24,7 @@ namespace org\octris\ncurses\widget {
          * X position of button.
          * 
          * @octdoc  p:button/$x
-         * @var     int
+         * @type    int
          */
         protected $x;
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\widget {
          * Y position of button.
          * 
          * @octdoc  p:button/$y
-         * @var     int
+         * @type    int
          */
         protected $y;
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\ncurses\widget {
          * Text of button.
          * 
          * @octdoc  p:button/$text
-         * @var     string
+         * @type    string
          */
         protected $text;
         /**/

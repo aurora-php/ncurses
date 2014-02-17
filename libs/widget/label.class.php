@@ -24,7 +24,7 @@ namespace org\octris\ncurses\widget {
          * X position of label.
          * 
          * @octdoc  p:label/$x
-         * @var     int
+         * @type    int
          */
         protected $x;
         /**/
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\widget {
          * Y position of label.
          * 
          * @octdoc  p:label/$y
-         * @var     int
+         * @type    int
          */
         protected $y;
         /**/
@@ -42,7 +42,7 @@ namespace org\octris\ncurses\widget {
          * Text of label.
          * 
          * @octdoc  p:label/$text
-         * @var     string
+         * @type    string
          */
         protected $text;
         /**/
@@ -51,7 +51,7 @@ namespace org\octris\ncurses\widget {
          * Label widget cannot take the focus.
          *
          * @octdoc  p:label/$focusable
-         * @var     bool
+         * @type    bool
          */
         protected $focusable = false;
         /**/
