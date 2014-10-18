@@ -23,22 +23,21 @@ namespace octris\ncurses {
         /**
          * Class Autoloader.
          *
-         * @octdoc  m:app/autoload
-         * @param   string      $classpath      Path of class to load.
+         * @octdoc  m:autoloader/autoload
+         * @param   string          $class              Class to load.
          */
-        public static function autoload($classpath)
+        public static function autoload($class)
         /**/
         {
-            if (preg_match('/^\\\\?org\\\\octris\\\\ncurses\\\\/', $classpath, $match)) {
-                $pkg = preg_replace('|\\\\|', '/', substr($classpath, strlen($match[0]))) . '.class.php';
+            if (strpos($class, 'octris\\ncurses\\') === 0) {
+                $file = __DIR__ . '/../' . str_replace('\\', '/', substr($class, 15)) . '.php';
                 
-                try {
-                    include_once(__DIR__ . '/' . $pkg);
-                } catch(\Exception $e) {
+                if (file_exists($file)) {
+                    require_once($file);
                 }
             }
         }
     }
 
-    spl_autoload_register(array('\octris\ncurses\autoloader', 'autoload'));
+    spl_autoload_register(array('\octris\ncurses\app\autoloader', 'autoload'));
 }
