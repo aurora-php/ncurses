@@ -14,7 +14,7 @@ namespace org\octris\ncurses\component {
      * Shell component.
      *
      * @octdoc      c:component/shell
-     * @copyright   copyright (c) 2013 by Harald Lapp
+     * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
     class shell extends \org\octris\ncurses\container\window

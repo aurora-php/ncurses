@@ -14,7 +14,7 @@ namespace org\octris\ncurses\widget {
      * Label widget.
      *
      * @octdoc      c:widget/label
-     * @copyright   copyright (c) 2013 by Harald Lapp
+     * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
     class label extends \org\octris\ncurses\widget

@@ -14,7 +14,7 @@ namespace org\octris\ncurses\widget {
      * Button widget.
      *
      * @octdoc      c:widget/button
-     * @copyright   copyright (c) 2013 by Harald Lapp
+     * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
     class button extends \org\octris\ncurses\widget

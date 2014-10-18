@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-// (c) 2013 by Harald Lapp <harald@octris.org>
+// (c) 2013-2014 by Harald Lapp <harald@octris.org>
 
 /* 
  * convenient command to show output of ACS constants

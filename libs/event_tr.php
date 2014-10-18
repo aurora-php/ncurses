@@ -14,7 +14,7 @@ namespace org\octris\ncurses {
      * Implements functionality for handling keyboard events.
      *
      * @octdoc      t:ncurses/event_tr
-     * @copyright   copyright (c) 2013 by Harald Lapp
+     * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
     trait event_tr

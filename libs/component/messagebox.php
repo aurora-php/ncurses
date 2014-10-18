@@ -14,7 +14,7 @@ namespace org\octris\ncurses\component {
      * Messagebox component.
      *
      * @octdoc      c:container/messagebox
-     * @copyright   copyright (c) 2013 by Harald Lapp
+     * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
     class messagebox extends \org\octris\ncurses\container\window
