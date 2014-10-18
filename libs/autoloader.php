@@ -30,7 +30,7 @@ namespace octris\ncurses {
         /**/
         {
             if (strpos($class, 'octris\\ncurses\\') === 0) {
-                $file = __DIR__ . '/../' . str_replace('\\', '/', substr($class, 15)) . '.php';
+                $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, 15)) . '.php';
                 
                 if (file_exists($file)) {
                     require_once($file);
@@ -39,5 +39,5 @@ namespace octris\ncurses {
         }
     }
 
-    spl_autoload_register(array('\octris\ncurses\app\autoloader', 'autoload'));
+    spl_autoload_register(array('\octris\ncurses\autoloader', 'autoload'), true, true);
 }
