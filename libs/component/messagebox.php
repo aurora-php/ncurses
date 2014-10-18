@@ -17,7 +17,7 @@ namespace org\octris\ncurses\component {
      * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class messagebox extends \org\octris\ncurses\container\window
+    class messagebox extends \octris\ncurses\container\window
     /**/
     {
         /**
@@ -112,9 +112,9 @@ namespace org\octris\ncurses\component {
         /**/
         {
             parent::addChild(
-                new \org\octris\ncurses\widget\text(
+                new \octris\ncurses\widget\text(
                     $this->text, 
-                    \org\octris\ncurses\widget\text::T_ALIGN_CENTER,
+                    \octris\ncurses\widget\text::T_ALIGN_CENTER,
                     1
                 )
             );
@@ -137,7 +137,7 @@ namespace org\octris\ncurses\component {
 
             foreach ($buttons as $button) {
                 parent::addChild(
-                    new \org\octris\ncurses\widget\button(
+                    new \octris\ncurses\widget\button(
                         $x, $y, $button
                     )
                 )->addEvent('action', function() use ($button) {

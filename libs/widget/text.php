@@ -17,7 +17,7 @@ namespace org\octris\ncurses\widget {
      * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class text extends \org\octris\ncurses\widget
+    class text extends \octris\ncurses\widget
     /**/
     {
         /**

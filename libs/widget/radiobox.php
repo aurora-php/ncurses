@@ -17,7 +17,7 @@ namespace org\octris\ncurses\widget {
      * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class radiobox extends \org\octris\ncurses\widget\listbox
+    class radiobox extends \octris\ncurses\widget\listbox
     /**/
     {
         /**

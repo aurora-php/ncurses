@@ -20,7 +20,7 @@ namespace org\octris\ncurses {
     abstract class widget
     /**/
     {
-        use \org\octris\ncurses\event_tr;
+        use \octris\ncurses\event_tr;
 
         /**
          * Resource of widget.
@@ -35,7 +35,7 @@ namespace org\octris\ncurses {
          * Parent container.
          *
          * @octdoc  p:widget/$parent
-         * @type    \org\octris\core\ncurses\container|null
+         * @type    \octris\core\ncurses\container|null
          */
         protected $parent = null;
         /**/
@@ -71,9 +71,9 @@ namespace org\octris\ncurses {
          * Set parent container for widget.
          *
          * @octdoc  m:widget/setParent
-         * @param   \org\octris\ncurses\container       $parent         Parent container.
+         * @param   \octris\ncurses\container       $parent         Parent container.
          */
-        final public function setParent(\org\octris\ncurses\container $parent)
+        final public function setParent(\octris\ncurses\container $parent)
         /**/
         {
             $this->parent = $parent;
@@ -83,7 +83,7 @@ namespace org\octris\ncurses {
          * Get parent container of widget.
          *
          * @octdoc  m:widget/getParent
-         * @return  \org\octris\ncurses\container                       Parent container.
+         * @return  \octris\ncurses\container                       Parent container.
          */
         public function getParent()
         /**/

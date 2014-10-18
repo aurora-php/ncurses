@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses {
+namespace octris\ncurses {
     /**
      * Class Autoloader.
      *
      * @octdoc      c:app/autoloader
-     * @copyright   copyright (c) 2010-2013 by Harald Lapp
+     * @copyright   copyright (c) 2010-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
     class autoloader
@@ -40,5 +40,5 @@ namespace org\octris\ncurses {
         }
     }
 
-    spl_autoload_register(array('\org\octris\ncurses\autoloader', 'autoload'));
+    spl_autoload_register(array('\octris\ncurses\autoloader', 'autoload'));
 }

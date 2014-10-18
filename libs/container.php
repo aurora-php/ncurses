@@ -20,7 +20,7 @@ namespace org\octris\ncurses {
     abstract class container
     /**/
     {
-        use \org\octris\ncurses\event_tr;
+        use \octris\ncurses\event_tr;
 
         /**
          * Resource of container.
@@ -44,7 +44,7 @@ namespace org\octris\ncurses {
          * Stores instance of child that currently has the focus.
          *
          * @octdoc  p:container/$focused
-         * @type    \org\octris\ncurses\widget
+         * @type    \octris\ncurses\widget
          */
         protected $focused = null;
         /**/
@@ -62,7 +62,7 @@ namespace org\octris\ncurses {
          * Parent container.
          *
          * @octdoc  p:container/$parent
-         * @type    \org\octris\core\ncurses\container|null
+         * @type    \octris\core\ncurses\container|null
          */
         protected $parent = null;
         /**/
@@ -81,9 +81,9 @@ namespace org\octris\ncurses {
          * Set parent container for widget.
          *
          * @octdoc  m:container/setParent
-         * @param   \org\octris\core\ncurses\container      $parent         Parent container.
+         * @param   \octris\core\ncurses\container      $parent         Parent container.
          */
-        final public function setParent(\org\octris\ncurses\container $parent)
+        final public function setParent(\octris\ncurses\container $parent)
         /**/
         {
             $this->parent = $parent;
@@ -168,15 +168,15 @@ namespace org\octris\ncurses {
          * Add child widget.
          *
          * @octdoc  m:container/addChild
-         * @param   \org\octris\ncurses\widget|\org\octris\ncurses\container       $child          Child widget to add.
-         * @return  \org\octris\ncurses\widget|\org\octris\ncurses\container                       The instance of the child widget.
+         * @param   \octris\ncurses\widget|\octris\ncurses\container       $child          Child widget to add.
+         * @return  \octris\ncurses\widget|\octris\ncurses\container                       The instance of the child widget.
          */
         public function addChild($child)
         /**/
         {
-            if (!($child instanceof \org\octris\ncurses\container ||
-                  $child instanceof \org\octris\ncurses\widget)) {
-                throw new \Exception('"\org\octris\ncurses\container" or "\org\octris\ncurses\widget" expected');
+            if (!($child instanceof \octris\ncurses\container ||
+                  $child instanceof \octris\ncurses\widget)) {
+                throw new \Exception('"\octris\ncurses\container" or "\octris\ncurses\widget" expected');
             }
 
             $child->setParent($this);
@@ -205,7 +205,7 @@ namespace org\octris\ncurses {
             ncurses_wrefresh($this->resource);
 
             foreach ($this->children as $child) {
-                if ($child instanceof \org\octris\ncurses\container) {
+                if ($child instanceof \octris\ncurses\container) {
                     $child->refresh();
                 }
             }
@@ -215,9 +215,9 @@ namespace org\octris\ncurses {
          * Set focus for a widget in container.
          *
          * @octdoc  m:container/focus
-         * @param   \org\octris\ncurses\widget       $widget          The widget to focus.
+         * @param   \octris\ncurses\widget       $widget          The widget to focus.
          */
-        public function focus(\org\octris\ncurses\widget $widget)
+        public function focus(\octris\ncurses\widget $widget)
         /**/
         {
             // remove focus from widget

@@ -17,14 +17,14 @@ namespace org\octris\ncurses\component {
      * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class menu extends \org\octris\ncurses\container\window
+    class menu extends \octris\ncurses\container\window
     /**/
     {
         /**
          * Instance of listbox used to display menu.
          *
          * @octdoc  p:menu/$listbox
-         * @type    \org\octris\ncurses\component\listbox
+         * @type    \octris\ncurses\component\listbox
          */
         protected $listbox;
         /**/
@@ -41,7 +41,7 @@ namespace org\octris\ncurses\component {
         public function __construct(array $items, $height = 0, $x = null, $y = null)
         /**/
         {
-            $this->listbox = parent::addChild(new \org\octris\ncurses\widget\listbox(0, 0, $items));
+            $this->listbox = parent::addChild(new \octris\ncurses\widget\listbox(0, 0, $items));
 
             $size = $this->listbox->getSize();
 

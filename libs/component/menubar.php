@@ -17,7 +17,7 @@ namespace org\octris\ncurses\component {
      * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class menubar extends \org\octris\ncurses\widget
+    class menubar extends \octris\ncurses\widget
     /**/
     {
         /**
@@ -52,9 +52,9 @@ namespace org\octris\ncurses\component {
          *
          * @octdoc  m:menubar/addMenu
          * @param   string                                  $label                      Label of menu to show in menubar.
-         * @param   \org\octris\ncurses\component\menu      $menu                       Menu object.
+         * @param   \octris\ncurses\component\menu      $menu                       Menu object.
          */
-        public function addMenu($label, \org\octris\ncurses\component\menu $menu)
+        public function addMenu($label, \octris\ncurses\component\menu $menu)
         /**/
         {
             $this->items[] = array(

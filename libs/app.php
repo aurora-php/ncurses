@@ -17,7 +17,7 @@ namespace org\octris\ncurses {
      * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    abstract class app extends \org\octris\ncurses\container
+    abstract class app extends \octris\ncurses\container
     /**/
     {
         /**

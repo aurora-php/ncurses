@@ -17,7 +17,7 @@ namespace org\octris\ncurses\container {
      * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    abstract class window extends \org\octris\ncurses\container
+    abstract class window extends \octris\ncurses\container
     /**/
     {
         /**
@@ -33,7 +33,7 @@ namespace org\octris\ncurses\container {
          * Panel instance the window is assigned to.
          *
          * @octdoc  p:window/$panel
-         * @type    \org\octris\ncurses\panel
+         * @type    \octris\ncurses\panel
          */
         private $panel = null;
         /**/
@@ -251,7 +251,7 @@ namespace org\octris\ncurses\container {
             
             parent::build();
 
-            $this->panel = new \org\octris\ncurses\panel(array($this->window_resource, $this->resource));
+            $this->panel = new \octris\ncurses\panel(array($this->window_resource, $this->resource));
 
             $this->is_build = true;
         }

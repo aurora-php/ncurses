@@ -17,7 +17,7 @@ namespace org\octris\ncurses\container {
      * @copyright   copyright (c) 2013-2014 by Harald Lapp
      * @author      Harald Lapp <harald@octris.org>
      */
-    class scrollpane extends \org\octris\ncurses\container
+    class scrollpane extends \octris\ncurses\container
     /**/
     {
         /**
