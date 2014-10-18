@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses {
+namespace octris\ncurses {
     /**
      * Implements functionality for handling keyboard events.
      *

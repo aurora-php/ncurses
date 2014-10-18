@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\widget {
+namespace octris\ncurses\widget {
     /**
      * Floating text widget.
      *

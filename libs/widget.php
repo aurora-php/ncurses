@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses {
+namespace octris\ncurses {
     /**
      * Ncurses widget class.
      *

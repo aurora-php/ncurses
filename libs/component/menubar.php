@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\component {
+namespace octris\ncurses\component {
     /**
      * menubar container.
      *

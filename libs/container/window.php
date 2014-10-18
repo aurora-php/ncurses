@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace org\octris\ncurses\container {
+namespace octris\ncurses\container {
     /**
      * Windows container.
      *
