@@ -11,21 +11,6 @@
         "email":        "harald@octris.org",
         "homepage":     "http://www.octris.org/"
     }],
-    
-    "repositories": [
-        {
-            "type":         "package",
-            "package":      {
-                "name":         "octris/pecl_ncurses",
-                "type":         "extension",
-                "source":       {
-                    "url":          "https://github.com/octris/pecl_ncurses",
-                    "type":         "git",
-                    "reference":    "master"
-                }
-            }
-        }
-    ],
             
     "require":      {
         "php":          ">=5.4.0"
