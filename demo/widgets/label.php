@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-require_once(__DIR__ . '/../../libs/autoloader.class.php');
+require_once(__DIR__ . '/../../libs/autoloader.php');
 
 use \org\octris\ncurses as ncurses;
 
