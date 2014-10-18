@@ -1,5 +1,5 @@
-org.octris.ncurses
-==================
+ncurses
+=======
 
 OOP ncurses library for PHP
 
@@ -15,4 +15,4 @@ Documentation
 -------------
 
 * Source documentation (nightly update): http://doc.octris.org/org.octris.ncurses/
-* Useful resources: https://github.com/octris/org.octris.ncurses/wiki
+* Useful resources: https://github.com/octris/ncurses/wiki
