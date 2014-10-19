@@ -95,7 +95,7 @@ namespace octris\ncurses\widget {
         /**/
         {
             $this->height = count($items);
-            $this->width  = array_reduce($items, function(&$width, $item) {
+            $this->width  = array_reduce($items, function($width, $item) {
                 $width = max($width, strlen($item['label']) + 2);
 
                 return $width;

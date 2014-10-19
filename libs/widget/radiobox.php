@@ -33,7 +33,7 @@ namespace octris\ncurses\widget {
         {
             // determine width and height of list
             $this->height = count($items);
-            $this->width  = array_reduce($items, function(&$width, $item) {
+            $this->width  = array_reduce($items, function($width, $item) {
                 $width = max($width, strlen($item['label']) + 6);
 
                 return $width;
