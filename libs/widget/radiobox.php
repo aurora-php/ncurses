@@ -21,9 +21,6 @@ namespace octris\ncurses\widget {
     /**/
     {
         /**
-         * 
-
-        /**
          * Constructor.
          *
          * @octdoc  m:radiobox/__construct
