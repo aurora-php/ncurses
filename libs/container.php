@@ -62,7 +62,7 @@ namespace octris\ncurses {
          * Parent container.
          *
          * @octdoc  p:container/$parent
-         * @type    \octris\core\ncurses\container|null
+         * @type    \octris\ncurses\container|null
          */
         protected $parent = null;
         /**/
@@ -81,7 +81,7 @@ namespace octris\ncurses {
          * Set parent container for widget.
          *
          * @octdoc  m:container/setParent
-         * @param   \octris\core\ncurses\container      $parent         Parent container.
+         * @param   \octris\ncurses\container      $parent         Parent container.
          */
         final public function setParent(\octris\ncurses\container $parent)
         /**/

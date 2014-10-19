@@ -35,7 +35,7 @@ namespace octris\ncurses {
          * Parent container.
          *
          * @octdoc  p:widget/$parent
-         * @type    \octris\core\ncurses\container|null
+         * @type    \octris\ncurses\container|null
          */
         protected $parent = null;
         /**/
