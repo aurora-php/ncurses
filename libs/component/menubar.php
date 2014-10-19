@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the 'org.octris.ncurses' package.
+ * This file is part of the 'octris/ncurses' package.
  *
  * (c) Harald Lapp <harald@octris.org>
  *
