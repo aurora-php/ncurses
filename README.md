@@ -1,7 +1,12 @@
 ncurses
 =======
 
-OOP ncurses library for PHP
+OOP ncurses library for PHP. This is version >= 1.x.x, which features completly different
+filenames (dropped .class from file extension) and namespaces to make things compatible 
+with the [PSR-4 autoloading](http://www.php-fig.org/psr/psr-4/) standard and to make it
+installable und usable with [composer](http://getcomposer.org/).
+
+The previous version was tagged v0.0.0 and is still available at [github](https://github.com/octris/ncurses/tree/v0.0.0).
 
 Note
 ----
