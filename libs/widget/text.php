@@ -23,12 +23,12 @@ namespace octris\ncurses\widget {
         /**
          * Text alignment.
          *
-         * @octdoc  d:text/T_...
+         * @octdoc  d:text/...
          */
-        const T_ALIGN_LEFT    = STR_PAD_RIGHT;
-        const T_ALIGN_RIGHT   = STR_PAD_LEFT;
-        const T_ALIGN_CENTER  = STR_PAD_BOTH;
-        const T_ALIGN_JUSTIFY = 3;
+        const ALIGN_LEFT    = STR_PAD_RIGHT;
+        const ALIGN_RIGHT   = STR_PAD_LEFT;
+        const ALIGN_CENTER  = STR_PAD_BOTH;
+        const ALIGN_JUSTIFY = 3;
         /**/
 
         /**
@@ -85,7 +85,7 @@ namespace octris\ncurses\widget {
          * @param   int                             $v_margin       Optional vertical margin of text to container border.
          * @param   int                             $h_margin       Optional horizontal margin of text to container border.
          */
-        public function __construct($text, $align = self::T_ALIGN_LEFT, $v_margin = 0, $h_margin = null)
+        public function __construct($text, $align = self::ALIGN_LEFT, $v_margin = 0, $h_margin = null)
         /**/
         {
             $this->text     = $text;
@@ -108,7 +108,7 @@ namespace octris\ncurses\widget {
             $width = $size->width - 2 * $this->h_margin;
             $rows  = explode("\n", wordwrap($this->text, $width));
 
-            if ($this->align != self::T_ALIGN_JUSTIFY) {
+            if ($this->align != self::ALIGN_JUSTIFY) {
                 array_walk($rows, function(&$row) use ($width, $size) {
                     $row = str_pad(trim($row), $width, ' ', $this->align);
                     $row = str_pad($row, $size->width, ' ', STR_PAD_BOTH);

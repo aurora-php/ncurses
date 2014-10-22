@@ -23,30 +23,30 @@ namespace octris\ncurses\component {
         /**
          * Messagebox types.
          *
-         * @octdoc  d:messagebox/T_...
+         * @octdoc  d:messagebox/...
          */
-        const T_OK                = 1;
-        const T_OKCANCEL          = 2;
-        const T_RETRYCANCEL       = 3;
-        const T_YESNO             = 4;
-        const T_YESNOCANCEL       = 5;
-        const T_ABORTRETRYIGNORE  = 6;
-        const T_HELP              = 128;
+        const OK                = 1;
+        const OKCANCEL          = 2;
+        const RETRYCANCEL       = 3;
+        const YESNO             = 4;
+        const YESNOCANCEL       = 5;
+        const ABORTRETRYIGNORE  = 6;
+        const HELP              = 128;
         /**/
 
         /**
          * Messagebox action.
          *
-         * @octdoc  d:messabox/T_ACTION_...
+         * @octdoc  d:messabox/ACTION_...
          */
-        const T_ACTION_OK     = 'Ok';
-        const T_ACTION_CANCEL = 'Cancel';
-        const T_ACTION_RETRY  = 'Retry';
-        const T_ACTION_ABORT  = 'Abort';
-        const T_ACTION_IGNORE = 'Ignore';
-        const T_ACTION_YES    = 'Yes';
-        const T_ACTION_NO     = 'No';
-        const T_ACTION_HELP   = 'Help';
+        const ACTION_OK     = 'Ok';
+        const ACTION_CANCEL = 'Cancel';
+        const ACTION_RETRY  = 'Retry';
+        const ACTION_ABORT  = 'Abort';
+        const ACTION_IGNORE = 'Ignore';
+        const ACTION_YES    = 'Yes';
+        const ACTION_NO     = 'No';
+        const ACTION_HELP   = 'Help';
         /**/ 
 
         /**
@@ -56,12 +56,12 @@ namespace octris\ncurses\component {
          * @type    array
          */
         protected static $types = array(
-            self::T_OK               => array(self::T_ACTION_OK),
-            self::T_OKCANCEL         => array(self::T_ACTION_OK, self::T_ACTION_CANCEL),
-            self::T_RETRYCANCEL      => array(self::T_ACTION_RETRY, self::T_ACTION_CANCEL),
-            self::T_YESNO            => array(self::T_ACTION_YES, self::T_ACTION_NO),
-            self::T_YESNOCANCEL      => array(self::T_ACTION_YES, self::T_ACTION_NO, self::T_ACTION_CANCEL),
-            self::T_ABORTRETRYIGNORE => array(self::T_ACTION_ABORT, self::T_ACTION_RETRY, self::T_ACTION_IGNORE)
+            self::OK               => array(self::ACTION_OK),
+            self::OKCANCEL         => array(self::ACTION_OK, self::ACTION_CANCEL),
+            self::RETRYCANCEL      => array(self::ACTION_RETRY, self::ACTION_CANCEL),
+            self::YESNO            => array(self::ACTION_YES, self::ACTION_NO),
+            self::YESNOCANCEL      => array(self::ACTION_YES, self::ACTION_NO, self::ACTION_CANCEL),
+            self::ABORTRETRYIGNORE => array(self::ACTION_ABORT, self::ACTION_RETRY, self::ACTION_IGNORE)
         );
         /**/
 
@@ -114,7 +114,7 @@ namespace octris\ncurses\component {
             parent::addChild(
                 new \octris\ncurses\widget\text(
                     $this->text, 
-                    \octris\ncurses\widget\text::T_ALIGN_CENTER,
+                    \octris\ncurses\widget\text::ALIGN_CENTER,
                     1
                 )
             );
@@ -122,11 +122,11 @@ namespace octris\ncurses\component {
             $size = $this->getInnerSize();
             $y    = $size->height - 2;
 
-            $help    = ($this->type & self::T_HELP) == self::T_HELP;
-            $buttons = self::$types[($this->type & ~self::T_HELP)];
+            $help    = ($this->type & self::HELP) == self::HELP;
+            $buttons = self::$types[($this->type & ~self::HELP)];
 
             if ($help) {
-                $buttons[] = self::T_ACTION_HELP;
+                $buttons[] = self::ACTION_HELP;
             }
 
             $b_width = array_reduce($buttons, function($result, $button) {
