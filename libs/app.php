@@ -18,7 +18,6 @@ namespace octris\ncurses {
      * @author      Harald Lapp <harald@octris.org>
      */
     abstract class app extends \octris\ncurses\container
-    /**/
     {
         /**
          * Enable logging to file.
@@ -70,7 +69,6 @@ namespace octris\ncurses {
          * @octdoc  m:app/__construct
          */
         protected function __construct()
-        /**/
         {
             // register shutdown function for catching E_FATAL errors.
             register_shutdown_function(function() {
@@ -96,7 +94,6 @@ namespace octris\ncurses {
          * @para    string          $log_file               File to log to.
          */
         public static function enableLog($log_file)
-        /**/
         {
             self::$logging = $log_file;
         }
@@ -107,7 +104,6 @@ namespace octris\ncurses {
          * @octdoc  m:app/getInstance
          */
         public static function getInstance()
-        /**/
         {
             if (is_null(self::$instance)) {
                 self::$instance = new static();
@@ -122,7 +118,6 @@ namespace octris\ncurses {
          * @octdoc  m:app/build
          */
         public function build()
-        /**/
         {
             ncurses_newwin(0, 0, 0, 0);
 
@@ -145,7 +140,6 @@ namespace octris\ncurses {
          * @return  mixed                                   Return value of callback function.
          */
         public function proxy(callable $cb)
-        /**/
         {
             $hash = spl_object_hash($cb);
 
@@ -162,7 +156,6 @@ namespace octris\ncurses {
          * @octdoc  a:app/main
          */
         protected function main()
-        /**/
         {
             parent::run();
         }
@@ -174,7 +167,6 @@ namespace octris\ncurses {
          * @return  bool                                    Returns true if application was able to leave ncurses.
          */
         public function leave()
-        /**/
         {
             if (!$this->left && ($this->left = !ncurses_def_prog_mode())) {
                 // ncurses_def_prog_mode returns false on success(!)
@@ -190,7 +182,6 @@ namespace octris\ncurses {
          * @octdoc  m:app/restore
          */
         public function restore()
-        /**/
         {
             if ($this->left) {
                 ncurses_reset_prog_mode();
@@ -207,7 +198,6 @@ namespace octris\ncurses {
          * @octdoc  m:app/run
          */
         public function run()
-        /**/
         {
             // initialize ncurses and register shutdown function
             ncurses_init();
@@ -237,7 +227,6 @@ namespace octris\ncurses {
          * @param   mixed                   $context                Optional context the error occured in.
          */
         public static function logError($no, $message, $file, $line, $context = null)
-        /**/
         {
             if (!static::$logging || (!is_writable(static::$logging) && !is_writable(dirname(static::$logging)))) return;
 
@@ -260,7 +249,6 @@ namespace octris\ncurses {
          * @octdoc  m:app/init
          */
         public static function init()
-        /**/
         {
             static $initialized = false;
 

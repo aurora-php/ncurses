@@ -18,7 +18,6 @@ namespace octris\ncurses\widget {
      * @author      Harald Lapp <harald@octris.org>
      */
     class text extends \octris\ncurses\widget
-    /**/
     {
         /**
          * Text alignment.
@@ -86,7 +85,6 @@ namespace octris\ncurses\widget {
          * @param   int                             $h_margin       Optional horizontal margin of text to container border.
          */
         public function __construct($text, $align = self::ALIGN_LEFT, $v_margin = 0, $h_margin = null)
-        /**/
         {
             $this->text     = $text;
             $this->align    = $align;
@@ -100,7 +98,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:text/render
          */
         public function build()
-        /**/
         {
             $size = $this->parent->getInnerSize();
 

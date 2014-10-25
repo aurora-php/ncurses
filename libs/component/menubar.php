@@ -18,7 +18,6 @@ namespace octris\ncurses\component {
      * @author      Harald Lapp <harald@octris.org>
      */
     class menubar extends \octris\ncurses\widget
-    /**/
     {
         /**
          * Menu items.
@@ -55,7 +54,6 @@ namespace octris\ncurses\component {
          * @param   \octris\ncurses\component\menu      $menu                       Menu object.
          */
         public function addMenu($label, \octris\ncurses\component\menu $menu)
-        /**/
         {
             $this->items[] = array(
                 'label' => $label,
@@ -72,7 +70,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:menubar/addChild
          */
         public function addChild($child)
-        /**/
         {
         }
 
@@ -82,7 +79,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:menubar/onFocus
          */
         public function onFocus()
-        /**/
         {
             $res = $this->parent->getResource();
 
@@ -95,7 +91,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:listbox/onBlur
          */
         public function onBlur()
-        /**/
         {
             $res = $this->parent->getResource();
 
@@ -108,7 +103,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:listbox/closeMenu
          */
         protected function closeMenu()
-        /**/
         {
             if (!is_null($this->selected)) {
                 $res = $this->parent->getResource();
@@ -128,7 +122,6 @@ namespace octris\ncurses\component {
          * @param   int                     $item                       Number of item to set.
          */
         public function openMenu($item)
-        /**/
         {
             if (is_null($item)) $item = 0;
 
@@ -153,7 +146,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:menubar/build
          */
         public function build()
-        /**/
         {
             $res = $this->parent->getResource();
 

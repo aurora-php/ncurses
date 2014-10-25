@@ -18,7 +18,6 @@ namespace octris\ncurses\component {
      * @author      Harald Lapp <harald@octris.org>
      */
     class menu extends \octris\ncurses\container\window
-    /**/
     {
         /**
          * Instance of listbox used to display menu.
@@ -39,7 +38,6 @@ namespace octris\ncurses\component {
          * @param   int             $y              Optional y position of window.
          */
         public function __construct(array $items, $height = 0, $x = null, $y = null)
-        /**/
         {
             $this->listbox = parent::addChild(new \octris\ncurses\widget\listbox(0, 0, $items));
 
@@ -54,7 +52,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:menu/addChild
          */
         public function addChild($child)
-        /**/
         {
             throw new \Exception('A menu cannot have child components!');
         }
@@ -65,7 +62,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:menu/setup
          */
         protected function setup()
-        /**/
         {
         }
 
@@ -79,7 +75,6 @@ namespace octris\ncurses\component {
          * @return  string                                          ID the event handler is registered as.
          */
         public function addKeyEvent($test, callable $cb, $propagate = false)
-        /**/
         {
             return $this->listbox->addKeyEvent($test, $cb, $propagate);
         }
@@ -91,7 +86,6 @@ namespace octris\ncurses\component {
          * @param   string              $id                 ID of event handler to remove.
          */
         public function removeKeyEvent($id)
-        /**/
         {
             $this->listbox->remoteKeyEvent($id);
         }
@@ -105,7 +99,6 @@ namespace octris\ncurses\component {
          * @return  bool                                    Propagation status.
          */
         public function propagateKeyEvent($char)
-        /**/
         {
             return $this->listbox->propagateKeyEvent($char);
         }
@@ -116,7 +109,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:menu/onShow
          */
         public function onShow()
-        /**/
         {
             $this->listbox->focus();
         }
@@ -127,7 +119,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:menu/build
          */
         public function build()
-        /**/
         {
             parent::build();
         }

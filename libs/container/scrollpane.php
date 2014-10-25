@@ -18,7 +18,6 @@ namespace octris\ncurses\container {
      * @author      Harald Lapp <harald@octris.org>
      */
     class scrollpane extends \octris\ncurses\container
-    /**/
     {
         /**
          * Scrollpane resource.
@@ -95,7 +94,6 @@ namespace octris\ncurses\container {
          * @param   int             $options        Optional additional options.
          */
         public function __construct($x, $y, $height, $width, $buffer_size = PHP_INT_MAX, $options = 0)
-        /**/
         {
             $this->x = $x;
             $this->y = $y;
@@ -113,7 +111,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:scrollpane/__destruct
          */
         public function __destruct()
-        /**/
         {
             ncurses_delwin($this->resource);
             ncurses_delwin($this->scrollpane_resource);
@@ -125,7 +122,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:scrollpane/addChild
          */
         public function addChild($child)
-        /**/
         {
             throw new \Exception('A scrollpane cannot have child components!');
         }
@@ -136,7 +132,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:scrollpane/addRow
          */
         public function addRow($row)
-        /**/
         {
             ncurses_mvwaddstr($this->resource, $this->height - 1, 0, $row . "\n"); 
             ncurses_wrefresh($this->resource);
@@ -148,7 +143,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:scrollpane/setup
          */
         protected function setup()
-        /**/
         {
         }
 
@@ -158,7 +152,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:scrollpane/build
          */
         public function build()
-        /**/
         {
             parent::build();
 
@@ -184,7 +177,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:scrollpane/refresh
          */
         public function refresh()
-        /**/
         {
             ncurses_wrefresh($this->scrollpane_resource);
 

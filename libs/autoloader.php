@@ -18,7 +18,6 @@ namespace octris\ncurses {
      * @author      Harald Lapp <harald@octris.org>
      */
     class autoloader
-    /**/
     {
         /**
          * Class Autoloader.
@@ -27,7 +26,6 @@ namespace octris\ncurses {
          * @param   string          $class              Class to load.
          */
         public static function autoload($class)
-        /**/
         {
             if (strpos($class, 'octris\\ncurses\\') === 0) {
                 $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, 15)) . '.php';

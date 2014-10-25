@@ -18,7 +18,6 @@ namespace octris\ncurses\container {
      * @author      Harald Lapp <harald@octris.org>
      */
     abstract class window extends \octris\ncurses\container
-    /**/
     {
         /**
          * Window resource.
@@ -121,7 +120,6 @@ namespace octris\ncurses\container {
          * @param   int             $y              Optional y position of window.
          */
         public function __construct($width, $height, $x = null, $y = null)
-        /**/
         {
             ncurses_getmaxyx(STDSCR, $max_y, $max_x);
 
@@ -142,7 +140,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:window/__destruct
          */
         public function __destruct()
-        /**/
         {
             unset($this->panel);
 
@@ -157,7 +154,6 @@ namespace octris\ncurses\container {
          * @return  stdClass                                            Size ->width, ->height
          */
         public function getSize()
-        /**/
         {
             return (object)array(
                 'width'  => $this->width, 
@@ -172,7 +168,6 @@ namespace octris\ncurses\container {
          * @return  stdClass                                            Size ->width, ->height
          */
         public function getInnerSize()
-        /**/
         {
             return (object)array(
                 'width'  => $this->width - 2 * (int)$this->has_border, 
@@ -188,7 +183,6 @@ namespace octris\ncurses\container {
          * @param   int                 $y                              New y-position to move to.
          */
         public function moveTo($x, $y)
-        /**/
         {
             if (!is_null($this->panel)) {
                 ncurses_move_panel($this->panel, $y, $x);
@@ -207,7 +201,6 @@ namespace octris\ncurses\container {
          * @return  bool                                Returns whether window is visible.
          */
         public function isVisible()
-        /**/
         {
             return $this->panel->isVisible();
         }
@@ -218,7 +211,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:window/build
          */
         public function build()
-        /**/
         {
             if ($this->has_border) {
                 // two windows to prevent overwriting of window border
@@ -262,7 +254,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:window/refresh
          */
         public function refresh()
-        /**/
         {
             ncurses_wrefresh($this->window_resource);
 
@@ -275,7 +266,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:window/onShow
          */
         public function onShow()
-        /**/
         {
         }
 
@@ -285,7 +275,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:window/show
          */
         public function show()
-        /**/
         {
             if (!$this->is_visible) {
                 if (!$this->is_build) $this->build();
@@ -304,7 +293,6 @@ namespace octris\ncurses\container {
          * @octdoc  m:window/hide
          */
         public function hide()
-        /**/
         {
             if ($this->is_visible) {
                 $this->panel->hide();

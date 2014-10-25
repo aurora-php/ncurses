@@ -18,7 +18,6 @@ namespace octris\ncurses\widget {
      * @author      Harald Lapp <harald@octris.org>
      */
     class textline extends \octris\ncurses\widget
-    /**/
     {
         /**
          * X position of textline.
@@ -94,7 +93,6 @@ namespace octris\ncurses\widget {
          * @param   int|INF         $max_length     Maximum input length, default is PHP_INT_MAX
          */
         public function __construct($x, $y, $size, $value = '', $max_length = PHP_INT_MAX)
-        /**/
         {
             $this->x          = $x;
             $this->y          = $y;
@@ -110,7 +108,6 @@ namespace octris\ncurses\widget {
          * @param   mixed           $value          Value to set.
          */
         public function setValue($value)
-        /**/
         {
             $this->value = substr($value, 0, $max_length);
 
@@ -131,7 +128,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:textline/onFocus
          */
         public function onFocus()
-        /**/
         {
             $res = $this->parent->getResource();
 
@@ -147,7 +143,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:textline/onBlur
          */
         public function onBlur()
-        /**/
         {
             ncurses_curs_set(0);
         }
@@ -158,7 +153,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:textline/onAction
          */
         public function onAction()
-        /**/
         {
             $this->propagateEvent('action');
         }
@@ -169,7 +163,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:textline/build
          */
         public function build()
-        /**/
         {        
             $res = $this->parent->getResource();
 

@@ -18,7 +18,6 @@ namespace octris\ncurses {
      * @author      Harald Lapp <harald@octris.org>
      */
     trait event_tr
-    /**/
     {
         /**
          * Stores registered key event handlers.
@@ -48,7 +47,6 @@ namespace octris\ncurses {
          * @return  string                                          ID the event handler is registered as.
          */
         public function addKeyEvent($test, callable $cb, $propagate = false)
-        /**/
         {
             if (is_string($test)) {
                 $test = ord($test);
@@ -82,7 +80,6 @@ namespace octris\ncurses {
          * @param   string              $id                 ID of event handler to remove.
          */
         public function removeKeyEvent($id)
-        /**/
         {
             $this->key_events = array_filter(
                 $this->key_events, 
@@ -101,7 +98,6 @@ namespace octris\ncurses {
          * @return  bool                                    Propagation status.
          */
         public function propagateKeyEvent($char)
-        /**/
         {
             $propagate = true;
 

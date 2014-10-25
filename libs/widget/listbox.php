@@ -18,7 +18,6 @@ namespace octris\ncurses\widget {
      * @author      Harald Lapp <harald@octris.org>
      */
     class listbox extends \octris\ncurses\widget
-    /**/
     {
         /**
          * Currently selected item.
@@ -92,7 +91,6 @@ namespace octris\ncurses\widget {
          * @param   int             $items          Items of listbox.
          */
         public function __construct($x, $y, array $items)
-        /**/
         {
             $this->height = count($items);
             $this->width  = array_reduce($items, function($width, $item) {
@@ -119,7 +117,6 @@ namespace octris\ncurses\widget {
          * @return  stdClass                                            Size ->width, ->height
          */
         public function getSize()
-        /**/
         {
             return (object)array(
                 'width'  => $this->width, 
@@ -134,7 +131,6 @@ namespace octris\ncurses\widget {
          * @param   int                     $item                       Number of item to set.
          */
         public function setValue($item)
-        /**/
         {
             if ($item != $this->selected) {
                 $res = $this->parent->getResource();
@@ -167,7 +163,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:listbox/onFocus
          */
         public function onFocus()
-        /**/
         {
             $res = $this->parent->getResource();
 
@@ -187,7 +182,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:listbox/onBlur
          */
         public function onBlur()
-        /**/
         {
             $res = $this->parent->getResource();
 
@@ -205,7 +199,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:listbox/onAction
          */
         public function onAction()
-        /**/
         {
             $this->propagateEvent('action');
         }
@@ -216,7 +209,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:listbox/build
          */
         public function build()
-        /**/
         {
             parent::build();
 

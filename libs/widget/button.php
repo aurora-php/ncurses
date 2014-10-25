@@ -18,7 +18,6 @@ namespace octris\ncurses\widget {
      * @author      Harald Lapp <harald@octris.org>
      */
     class button extends \octris\ncurses\widget
-    /**/
     {
         /**
          * X position of button.
@@ -56,7 +55,6 @@ namespace octris\ncurses\widget {
          * @param   string                          $text           button text to display.
          */
         public function __construct($x, $y, $text)
-        /**/
         {
             $this->x    = $x;
             $this->y    = $y;
@@ -69,7 +67,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:button/onFocus
          */
         public function onFocus()
-        /**/
         {
             $res = $this->parent->getResource();
 
@@ -86,7 +83,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:button/onBlur
          */
         public function onBlur()
-        /**/
         {
             $this->build();
         }
@@ -97,7 +93,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:button/onAction
          */
         public function onAction()
-        /**/
         {
             $this->propagateEvent('action');
         }
@@ -108,7 +103,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:button/render
          */
         public function build()
-        /**/
         {
             parent::build();
 

@@ -18,7 +18,6 @@ namespace octris\ncurses {
      * @author      Harald Lapp <harald@octris.org>
      */
     abstract class container
-    /**/
     {
         use \octris\ncurses\event_tr;
 
@@ -84,7 +83,6 @@ namespace octris\ncurses {
          * @param   \octris\ncurses\container      $parent         Parent container.
          */
         final public function setParent(\octris\ncurses\container $parent)
-        /**/
         {
             $this->parent = $parent;
         }
@@ -96,7 +94,6 @@ namespace octris\ncurses {
          * @return  array                           Returns an array of two values x, y.
          */
         public function getMaxXY()
-        /**/
         {
             ncurses_wrefresh($this->resource);
             ncurses_getmaxyx($this->resource, $y, $x);
@@ -111,7 +108,6 @@ namespace octris\ncurses {
          * @return  stdClass                                            Size ->width, ->height
          */
         public function getSize()
-        /**/
         {
             list($width, $height) = $this->getMaxXY();
 
@@ -129,7 +125,6 @@ namespace octris\ncurses {
          * @return  stdClass                                            Size ->width, ->height
          */
         public function getInnerSize()
-        /**/
         {
             $size = $this->getSize();
 
@@ -147,7 +142,6 @@ namespace octris\ncurses {
          * @octdoc  m:container/getResource
          */
         public function getResource()
-        /**/
         {
             return $this->resource;
         }
@@ -159,7 +153,6 @@ namespace octris\ncurses {
          * @param   mixed                                                           $r_value            Optional value to return.
          */
         public function doExit($r_value = null)
-        /**/
         {
             $this->do_exit = array('r_value' => $r_value);
         }
@@ -172,7 +165,6 @@ namespace octris\ncurses {
          * @return  \octris\ncurses\widget|\octris\ncurses\container                       The instance of the child widget.
          */
         public function addChild($child)
-        /**/
         {
             if (!($child instanceof \octris\ncurses\container ||
                   $child instanceof \octris\ncurses\widget)) {
@@ -200,7 +192,6 @@ namespace octris\ncurses {
          * @octdoc  m:container/refresh
          */
         public function refresh()
-        /**/
         {
             ncurses_wrefresh($this->resource);
 
@@ -218,7 +209,6 @@ namespace octris\ncurses {
          * @param   \octris\ncurses\widget       $widget          The widget to focus.
          */
         public function focus(\octris\ncurses\widget $widget)
-        /**/
         {
             // remove focus from widget
             if (!is_null($this->focused)) {
@@ -238,7 +228,6 @@ namespace octris\ncurses {
          * @octdoc  m:container/moveFocus
          */
         public function moveFocus()
-        /**/
         {
             $next = is_null($this->focused);
             $idx  = 0;
@@ -267,7 +256,6 @@ namespace octris\ncurses {
          * @octdoc  m:container/build
          */
         public function build()
-        /**/
         {
             $this->addKeyEvent(NCURSES_KEY_TAB, function() { $this->moveFocus(); });
 
@@ -284,7 +272,6 @@ namespace octris\ncurses {
          * @octdoc  m:container/run
          */
         protected function run()
-        /**/
         {
             do {
                 $key_code = ncurses_getch($this->resource);

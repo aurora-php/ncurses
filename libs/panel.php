@@ -18,7 +18,6 @@ namespace octris\ncurses {
      * @author      Harald Lapp <harald@octris.org>
      */
     class panel
-    /**/
     {
         /**
          * Resources to handle.
@@ -45,7 +44,6 @@ namespace octris\ncurses {
          * @param   array                       $resources              One or multiple resources to handle.
          */
         public function __construct(array $resources)
-        /**/
         {
             foreach ($resources as $resource) {
                 $this->resources[] = ncurses_new_panel($resource);
@@ -60,7 +58,6 @@ namespace octris\ncurses {
          * @octdoc  m:panel/__destruct
          */
         public function __destruct()
-        /**/
         {
             foreach ($this->resources as $resource) {
                 ncurses_del_panel($resource);
@@ -74,7 +71,6 @@ namespace octris\ncurses {
          * @return  bool                                Returns whether panel is visible.
          */
         public function isVisible()
-        /**/
         {
             return $this->is_visible;
         }
@@ -85,7 +81,6 @@ namespace octris\ncurses {
          * @octdoc  m:panel/show
          */
         public function show()
-        /**/
         {
             if (!$this->is_visible) {
                 foreach ($this->resources as $resource) {
@@ -106,7 +101,6 @@ namespace octris\ncurses {
          * @octdoc  m:panel/hide
          */
         public function hide()
-        /**/
         {
             if (!$this->is_visible) return;
 

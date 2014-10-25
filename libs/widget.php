@@ -18,7 +18,6 @@ namespace octris\ncurses {
      * @author      Harald Lapp <harald@octris.org>
      */
     abstract class widget
-    /**/
     {
         use \octris\ncurses\event_tr;
 
@@ -74,7 +73,6 @@ namespace octris\ncurses {
          * @param   \octris\ncurses\container       $parent         Parent container.
          */
         final public function setParent(\octris\ncurses\container $parent)
-        /**/
         {
             $this->parent = $parent;
         }
@@ -86,7 +84,6 @@ namespace octris\ncurses {
          * @return  \octris\ncurses\container                       Parent container.
          */
         public function getParent()
-        /**/
         {
             return $this->parent;
         }
@@ -97,7 +94,6 @@ namespace octris\ncurses {
          * @octdoc  m:widget/getResource
          */
         public function getResource()
-        /**/
         {
             return $this->resource;
         }
@@ -112,7 +108,6 @@ namespace octris\ncurses {
          * @return  string                              ID the event handler is registered as.
          */
         public function addEvent($name, callable $cb, $propagate = true)
-        /**/
         {
             $name = strtolower($name);
 
@@ -144,7 +139,6 @@ namespace octris\ncurses {
          * @param   string              $id                 ID of event handler to remove.
          */
         public function removeEvent($id)
-        /**/
         {
             $id   = strtolower($id);
             $name = explode('-', $id)[0];
@@ -167,7 +161,6 @@ namespace octris\ncurses {
          * @param   array               $args               Optional arguments for event handler.
          */
         protected function propagateEvent($name, array $args = array())
-        /**/
         {
             $name = strtolower($name);
 
@@ -187,7 +180,6 @@ namespace octris\ncurses {
          * @return  bool                                Whether widget can take the focus.
          */
         public function isFocusable()
-        /**/
         {
             return $this->focusable;
         }
@@ -198,7 +190,6 @@ namespace octris\ncurses {
          * @octdoc  m:widget/onBlur
          */
         public function onBlur()
-        /**/
         {
         }
 
@@ -208,7 +199,6 @@ namespace octris\ncurses {
          * @octdoc  m:widget/onFocus
          */
         public function onFocus()
-        /**/
         {
         }
 
@@ -220,7 +210,6 @@ namespace octris\ncurses {
          * @param   int                 $key            Code of the key that was pressed.
          */
         public function onKeypress($key_code)
-        /**/
         {
             $this->propagateEvent('keypress', array($key_code));
         }
@@ -231,7 +220,6 @@ namespace octris\ncurses {
          * @octdoc  m:widget/focus
          */
         public function focus()
-        /**/
         {
             $this->parent->focus($this);
         }
@@ -242,7 +230,6 @@ namespace octris\ncurses {
          * @octdoc  m:widget/build
          */
         public function build()
-        /**/
         {
             $this->addKeyEvent(NCURSES_KEY_CR,  function() { 
                 $this->parent->moveFocus(); 

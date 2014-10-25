@@ -18,7 +18,6 @@ namespace octris\ncurses\widget {
      * @author      Harald Lapp <harald@octris.org>
      */
     class radiobox extends \octris\ncurses\widget\listbox
-    /**/
     {
         /**
          * Constructor.
@@ -29,7 +28,6 @@ namespace octris\ncurses\widget {
          * @param   int             $items          Items of radiobox.
          */
         public function __construct($x, $y, array $items)
-        /**/
         {
             // determine width and height of list
             $this->height = count($items);
@@ -86,7 +84,6 @@ namespace octris\ncurses\widget {
          * @param   int                     $no             Number of item to toggle.
          */
         public function toggle($no)
-        /**/
         {
             if ($no < 1 || $no > $this->cnt) return;
 

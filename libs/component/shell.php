@@ -18,7 +18,6 @@ namespace octris\ncurses\component {
      * @author      Harald Lapp <harald@octris.org>
      */
     class shell extends \octris\ncurses\container\window
-    /**/
     {
         /**
          * Y position to start line at.
@@ -122,7 +121,6 @@ namespace octris\ncurses\component {
          * @param   int             $y              Optional y position of window.
          */
         public function __construct($width, $height, $prompt = '', $x = null, $y = null)
-        /**/
         {
             $this->prompt     = $prompt;
             $this->prompt_len = $this->cursor_x = strlen($prompt);
@@ -136,7 +134,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:shell/setup
          */
         protected function setup()
-        /**/
         {
         }
 
@@ -146,7 +143,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:shell/render
          */
         public function build()
-        /**/
         {
             parent::build();
 
@@ -167,7 +163,6 @@ namespace octris\ncurses\component {
          * @param   string                  $str                    String to write.
          */
         public function write($str)
-        /**/
         {
             // move cursor to next line if input row is not empty
             if (!$this->is_newline) {
@@ -211,7 +206,6 @@ namespace octris\ncurses\component {
          * @return  int                                                 Maximum length.
          */
         protected function getMaxLen()
-        /**/
         {
             return $this->width * ($this->height - $this->line_y);
         }
@@ -224,7 +218,6 @@ namespace octris\ncurses\component {
          * @return  array                                               X, Y position.
          */
         protected function getCursorXY($info)
-        /**/
         {
             $y = floor(($this->prompt_len + $info['point']) / $this->width);
             $x = ($this->prompt_len + $info['point']) % $this->width;
@@ -252,7 +245,6 @@ namespace octris\ncurses\component {
          * @param   string                  $input                  Last input row.
          */
         protected function onSubmit($input)
-        /**/
         {
         }
 
@@ -263,7 +255,6 @@ namespace octris\ncurses\component {
          * @param   string                  $input                  Current input row.
          */
         protected function onCompletion($input)
-        /**/
         {
         }
 
@@ -274,7 +265,6 @@ namespace octris\ncurses\component {
          * @param   string                  $v                      String
          */
         public function doNewLine($v, $point = 0)
-        /**/
         {
             $res = $this->getResource();
 
@@ -305,7 +295,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:shell/run
          */
         protected function run()
-        /**/
         {
             $res   = $this->getResource();
             $point = 0;

@@ -18,7 +18,6 @@ namespace octris\ncurses\component {
      * @author      Harald Lapp <harald@octris.org>
      */
     class messagebox extends \octris\ncurses\container\window
-    /**/
     {
         /**
          * Messagebox types.
@@ -95,7 +94,6 @@ namespace octris\ncurses\component {
          * @param   int             $y              Optional y position of window.
          */
         public function __construct($type, $text, $width = 0, $height = 0, $x = 0, $y = 0)
-        /**/
         {
             parent::__construct($width, $height, $x, $y);
 
@@ -109,7 +107,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:messagebox/setup
          */
         protected function setup()
-        /**/
         {
             parent::addChild(
                 new \octris\ncurses\widget\text(
@@ -154,7 +151,6 @@ namespace octris\ncurses\component {
          * @octdoc  m:container/addChild
          */
         public function addChild($child)
-        /**/
         {
             throw new \Exception('A messagebox cannot have child components!');
         }

@@ -18,7 +18,6 @@ namespace octris\ncurses\widget {
      * @author      Harald Lapp <harald@octris.org>
      */
     class label extends \octris\ncurses\widget
-    /**/
     {
         /**
          * X position of label.
@@ -65,7 +64,6 @@ namespace octris\ncurses\widget {
          * @param   string                          $text           Label text to display.
          */
         public function __construct($x, $y, $text)
-        /**/
         {
             $this->x    = $x;
             $this->y    = $y;
@@ -78,7 +76,6 @@ namespace octris\ncurses\widget {
          * @octdoc  m:label/render
          */
         public function build()
-        /**/
         {
             ncurses_mvwaddstr(
                 $this->parent->getResource(), 
