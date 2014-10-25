@@ -257,7 +257,7 @@ namespace octris\ncurses {
          */
         public function build()
         {
-            $this->addKeyEvent(NCURSES_KEY_TAB, function() { $this->moveFocus(); });
+            $this->addKeyEvent(NCURSES_KEY_TAB, function () { $this->moveFocus(); });
 
             $this->setup();
 

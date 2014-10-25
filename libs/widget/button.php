@@ -114,7 +114,7 @@ namespace octris\ncurses\widget {
             );
 
             // attach keyboard events
-            $this->addKeyEvent(NCURSES_KEY_CR, function() {
+            $this->addKeyEvent(NCURSES_KEY_CR, function () {
                 $this->onAction();
             });
         }

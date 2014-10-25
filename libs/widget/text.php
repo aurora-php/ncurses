@@ -106,7 +106,7 @@ namespace octris\ncurses\widget {
             $rows  = explode("\n", wordwrap($this->text, $width));
 
             if ($this->align != self::ALIGN_JUSTIFY) {
-                array_walk($rows, function(&$row) use ($width, $size) {
+                array_walk($rows, function (&$row) use ($width, $size) {
                     $row = str_pad(trim($row), $width, ' ', $this->align);
                     $row = str_pad($row, $size->width, ' ', STR_PAD_BOTH);
                 });

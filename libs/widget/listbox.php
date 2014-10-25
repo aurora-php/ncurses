@@ -93,13 +93,13 @@ namespace octris\ncurses\widget {
         public function __construct($x, $y, array $items)
         {
             $this->height = count($items);
-            $this->width  = array_reduce($items, function($width, $item) {
+            $this->width  = array_reduce($items, function ($width, $item) {
                 $width = max($width, strlen($item['label']) + 2);
 
                 return $width;
             }, 0);
 
-            array_walk($items, function(&$item) {
+            array_walk($items, function (&$item) {
                 $item['label'] = str_pad(' ' . $item['label'], $this->width, ' ', STR_PAD_RIGHT);
             });
 
@@ -224,18 +224,18 @@ namespace octris\ncurses\widget {
             }
 
             // attach keyboard events
-            $this->addKeyEvent(NCURSES_KEY_UP, function() {
+            $this->addKeyEvent(NCURSES_KEY_UP, function () {
                 $this->setValue(max(1, $this->selected - 1));
             });
-            $this->addKeyEvent(NCURSES_KEY_DOWN, function() {
+            $this->addKeyEvent(NCURSES_KEY_DOWN, function () {
                 $this->setValue(min($this->cnt, $this->selected + 1));
             });
-            $this->addKeyEvent(NCURSES_KEY_CR, function() {
+            $this->addKeyEvent(NCURSES_KEY_CR, function () {
                 if (isset($this->items[$this->selected - 1]['action'])) {
                     $this->items[$this->selected - 1]['action']($this);
                 }                    
             }, true);
-            $this->addKeyEvent(NCURSES_KEY_SPACE, function() {
+            $this->addKeyEvent(NCURSES_KEY_SPACE, function () {
                 if (isset($this->items[$this->selected - 1]['action'])) {
                     $this->items[$this->selected - 1]['action']($this);
                 }                    

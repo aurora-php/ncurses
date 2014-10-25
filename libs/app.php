@@ -71,7 +71,7 @@ namespace octris\ncurses {
         protected function __construct()
         {
             // register shutdown function for catching E_FATAL errors.
-            register_shutdown_function(function() {
+            register_shutdown_function (function () {
                 $error = error_get_last();
 
                 if (!is_null($error)) {
@@ -82,7 +82,7 @@ namespace octris\ncurses {
             });
 
             // set error logging
-            set_error_handler(function($no, $message, $file, $line, $context = null) {
+            set_error_handler(function ($no, $message, $file, $line, $context = null) {
                 static::logError($no, $message, $file, $line, $context);
             });
         }
@@ -230,7 +230,7 @@ namespace octris\ncurses {
         {
             if (!static::$logging || (!is_writable(static::$logging) && !is_writable(dirname(static::$logging)))) return;
 
-            $message = preg_replace_callback('/^/m', function() {
+            $message = preg_replace_callback('/^/m', function () {
                 static $row = 0;
                 
                 return ($row++ > 0 ? '      ' : '');
@@ -265,7 +265,7 @@ namespace octris\ncurses {
                 'NCURSES_KEY_BACK'   => 127
             );
 
-            array_walk($keys, function($code, $name) {
+            array_walk($keys, function ($code, $name) {
                 if (!defined($name)) {
                     define($name, $code);
                 }

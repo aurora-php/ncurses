@@ -161,16 +161,16 @@ namespace octris\ncurses\component {
                 $item['x']     = $x;
 
                 $item['menu']->moveTo($x, 1);
-                $item['menu']->addKeyEvent(NCURSES_KEY_LEFT, function() {
+                $item['menu']->addKeyEvent(NCURSES_KEY_LEFT, function () {
                     $this->openMenu(($this->selected + 1) % $this->cnt); 
                 });
-                $item['menu']->addKeyEvent(NCURSES_KEY_RIGHT, function() {
+                $item['menu']->addKeyEvent(NCURSES_KEY_RIGHT, function () {
                     $this->openMenu(($this->cnt + ($this->selected - 1)) % $this->cnt);
                 });
-                $item['menu']->addKeyEvent(NCURSES_KEY_CR, function() {
+                $item['menu']->addKeyEvent(NCURSES_KEY_CR, function () {
                     $this->closeMenu();
                 }, true);
-                $item['menu']->addKeyEvent(NCURSES_KEY_SPACE, function() {
+                $item['menu']->addKeyEvent(NCURSES_KEY_SPACE, function () {
                     $this->closeMenu();
                 }, true);
 

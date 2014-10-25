@@ -5,7 +5,7 @@
 ncurses_init();
 // ncurses_noecho();
 
-register_shutdown_function(function() {
+register_shutdown_function (function () {
     ncurses_end();
 });
 

@@ -174,7 +174,7 @@ namespace octris\ncurses\component {
             }
 
             // write string
-            $trimOne = function($str) {
+            $trimOne = function ($str) {
                 return (substr($str, -1) == "\n" 
                         ? substr($str, 0, -1)
                         : $str);
@@ -299,7 +299,7 @@ namespace octris\ncurses\component {
             $res   = $this->getResource();
             $point = 0;
 
-            readline_callback_handler_install('', function($input) use (&$point) {
+            readline_callback_handler_install('', function ($input) use (&$point) {
                 readline_add_history($input);
 
                 $this->doNewLine($input, $point);
@@ -315,7 +315,7 @@ namespace octris\ncurses\component {
                 }
             });
             
-            readline_completion_function(function($input, $index) {
+            readline_completion_function (function ($input, $index) {
                 $this->is_newline = false;
 
                 $info  = readline_info();

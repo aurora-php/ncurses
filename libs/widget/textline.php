@@ -166,7 +166,7 @@ namespace octris\ncurses\widget {
         {        
             $res = $this->parent->getResource();
 
-            $show_value = function() use ($res) {
+            $show_value = function () use ($res) {
                 ncurses_mvwaddstr(
                     $res, $this->y, $this->x, 
                     substr($this->value . str_repeat(' ', $this->size), $this->value_offset, $this->size)
@@ -175,7 +175,7 @@ namespace octris\ncurses\widget {
                 
                 $this->parent->refresh();
             };
-            $move_cursor = function() use ($res) {
+            $move_cursor = function () use ($res) {
                 ncurses_wmove($res, $this->y, $this->x + $this->cursor_x);
                 
                 $this->parent->refresh();
@@ -186,7 +186,7 @@ namespace octris\ncurses\widget {
             ncurses_mvwaddstr($res, $this->y, $this->x, substr($this->value . str_repeat(' ', $this->size), 0, $this->size));
 
             // attach keyboard events
-            $this->addKeyEvent(NCURSES_KEY_LEFT, function() use ($show_value, $move_cursor) {
+            $this->addKeyEvent(NCURSES_KEY_LEFT, function () use ($show_value, $move_cursor) {
                 if (($this->cursor_x > 0 && ($this->value_offset == 0 || $this->size == 1)) || $this->cursor_x > 1) {
                     --$this->cursor_x;
 
@@ -198,7 +198,7 @@ namespace octris\ncurses\widget {
                     $show_value();
                 }
             });
-            $this->addKeyEvent(NCURSES_KEY_RIGHT, function() use ($show_value, $move_cursor) {
+            $this->addKeyEvent(NCURSES_KEY_RIGHT, function () use ($show_value, $move_cursor) {
                 if ($this->cursor_x < min(strlen(rtrim($this->value)), $this->size - 1)) {
                     ++$this->cursor_x;
                     
@@ -209,7 +209,7 @@ namespace octris\ncurses\widget {
                     $show_value();
                 }
             });
-            $this->addKeyEvent(NCURSES_KEY_BACK, function() use ($show_value, $move_cursor) {
+            $this->addKeyEvent(NCURSES_KEY_BACK, function () use ($show_value, $move_cursor) {
                 if ($this->cursor_x > 0 || $this->value_offset > 0) {
                     if (($this->cursor_x > 0 && ($this->value_offset == 0 || $this->size == 1)) || $this->cursor_x > 1) {
                         --$this->cursor_x;
@@ -226,10 +226,10 @@ namespace octris\ncurses\widget {
                 }
             });
             $this->addKeyEvent(
-                function($key_code) { 
+                function ($key_code) { 
                     return ($key_code <= 255 && ctype_print($key_code)); 
                 }, 
-                function($key_code) use ($show_value) {
+                function ($key_code) use ($show_value) {
                     $this->value = substr(
                         substr_replace($this->value, chr($key_code), $this->value_offset + $this->cursor_x, 0),
                         0, $this->max_length

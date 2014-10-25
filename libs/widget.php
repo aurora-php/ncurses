@@ -146,7 +146,7 @@ namespace octris\ncurses {
             if (isset($this->events[$name])) {
                 $this->events[$name] = array_filter(
                     $this->events[$name], 
-                    function($item) use ($id) {
+                    function ($item) use ($id) {
                         return ($item['id'] != $id);
                     }
                 );
@@ -231,7 +231,7 @@ namespace octris\ncurses {
          */
         public function build()
         {
-            $this->addKeyEvent(NCURSES_KEY_CR,  function() { 
+            $this->addKeyEvent(NCURSES_KEY_CR,  function () { 
                 $this->parent->moveFocus(); 
             }, true);
         }

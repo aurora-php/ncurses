@@ -126,7 +126,7 @@ namespace octris\ncurses\component {
                 $buttons[] = self::ACTION_HELP;
             }
 
-            $b_width = array_reduce($buttons, function($result, $button) {
+            $b_width = array_reduce($buttons, function ($result, $button) {
                 return $result + strlen($button) + 2;
             }, (count($buttons) - 1) * 2);
 
@@ -137,7 +137,7 @@ namespace octris\ncurses\component {
                     new \octris\ncurses\widget\button(
                         $x, $y, $button
                     )
-                )->addEvent('action', function() use ($button) {
+                )->addEvent('action', function () use ($button) {
                     $this->doExit($button);
                 });
 

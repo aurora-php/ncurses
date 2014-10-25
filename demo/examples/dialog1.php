@@ -29,10 +29,10 @@ class win extends ncurses\container\window {
         $this->addChild(new ncurses\widget\label(2, 9, 'Proxy URL'));
         $this->addChild(new ncurses\widget\textline(15, 9, 20));
 
-        $this->addChild(new ncurses\widget\button( 2, 12, 'Save'))->addEvent('action', function() {
+        $this->addChild(new ncurses\widget\button( 2, 12, 'Save'))->addEvent('action', function () {
             $this->doExit('Save');
         });;
-        $this->addChild(new ncurses\widget\button(10, 12, 'Cancel'))->addEvent('action', function() {
+        $this->addChild(new ncurses\widget\button(10, 12, 'Cancel'))->addEvent('action', function () {
             $this->doExit('Cancel');
         });;
     }

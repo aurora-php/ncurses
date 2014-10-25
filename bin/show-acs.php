@@ -9,7 +9,7 @@
 
 ncurses_init();
 
-register_shutdown_function(function() {
+register_shutdown_function (function () {
 	$err = error_get_last();
 
     ncurses_end();
@@ -26,7 +26,7 @@ foreach (get_defined_constants() as $k => $v) {
 }
 
 $y = 0;
-array_walk($def, function(&$v, $k) use (&$y, $max) {
+array_walk($def, function (&$v, $k) use (&$y, $max) {
 	ncurses_mvaddstr($y++, 4, sprintf('%-' . $max . 's = ', $k));
 	ncurses_hline($v, 1);
 });

@@ -5,7 +5,7 @@
 ncurses_init();
 ncurses_noecho();
 
-register_shutdown_function(function() {
+register_shutdown_function (function () {
     ncurses_end();
 });
 
@@ -23,7 +23,7 @@ function rl_info() {
     $info['history_items'] = count(readline_list_history());
 
     $row = 2;
-    array_walk($info, function(&$v, $k) use (&$row) {
+    array_walk($info, function (&$v, $k) use (&$row) {
         ncurses_mvaddstr($row++, 0, sprintf("%-20s = %s", $k, $v));
         ncurses_clrtoeol();
     });

@@ -31,7 +31,7 @@ namespace octris\ncurses\widget {
         {
             // determine width and height of list
             $this->height = count($items);
-            $this->width  = array_reduce($items, function($width, $item) {
+            $this->width  = array_reduce($items, function ($width, $item) {
                 $width = max($width, strlen($item['label']) + 6);
 
                 return $width;
@@ -46,7 +46,7 @@ namespace octris\ncurses\widget {
             }
 
             // add radio button to label and add action for toggling radio button
-            array_walk($items, function(&$item, $no) {
+            array_walk($items, function (&$item, $no) {
                 $item['label'] = str_pad(
                     ' (' . ($item['selected'] ? '*' : ' ') . ') ' . $item['label'], 
                     $this->width, 
@@ -54,9 +54,9 @@ namespace octris\ncurses\widget {
                     STR_PAD_RIGHT
                 );
 
-                $item['action'] = function() use ($item, $no) {
+                $item['action'] = function () use ($item, $no) {
                     // turn all buttons off
-                    array_walk($this->items, function($item, $no) {
+                    array_walk($this->items, function ($item, $no) {
                         if ($item['selected']) $this->toggle($no + 1);
                     });
 

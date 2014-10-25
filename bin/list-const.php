@@ -21,6 +21,6 @@ foreach (get_defined_constants() as $k => $v) {
 
 ncurses_end(); 
 
-array_walk($def, function(&$v, $k) use ($max) {
+array_walk($def, function (&$v, $k) use ($max) {
 	printf("    %-" . $max . "s = %s\n", $k, $v);
 });

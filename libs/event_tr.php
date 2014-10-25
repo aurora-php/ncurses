@@ -50,11 +50,11 @@ namespace octris\ncurses {
         {
             if (is_string($test)) {
                 $test = ord($test);
-                $test = function($key_code) use ($test) { 
+                $test = function ($key_code) use ($test) { 
                     return ($key_code === $test);
                 };
             } elseif (is_int($test)) {
-                $test = function($key_code) use ($test) {
+                $test = function ($key_code) use ($test) {
                     return ($key_code === $test);
                 };
             } elseif (!is_callable($test)) {
@@ -83,7 +83,7 @@ namespace octris\ncurses {
         {
             $this->key_events = array_filter(
                 $this->key_events, 
-                function($item) use ($id) {
+                function ($item) use ($id) {
                     return ($item['id'] != $id);
                 }
             );
