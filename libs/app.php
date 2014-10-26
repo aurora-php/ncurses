@@ -9,272 +9,273 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\ncurses {
+namespace octris\ncurses;
+
+/**
+ * Ncurses application class.
+ *
+ * @octdoc      c:ncurses/app
+ * @copyright   copyright (c) 2013-2014 by Harald Lapp
+ * @author      Harald Lapp <harald@octris.org>
+ */
+abstract class app extends \octris\ncurses\container
+{
     /**
-     * Ncurses application class.
+     * Enable logging to file.
      *
-     * @octdoc      c:ncurses/app
-     * @copyright   copyright (c) 2013-2014 by Harald Lapp
-     * @author      Harald Lapp <harald@octris.org>
+     * @octdoc  p:app/$logging
+     * @type    string|bool
      */
-    abstract class app extends \octris\ncurses\container
+    protected static $logging = false;
+    /**/
+
+    /**
+     * Application instance.
+     *
+     * @octdoc  p:app/$instance
+     */
+    protected static $instance = null;
+    /**/
+
+    /**
+     * Application title.
+     *
+     * @octdoc  p:app/$title = '';
+     * @type    string
+     */
+    protected $title = '';
+    /**/
+
+    /**
+     * Set-up proxies.
+     *
+     * @octdoc  p:app/$proxies
+     * @type    array
+     */
+    protected $proxies = array();
+    /**/
+
+    /**
+     * Whether method 'leave' has been called.
+     *
+     * @octdoc  p:app/$left
+     * @type    bool
+     */
+    protected $left = false;
+    /**/
+
+    /**
+     * Constructor, create root window.
+     *
+     * @octdoc  m:app/__construct
+     */
+    protected function __construct()
     {
-        /**
-         * Enable logging to file.
-         *
-         * @octdoc  p:app/$logging
-         * @type    string|bool
-         */
-        protected static $logging = false;
-        /**/
+        // register shutdown function for catching E_FATAL errors.
+        register_shutdown_function (function () {
+            $error = error_get_last();
 
-        /**
-         * Application instance.
-         *
-         * @octdoc  p:app/$instance
-         */
-        protected static $instance = null;
-        /**/
-
-        /**
-         * Application title.
-         *
-         * @octdoc  p:app/$title = '';
-         * @type    string
-         */
-        protected $title = '';
-        /**/
-
-        /**
-         * Set-up proxies.
-         *
-         * @octdoc  p:app/$proxies
-         * @type    array
-         */
-        protected $proxies = array();
-        /**/
-
-        /**
-         * Whether method 'leave' has been called.
-         *
-         * @octdoc  p:app/$left
-         * @type    bool
-         */
-        protected $left = false;
-        /**/
-
-        /**
-         * Constructor, create root window.
-         *
-         * @octdoc  m:app/__construct
-         */
-        protected function __construct()
-        {
-            // register shutdown function for catching E_FATAL errors.
-            register_shutdown_function (function () {
-                $error = error_get_last();
-
-                if (!is_null($error)) {
-                    static::logError($error['type'], $error['message'], $error['file'], $error['line']);
-                }
-
-                ncurses_end();
-            });
-
-            // set error logging
-            set_error_handler(function ($no, $message, $file, $line, $context = null) {
-                static::logError($no, $message, $file, $line, $context);
-            });
-        }
-
-        /**
-         * Enable logging.
-         *
-         * @octdoc  m:app/enableLog
-         * @para    string          $log_file               File to log to.
-         */
-        public static function enableLog($log_file)
-        {
-            self::$logging = $log_file;
-        }
-
-        /**
-         * Create an instance of the application.
-         *
-         * @octdoc  m:app/getInstance
-         */
-        public static function getInstance()
-        {
-            if (is_null(self::$instance)) {
-                self::$instance = new static();
+            if (!is_null($error)) {
+                static::logError($error['type'], $error['message'], $error['file'], $error['line']);
             }
 
-            return self::$instance;
+            ncurses_end();
+        });
+
+        // set error logging
+        set_error_handler(function ($no, $message, $file, $line, $context = null) {
+            static::logError($no, $message, $file, $line, $context);
+        });
+    }
+
+    /**
+     * Enable logging.
+     *
+     * @octdoc  m:app/enableLog
+     * @para    string          $log_file               File to log to.
+     */
+    public static function enableLog($log_file)
+    {
+        self::$logging = $log_file;
+    }
+
+    /**
+     * Create an instance of the application.
+     *
+     * @octdoc  m:app/getInstance
+     */
+    public static function getInstance()
+    {
+        if (is_null(self::$instance)) {
+            self::$instance = new static();
         }
 
-        /**
-         * Build application window.
-         *
-         * @octdoc  m:app/build
-         */
-        public function build()
-        {
-            ncurses_newwin(0, 0, 0, 0);
+        return self::$instance;
+    }
 
-            $this->resource = STDSCR;
+    /**
+     * Build application window.
+     *
+     * @octdoc  m:app/build
+     */
+    public function build()
+    {
+        ncurses_newwin(0, 0, 0, 0);
 
-            if ($this->title != '') {
-                list($width, ) = $this->getMaxXY();
+        $this->resource = STDSCR;
 
-                ncurses_mvaddstr(0, 0, $this->title);
-                ncurses_mvhline(1, 0, NCURSES_ACS_HLINE, $width);
-            }
+        if ($this->title != '') {
+            list($width, ) = $this->getMaxXY();
 
-            parent::build();
+            ncurses_mvaddstr(0, 0, $this->title);
+            ncurses_mvhline(1, 0, NCURSES_ACS_HLINE, $width);
         }
 
-        /**
-         * Proxy method.
-         *
-         * @octdoc  m:app/proxy
-         * @return  mixed                                   Return value of callback function.
-         */
-        public function proxy(callable $cb)
-        {
-            $hash = spl_object_hash($cb);
+        parent::build();
+    }
 
-            if (!isset($this->proxies[$hash])) {
-                $this->proxies[$hash] = $cb();
-            }
+    /**
+     * Proxy method.
+     *
+     * @octdoc  m:app/proxy
+     * @return  mixed                                   Return value of callback function.
+     */
+    public function proxy(callable $cb)
+    {
+        $hash = spl_object_hash($cb);
 
-            return $this->proxies[$hash];
+        if (!isset($this->proxies[$hash])) {
+            $this->proxies[$hash] = $cb();
         }
 
-        /**
-         * Main application loop to be implemented by application.
-         *
-         * @octdoc  a:app/main
-         */
-        protected function main()
-        {
-            parent::run();
+        return $this->proxies[$hash];
+    }
+
+    /**
+     * Main application loop to be implemented by application.
+     *
+     * @octdoc  a:app/main
+     */
+    protected function main()
+    {
+        parent::run();
+    }
+
+    /**
+     * Temporarly leave ncurses.
+     *
+     * @octdoc  m:app/leave
+     * @return  bool                                    Returns true if application was able to leave ncurses.
+     */
+    public function leave()
+    {
+        if (!$this->left && ($this->left = !ncurses_def_prog_mode())) {
+            // ncurses_def_prog_mode returns false on success(!)
+            ncurses_end();
         }
 
-        /**
-         * Temporarly leave ncurses.
-         *
-         * @octdoc  m:app/leave
-         * @return  bool                                    Returns true if application was able to leave ncurses.
-         */
-        public function leave()
-        {
-            if (!$this->left && ($this->left = !ncurses_def_prog_mode())) {
-                // ncurses_def_prog_mode returns false on success(!)
-                ncurses_end();
-            }
+        return $this->left;
+    }
 
-            return $this->left;
-        }
+    /**
+     * Restore to ncurses.
+     *
+     * @octdoc  m:app/restore
+     */
+    public function restore()
+    {
+        if ($this->left) {
+            ncurses_reset_prog_mode();
 
-        /**
-         * Restore to ncurses.
-         *
-         * @octdoc  m:app/restore
-         */
-        public function restore()
-        {
-            if ($this->left) {
-                ncurses_reset_prog_mode();
-
-                $this->refresh();
-
-                $this->left = false;
-            }
-        }
-
-        /**
-         * Build and run application.
-         *
-         * @octdoc  m:app/run
-         */
-        public function run()
-        {
-            // initialize ncurses and register shutdown function
-            ncurses_init();
-            ncurses_curs_set(0);
-            ncurses_noecho();
-
-            // render app UI
-            $this->build();
             $this->refresh();
 
-            // enter main loop
-            $this->main();
-        }
-
-        /*
-         *
-         */
-
-        /**
-         * Error logger.
-         *
-         * @octdoc  m:app/logError
-         * @param   int                     $no                     Number/type of error.
-         * @param   string                  $message                Error message.
-         * @param   string                  $file                   File the error occured in.
-         * @param   int                     $line                   Number of line the error occured in.
-         * @param   mixed                   $context                Optional context the error occured in.
-         */
-        public static function logError($no, $message, $file, $line, $context = null)
-        {
-            if (!static::$logging || (!is_writable(static::$logging) && !is_writable(dirname(static::$logging)))) return;
-
-            $message = preg_replace_callback('/^/m', function () {
-                static $row = 0;
-                
-                return ($row++ > 0 ? '      ' : '');
-            }, $message);
-
-            file_put_contents(
-                static::$logging,
-                sprintf("date: %s\ntype: %d\nfile: %s\nline: %d\nmsg : %s\n\n", strftime('%Y-%m-%d %H:%M:%S'), $no, $file, $line, $message),
-                FILE_APPEND
-            );
-        }
-
-        /**
-         * Initialize application.
-         *
-         * @octdoc  m:app/init
-         */
-        public static function init()
-        {
-            static $initialized = false;
-
-            if ($initialized) return;
-
-            // additional keys initialization
-            $keys = array(
-                'NCURSES_KEY_TAB'    =>  9,
-                'NCURSES_KEY_LF'     => 10,
-                'NCURSES_KEY_CR'     => 13,
-                'NCURSES_KEY_ENTER'  => 13,
-                'NCURSES_KEY_ESCAPE' => 27,
-                'NCURSES_KEY_SPACE'  => 32,
-                'NCURSES_KEY_BACK'   => 127
-            );
-
-            array_walk($keys, function ($code, $name) {
-                if (!defined($name)) {
-                    define($name, $code);
-                }
-            });
-
-            // ---
-            $initialized = true;
+            $this->left = false;
         }
     }
 
-    app::init();
+    /**
+     * Build and run application.
+     *
+     * @octdoc  m:app/run
+     */
+    public function run()
+    {
+        // initialize ncurses and register shutdown function
+        ncurses_init();
+        ncurses_curs_set(0);
+        ncurses_noecho();
+
+        // render app UI
+        $this->build();
+        $this->refresh();
+
+        // enter main loop
+        $this->main();
+    }
+
+    /*
+     *
+     */
+
+    /**
+     * Error logger.
+     *
+     * @octdoc  m:app/logError
+     * @param   int                     $no                     Number/type of error.
+     * @param   string                  $message                Error message.
+     * @param   string                  $file                   File the error occured in.
+     * @param   int                     $line                   Number of line the error occured in.
+     * @param   mixed                   $context                Optional context the error occured in.
+     */
+    public static function logError($no, $message, $file, $line, $context = null)
+    {
+        if (!static::$logging || (!is_writable(static::$logging) && !is_writable(dirname(static::$logging)))) return;
+
+        $message = preg_replace_callback('/^/m', function () {
+            static $row = 0;
+            
+            return ($row++ > 0 ? '      ' : '');
+        }, $message);
+
+        file_put_contents(
+            static::$logging,
+            sprintf("date: %s\ntype: %d\nfile: %s\nline: %d\nmsg : %s\n\n", strftime('%Y-%m-%d %H:%M:%S'), $no, $file, $line, $message),
+            FILE_APPEND
+        );
+    }
+
+    /**
+     * Initialize application.
+     *
+     * @octdoc  m:app/init
+     */
+    public static function init()
+    {
+        static $initialized = false;
+
+        if ($initialized) return;
+
+        // additional keys initialization
+        $keys = array(
+            'NCURSES_KEY_TAB'    =>  9,
+            'NCURSES_KEY_LF'     => 10,
+            'NCURSES_KEY_CR'     => 13,
+            'NCURSES_KEY_ENTER'  => 13,
+            'NCURSES_KEY_ESCAPE' => 27,
+            'NCURSES_KEY_SPACE'  => 32,
+            'NCURSES_KEY_BACK'   => 127
+        );
+
+        array_walk($keys, function ($code, $name) {
+            if (!defined($name)) {
+                define($name, $code);
+            }
+        });
+
+        // ---
+        $initialized = true;
+    }
 }
+
+app::init();
+

@@ -9,114 +9,115 @@
  * file that was distributed with this source code.
  */
 
-namespace octris\ncurses\widget {
+namespace octris\ncurses\widget;
+
+/**
+ * Button widget.
+ *
+ * @octdoc      c:widget/button
+ * @copyright   copyright (c) 2013-2014 by Harald Lapp
+ * @author      Harald Lapp <harald@octris.org>
+ */
+class button extends \octris\ncurses\widget
+{
     /**
-     * Button widget.
-     *
-     * @octdoc      c:widget/button
-     * @copyright   copyright (c) 2013-2014 by Harald Lapp
-     * @author      Harald Lapp <harald@octris.org>
+     * X position of button.
+     * 
+     * @octdoc  p:button/$x
+     * @type    int
      */
-    class button extends \octris\ncurses\widget
+    protected $x;
+    /**/
+
+    /**
+     * Y position of button.
+     * 
+     * @octdoc  p:button/$y
+     * @type    int
+     */
+    protected $y;
+    /**/
+
+    /**
+     * Text of button.
+     * 
+     * @octdoc  p:button/$text
+     * @type    string
+     */
+    protected $text;
+    /**/
+
+    /**
+     * Constructor.
+     *
+     * @octdoc  m:button/__construct
+     * @param   int                             $x              X position of button.
+     * @param   int                             $y              Y position of button.
+     * @param   string                          $text           button text to display.
+     */
+    public function __construct($x, $y, $text)
     {
-        /**
-         * X position of button.
-         * 
-         * @octdoc  p:button/$x
-         * @type    int
-         */
-        protected $x;
-        /**/
+        $this->x    = $x;
+        $this->y    = $y;
+        $this->text = $text;
+    }
 
-        /**
-         * Y position of button.
-         * 
-         * @octdoc  p:button/$y
-         * @type    int
-         */
-        protected $y;
-        /**/
+    /**
+     * Get Focus.
+     *
+     * @octdoc  m:button/onFocus
+     */
+    public function onFocus()
+    {
+        $res = $this->parent->getResource();
 
-        /**
-         * Text of button.
-         * 
-         * @octdoc  p:button/$text
-         * @type    string
-         */
-        protected $text;
-        /**/
+        ncurses_wattron($res, NCURSES_A_REVERSE);
 
-        /**
-         * Constructor.
-         *
-         * @octdoc  m:button/__construct
-         * @param   int                             $x              X position of button.
-         * @param   int                             $y              Y position of button.
-         * @param   string                          $text           button text to display.
-         */
-        public function __construct($x, $y, $text)
-        {
-            $this->x    = $x;
-            $this->y    = $y;
-            $this->text = $text;
-        }
+        $this->build();
+        
+        ncurses_wattroff($res, NCURSES_A_REVERSE);
+    }
 
-        /**
-         * Get Focus.
-         *
-         * @octdoc  m:button/onFocus
-         */
-        public function onFocus()
-        {
-            $res = $this->parent->getResource();
+    /**
+     * Lose focus.
+     *
+     * @octdoc  m:button/onBlur
+     */
+    public function onBlur()
+    {
+        $this->build();
+    }
 
-            ncurses_wattron($res, NCURSES_A_REVERSE);
+    /**
+     * Get's called when ENTER key is pressed on a button.
+     *
+     * @octdoc  m:button/onAction
+     */
+    public function onAction()
+    {
+        $this->propagateEvent('action');
+    }
 
-            $this->build();
-            
-            ncurses_wattroff($res, NCURSES_A_REVERSE);
-        }
+    /**
+     * Render button.
+     *
+     * @octdoc  m:button/render
+     */
+    public function build()
+    {
+        parent::build();
 
-        /**
-         * Lose focus.
-         *
-         * @octdoc  m:button/onBlur
-         */
-        public function onBlur()
-        {
-            $this->build();
-        }
+        ncurses_mvwaddstr(
+            $this->parent->getResource(), 
+            $this->y, 
+            $this->x, 
+            '<' . $this->text . '>'
+        );
 
-        /**
-         * Get's called when ENTER key is pressed on a button.
-         *
-         * @octdoc  m:button/onAction
-         */
-        public function onAction()
-        {
-            $this->propagateEvent('action');
-        }
-
-        /**
-         * Render button.
-         *
-         * @octdoc  m:button/render
-         */
-        public function build()
-        {
-            parent::build();
-
-            ncurses_mvwaddstr(
-                $this->parent->getResource(), 
-                $this->y, 
-                $this->x, 
-                '<' . $this->text . '>'
-            );
-
-            // attach keyboard events
-            $this->addKeyEvent(NCURSES_KEY_CR, function () {
-                $this->onAction();
-            });
-        }
+        // attach keyboard events
+        $this->addKeyEvent(NCURSES_KEY_CR, function () {
+            $this->onAction();
+        });
     }
 }
+
