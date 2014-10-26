@@ -363,7 +363,7 @@ class shell extends \octris\ncurses\container\window
                 // refresh window
                 ncurses_wrefresh($res);
             }
-        } while($this->do_exit === false);
+        } while ($this->do_exit === false);
 
         ncurses_curs_set(0);
 

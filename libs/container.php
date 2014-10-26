@@ -286,7 +286,7 @@ abstract class container
             if ($propagate) {
                 $this->propagateKeyEvent($key_code);
             }
-        } while($this->do_exit === false);
+        } while ($this->do_exit === false);
 
         $return = $this->do_exit['r_value'];
         $this->do_exit = false;

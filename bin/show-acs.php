@@ -36,4 +36,4 @@ ncurses_refresh();
 
 do {
 	sleep(2);
-} while(true);
+} while (true);
