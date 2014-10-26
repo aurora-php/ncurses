@@ -98,7 +98,7 @@ abstract class container
     {
         ncurses_wrefresh($this->resource);
         ncurses_getmaxyx($this->resource, $y, $x);
-        
+
         return array($x, $y);
     }
 
@@ -113,7 +113,7 @@ abstract class container
         list($width, $height) = $this->getMaxXY();
 
         return (object)array(
-            'width'  => $width, 
+            'width'  => $width,
             'height' => $height
         );
     }

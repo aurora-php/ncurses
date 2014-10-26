@@ -22,7 +22,7 @@ class textline extends \octris\ncurses\widget
 {
     /**
      * X position of textline.
-     * 
+     *
      * @octdoc  p:textline/$x
      * @type    int
      */
@@ -31,7 +31,7 @@ class textline extends \octris\ncurses\widget
 
     /**
      * Y position of textline.
-     * 
+     *
      * @octdoc  p:textline/$y
      * @type    int
      */
@@ -116,7 +116,7 @@ class textline extends \octris\ncurses\widget
 
         ncurses_mvwaddstr(
             $this->parent->getResource(),
-            $this->y, $this->x, 
+            $this->y, $this->x,
             substr($this->value . str_repeat(' ', $this->size), 0, $this->size)
         );
 
@@ -135,7 +135,7 @@ class textline extends \octris\ncurses\widget
         ncurses_wmove($res, $this->y, $this->x + $this->cursor_x);
         ncurses_curs_set(1);
 
-        $this->parent->refresh();            
+        $this->parent->refresh();
     }
 
     /**
@@ -164,21 +164,21 @@ class textline extends \octris\ncurses\widget
      * @octdoc  m:textline/build
      */
     public function build()
-    {        
+    {
         $res = $this->parent->getResource();
 
         $show_value = function () use ($res) {
             ncurses_mvwaddstr(
-                $res, $this->y, $this->x, 
+                $res, $this->y, $this->x,
                 substr($this->value . str_repeat(' ', $this->size), $this->value_offset, $this->size)
             );
             ncurses_wmove($res, $this->y, $this->x + $this->cursor_x);
-            
+
             $this->parent->refresh();
         };
         $move_cursor = function () use ($res) {
             ncurses_wmove($res, $this->y, $this->x + $this->cursor_x);
-            
+
             $this->parent->refresh();
         };
 
@@ -202,7 +202,7 @@ class textline extends \octris\ncurses\widget
         $this->addKeyEvent(NCURSES_KEY_RIGHT, function () use ($show_value, $move_cursor) {
             if ($this->cursor_x < min(strlen(rtrim($this->value)), $this->size - 1)) {
                 ++$this->cursor_x;
-                
+
                 $move_cursor();
             } elseif ($this->value_offset + $this->size < strlen($this->value)) {
                 ++$this->value_offset;
@@ -227,9 +227,9 @@ class textline extends \octris\ncurses\widget
             }
         });
         $this->addKeyEvent(
-            function ($key_code) { 
-                return ($key_code <= 255 && ctype_print($key_code)); 
-            }, 
+            function ($key_code) {
+                return ($key_code <= 255 && ctype_print($key_code));
+            },
             function ($key_code) use ($show_value) {
                 $this->value = substr(
                     substr_replace($this->value, chr($key_code), $this->value_offset + $this->cursor_x, 0),

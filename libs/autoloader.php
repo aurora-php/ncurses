@@ -30,7 +30,7 @@ class autoloader
     {
         if (strpos($class, 'octris\\ncurses\\') === 0) {
             $file = __DIR__ . '/' . str_replace('\\', '/', substr($class, 15)) . '.php';
-            
+
             if (file_exists($file)) {
                 require_once($file);
             }

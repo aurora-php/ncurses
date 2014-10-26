@@ -33,7 +33,7 @@ class text extends \octris\ncurses\widget
 
     /**
      * Text.
-     * 
+     *
      * @octdoc  p:text/$text
      * @type    string
      */
@@ -120,9 +120,9 @@ class text extends \octris\ncurses\widget
 
         // output
         ncurses_mvwaddstr(
-            $this->parent->getResource(), 
-            $this->v_margin, 
-            0, 
+            $this->parent->getResource(),
+            $this->v_margin,
+            0,
             $text
         );
     }

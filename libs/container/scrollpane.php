@@ -134,7 +134,7 @@ class scrollpane extends \octris\ncurses\container
      */
     public function addRow($row)
     {
-        ncurses_mvwaddstr($this->resource, $this->height - 1, 0, $row . "\n"); 
+        ncurses_mvwaddstr($this->resource, $this->height - 1, 0, $row . "\n");
         ncurses_wrefresh($this->resource);
     }
 

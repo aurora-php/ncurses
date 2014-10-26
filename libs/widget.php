@@ -146,7 +146,7 @@ abstract class widget
 
         if (isset($this->events[$name])) {
             $this->events[$name] = array_filter(
-                $this->events[$name], 
+                $this->events[$name],
                 function ($item) use ($id) {
                     return ($item['id'] != $id);
                 }
@@ -232,8 +232,8 @@ abstract class widget
      */
     public function build()
     {
-        $this->addKeyEvent(NCURSES_KEY_CR,  function () { 
-            $this->parent->moveFocus(); 
+        $this->addKeyEvent(NCURSES_KEY_CR,  function () {
+            $this->parent->moveFocus();
         }, true);
     }
 }

@@ -5,17 +5,17 @@
     "keywords":     [],
     "homepage":     "http://github.com/octris/ncurses/",
     "license":      "BSD-3-Clause",
-    
+
     "authors":      [{
         "name":         "Harald Lapp",
         "email":        "harald@octris.org",
         "homepage":     "http://www.octris.org/"
     }],
-            
+
     "require":      {
         "php":          ">=5.4.0"
     },
-    
+
     "autoload":     {
         "psr-4":        {
             "octris\\ncurses\\": "libs/"

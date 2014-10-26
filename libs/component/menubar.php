@@ -111,7 +111,7 @@ class menubar extends \octris\ncurses\widget
             ncurses_wattron($res, NCURSES_A_REVERSE);
             ncurses_mvwaddstr($res, 0, $this->items[$this->selected]['x'], $this->items[$this->selected]['label']);
             ncurses_wattroff($res, NCURSES_A_REVERSE);
-    
+
             $this->items[$this->selected]['menu']->hide();
         }
     }
@@ -163,7 +163,7 @@ class menubar extends \octris\ncurses\widget
 
             $item['menu']->moveTo($x, 1);
             $item['menu']->addKeyEvent(NCURSES_KEY_LEFT, function () {
-                $this->openMenu(($this->selected + 1) % $this->cnt); 
+                $this->openMenu(($this->selected + 1) % $this->cnt);
             });
             $item['menu']->addKeyEvent(NCURSES_KEY_RIGHT, function () {
                 $this->openMenu(($this->cnt + ($this->selected - 1)) % $this->cnt);

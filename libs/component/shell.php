@@ -58,7 +58,7 @@ class shell extends \octris\ncurses\container\window
 
     /**
      * Prompt text to show.
-     * 
+     *
      * @octdoc  p:shell/$prompt
      * @type    string
      */
@@ -176,7 +176,7 @@ class shell extends \octris\ncurses\container\window
 
         // write string
         $trimOne = function ($str) {
-            return (substr($str, -1) == "\n" 
+            return (substr($str, -1) == "\n"
                     ? substr($str, 0, -1)
                     : $str);
         };
@@ -281,8 +281,8 @@ class shell extends \octris\ncurses\container\window
             $v = str_pad($this->prompt . $v, $total * $this->width);
 
             ncurses_mvwaddstr(
-                $res, 
-                max(0, $line_y - $total), 0, 
+                $res,
+                max(0, $line_y - $total), 0,
                 substr($v, -($total * $this->width))
             );
         }
@@ -315,7 +315,7 @@ class shell extends \octris\ncurses\container\window
                 $this->onSubmit($input);
             }
         });
-        
+
         readline_completion_function (function ($input, $index) {
             $this->is_newline = false;
 
@@ -332,7 +332,7 @@ class shell extends \octris\ncurses\container\window
             $read   = array(STDIN);
             $write  = null;
             $except = null;
-            
+
             $n = stream_select($read, $write, $except, null);
 
             if ($n && in_array(STDIN, $read)) {
@@ -349,9 +349,9 @@ class shell extends \octris\ncurses\container\window
                 // show line buffer contents and clear rest of line
                 ncurses_scrollok($res, false);
                 ncurses_mvwaddstr(
-                    $res, 
-                    $this->line_y, 
-                    0, 
+                    $res,
+                    $this->line_y,
+                    0,
                     substr($line, ($cy - $sy) * $this->width, $this->getMaxLen())
                 );
                 ncurses_wclrtobot($res);

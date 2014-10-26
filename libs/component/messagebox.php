@@ -47,7 +47,7 @@ class messagebox extends \octris\ncurses\container\window
     const ACTION_YES    = 'Yes';
     const ACTION_NO     = 'No';
     const ACTION_HELP   = 'Help';
-    /**/ 
+    /**/
 
     /**
      * Messagebox types.
@@ -111,7 +111,7 @@ class messagebox extends \octris\ncurses\container\window
     {
         parent::addChild(
             new \octris\ncurses\widget\text(
-                $this->text, 
+                $this->text,
                 \octris\ncurses\widget\text::ALIGN_CENTER,
                 1
             )

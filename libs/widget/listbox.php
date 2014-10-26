@@ -67,7 +67,7 @@ class listbox extends \octris\ncurses\widget
 
     /**
      * X position of listbox.
-     * 
+     *
      * @octdoc  p:listbox/$x
      * @type    int
      */
@@ -76,7 +76,7 @@ class listbox extends \octris\ncurses\widget
 
     /**
      * Y position of listbox.
-     * 
+     *
      * @octdoc  p:listbox/$y
      * @type    int
      */
@@ -120,7 +120,7 @@ class listbox extends \octris\ncurses\widget
     public function getSize()
     {
         return (object)array(
-            'width'  => $this->width, 
+            'width'  => $this->width,
             'height' => $this->height
         );
     }
@@ -138,17 +138,17 @@ class listbox extends \octris\ncurses\widget
 
             ncurses_wattron($res, NCURSES_A_REVERSE);
             ncurses_mvwaddstr(
-                $res, 
-                $this->y + ($item - 1), 
-                $this->x, 
+                $res,
+                $this->y + ($item - 1),
+                $this->x,
                 $this->items[$item - 1]['label']
             );
             ncurses_wattroff($res, NCURSES_A_REVERSE);
 
             ncurses_mvwaddstr(
-                $res, 
-                $this->y + ($this->selected - 1), 
-                $this->x, 
+                $res,
+                $this->y + ($this->selected - 1),
+                $this->x,
                 $this->items[$this->selected - 1]['label']
             );
 
@@ -169,9 +169,9 @@ class listbox extends \octris\ncurses\widget
 
         ncurses_wattron($res, NCURSES_A_REVERSE);
         ncurses_mvwaddstr(
-            $res, 
-            $this->y + ($this->selected - 1), 
-            $this->x, 
+            $res,
+            $this->y + ($this->selected - 1),
+            $this->x,
             $this->items[$this->selected - 1]['label']
         );
         ncurses_wattroff($res, NCURSES_A_REVERSE);
@@ -187,9 +187,9 @@ class listbox extends \octris\ncurses\widget
         $res = $this->parent->getResource();
 
         ncurses_mvwaddstr(
-            $res, 
-            $this->y + ($this->selected - 1), 
-            $this->x, 
+            $res,
+            $this->y + ($this->selected - 1),
+            $this->x,
             $this->items[$this->selected - 1]['label']
         );
     }
@@ -217,9 +217,9 @@ class listbox extends \octris\ncurses\widget
 
         for ($i = 1; $i <= $this->cnt; ++$i) {
             ncurses_mvwaddstr(
-                $res, 
-                $this->y + ($i - 1), 
-                $this->x, 
+                $res,
+                $this->y + ($i - 1),
+                $this->x,
                 $this->items[$i - 1]['label']
             );
         }
@@ -234,12 +234,12 @@ class listbox extends \octris\ncurses\widget
         $this->addKeyEvent(NCURSES_KEY_CR, function () {
             if (isset($this->items[$this->selected - 1]['action'])) {
                 $this->items[$this->selected - 1]['action']($this);
-            }                    
+            }
         }, true);
         $this->addKeyEvent(NCURSES_KEY_SPACE, function () {
             if (isset($this->items[$this->selected - 1]['action'])) {
                 $this->items[$this->selected - 1]['action']($this);
-            }                    
+            }
         }, true);
     }
 }

@@ -233,7 +233,7 @@ abstract class app extends \octris\ncurses\container
 
         $message = preg_replace_callback('/^/m', function () {
             static $row = 0;
-            
+
             return ($row++ > 0 ? '      ' : '');
         }, $message);
 

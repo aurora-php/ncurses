@@ -51,7 +51,7 @@ trait event_tr
     {
         if (is_string($test)) {
             $test = ord($test);
-            $test = function ($key_code) use ($test) { 
+            $test = function ($key_code) use ($test) {
                 return ($key_code === $test);
             };
         } elseif (is_int($test)) {
@@ -83,7 +83,7 @@ trait event_tr
     public function removeKeyEvent($id)
     {
         $this->key_events = array_filter(
-            $this->key_events, 
+            $this->key_events,
             function ($item) use ($id) {
                 return ($item['id'] != $id);
             }

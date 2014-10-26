@@ -58,7 +58,7 @@ abstract class window extends \octris\ncurses\container
 
     /**
      * Window title. Note that the title will only be rendered, if the window has a border.
-     * 
+     *
      * @octdoc  p:window/$title
      * @type    string
      */
@@ -67,7 +67,7 @@ abstract class window extends \octris\ncurses\container
 
     /**
      * Width of window.
-     * 
+     *
      * @octdoc  p:window/$width
      * @type    int
      */
@@ -76,7 +76,7 @@ abstract class window extends \octris\ncurses\container
 
     /**
      * Height of window.
-     * 
+     *
      * @octdoc  p:window/$height
      * @type    int
      */
@@ -85,7 +85,7 @@ abstract class window extends \octris\ncurses\container
 
     /**
      * X position of window.
-     * 
+     *
      * @octdoc  p:window/$x
      * @type    int
      */
@@ -94,7 +94,7 @@ abstract class window extends \octris\ncurses\container
 
     /**
      * Y position of window.
-     * 
+     *
      * @octdoc  p:window/$y
      * @type    int
      */
@@ -134,7 +134,7 @@ abstract class window extends \octris\ncurses\container
                     ? floor(($max_y - $this->height) / 2)
                     : $y);
     }
-    
+
     /**
      * Destructor.
      *
@@ -157,7 +157,7 @@ abstract class window extends \octris\ncurses\container
     public function getSize()
     {
         return (object)array(
-            'width'  => $this->width, 
+            'width'  => $this->width,
             'height' => $this->height
         );
     }
@@ -171,7 +171,7 @@ abstract class window extends \octris\ncurses\container
     public function getInnerSize()
     {
         return (object)array(
-            'width'  => $this->width - 2 * (int)$this->has_border, 
+            'width'  => $this->width - 2 * (int)$this->has_border,
             'height' => $this->height - 2 * (int)$this->has_border
         );
     }
@@ -229,7 +229,7 @@ abstract class window extends \octris\ncurses\container
                             ? substr($this->title, 0, $this->width - 8) . ' ...'
                             : ''));
 
-            if ($title != '') {                   
+            if ($title != '') {
                 $title_x = floor(($this->width - strlen($title) - 2) / 2);
 
                 ncurses_wmove($this->window_resource, 0, $title_x);
@@ -241,7 +241,7 @@ abstract class window extends \octris\ncurses\container
             $this->window_resource = ncurses_newwin($this->height, $this->width, $this->y, $this->x);
             $this->resource = $this->window_resource;
         }
-        
+
         parent::build();
 
         $this->panel = new \octris\ncurses\panel(array($this->window_resource, $this->resource));

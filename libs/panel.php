@@ -49,7 +49,7 @@ class panel
         foreach ($resources as $resource) {
             $this->resources[] = ncurses_new_panel($resource);
         }
-        
+
         $this->hide();  // all panels are hidden by default
     }
 

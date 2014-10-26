@@ -22,7 +22,7 @@ class button extends \octris\ncurses\widget
 {
     /**
      * X position of button.
-     * 
+     *
      * @octdoc  p:button/$x
      * @type    int
      */
@@ -31,7 +31,7 @@ class button extends \octris\ncurses\widget
 
     /**
      * Y position of button.
-     * 
+     *
      * @octdoc  p:button/$y
      * @type    int
      */
@@ -40,7 +40,7 @@ class button extends \octris\ncurses\widget
 
     /**
      * Text of button.
-     * 
+     *
      * @octdoc  p:button/$text
      * @type    string
      */
@@ -74,7 +74,7 @@ class button extends \octris\ncurses\widget
         ncurses_wattron($res, NCURSES_A_REVERSE);
 
         $this->build();
-        
+
         ncurses_wattroff($res, NCURSES_A_REVERSE);
     }
 
@@ -108,9 +108,9 @@ class button extends \octris\ncurses\widget
         parent::build();
 
         ncurses_mvwaddstr(
-            $this->parent->getResource(), 
-            $this->y, 
-            $this->x, 
+            $this->parent->getResource(),
+            $this->y,
+            $this->x,
             '<' . $this->text . '>'
         );
 

@@ -49,9 +49,9 @@ class radiobox extends \octris\ncurses\widget\listbox
         // add radio button to label and add action for toggling radio button
         array_walk($items, function (&$item, $no) {
             $item['label'] = str_pad(
-                ' (' . ($item['selected'] ? '*' : ' ') . ') ' . $item['label'], 
-                $this->width, 
-                ' ', 
+                ' (' . ($item['selected'] ? '*' : ' ') . ') ' . $item['label'],
+                $this->width,
+                ' ',
                 STR_PAD_RIGHT
             );
 
@@ -98,12 +98,12 @@ class radiobox extends \octris\ncurses\widget\listbox
 
         ncurses_mvwaddstr(
             $res,
-            $this->y + ($no - 1), 
-            $this->x + 2, 
+            $this->y + ($no - 1),
+            $this->x + 2,
             ($selected ? '*' : ' ')
         );
 
-        if ($no == $this->selected) {            
+        if ($no == $this->selected) {
             ncurses_wattroff($res, NCURSES_A_REVERSE);
         }
 

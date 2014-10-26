@@ -22,7 +22,7 @@ class label extends \octris\ncurses\widget
 {
     /**
      * X position of label.
-     * 
+     *
      * @octdoc  p:label/$x
      * @type    int
      */
@@ -31,7 +31,7 @@ class label extends \octris\ncurses\widget
 
     /**
      * Y position of label.
-     * 
+     *
      * @octdoc  p:label/$y
      * @type    int
      */
@@ -40,7 +40,7 @@ class label extends \octris\ncurses\widget
 
     /**
      * Text of label.
-     * 
+     *
      * @octdoc  p:label/$text
      * @type    string
      */
@@ -79,9 +79,9 @@ class label extends \octris\ncurses\widget
     public function build()
     {
         ncurses_mvwaddstr(
-            $this->parent->getResource(), 
-            $this->y, 
-            $this->x, 
+            $this->parent->getResource(),
+            $this->y,
+            $this->x,
             $this->text
         );
     }
