@@ -124,4 +124,3 @@ class menu extends \octris\ncurses\container\window
         parent::build();
     }
 }
-

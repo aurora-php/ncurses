@@ -247,4 +247,3 @@ class textline extends \octris\ncurses\widget
         );
     }
 }
-

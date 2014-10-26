@@ -127,4 +127,3 @@ class text extends \octris\ncurses\widget
         );
     }
 }
-

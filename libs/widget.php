@@ -237,4 +237,3 @@ abstract class widget
         }, true);
     }
 }
-

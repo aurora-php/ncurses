@@ -156,4 +156,3 @@ class messagebox extends \octris\ncurses\container\window
         throw new \Exception('A messagebox cannot have child components!');
     }
 }
-

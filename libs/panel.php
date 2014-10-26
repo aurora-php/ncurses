@@ -115,4 +115,3 @@ class panel
         $this->is_visible = false;
     }
 }
-

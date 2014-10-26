@@ -302,4 +302,3 @@ abstract class window extends \octris\ncurses\container
         }
     }
 }
-

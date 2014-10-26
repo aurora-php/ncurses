@@ -183,4 +183,3 @@ class menubar extends \octris\ncurses\widget
         }
     }
 }
-

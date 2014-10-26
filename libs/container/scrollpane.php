@@ -184,4 +184,3 @@ class scrollpane extends \octris\ncurses\container
         parent::refresh();
     }
 }
-

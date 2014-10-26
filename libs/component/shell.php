@@ -373,4 +373,3 @@ class shell extends \octris\ncurses\container\window
         return $return;
     }
 }
-

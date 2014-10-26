@@ -120,4 +120,3 @@ class button extends \octris\ncurses\widget
         });
     }
 }
-

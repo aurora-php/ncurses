@@ -278,4 +278,3 @@ abstract class app extends \octris\ncurses\container
 }
 
 app::init();
-

@@ -243,4 +243,3 @@ class listbox extends \octris\ncurses\widget
         }, true);
     }
 }
-

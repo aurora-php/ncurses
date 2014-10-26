@@ -119,4 +119,3 @@ trait event_tr
         return $propagate;
     }
 }
-

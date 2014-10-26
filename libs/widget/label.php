@@ -86,4 +86,3 @@ class label extends \octris\ncurses\widget
         );
     }
 }
-

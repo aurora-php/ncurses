@@ -112,4 +112,3 @@ class radiobox extends \octris\ncurses\widget\listbox
         $this->parent->refresh();
     }
 }
-

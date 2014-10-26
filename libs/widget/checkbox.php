@@ -98,4 +98,3 @@ class checkbox extends \octris\ncurses\widget\listbox
         $this->parent->refresh();
     }
 }
-
