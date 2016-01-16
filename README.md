@@ -19,5 +19,5 @@ that they will get accepted.
 Documentation
 -------------
 
-* Source documentation (nightly update): http://doc.octris.org/org.octris.ncurses/
+* Source documentation (nightly update): http://octris.org/doc/octris/ncurses/html/
 * Useful resources: https://github.com/octris/ncurses/wiki
